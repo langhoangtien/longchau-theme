@@ -18,7 +18,10 @@ import {
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { HOST_API } from "@/config-global";
-export default function SheetDemo() {
+import { useRouter } from "next/navigation";
+import { set } from "react-hook-form";
+export default function SheetDemo({ open, setOpen }: any) {
+  const router = useRouter();
   const [menu, setMenu] = useState([]);
   useEffect(() => {
     const getMenu = async () => {
@@ -33,28 +36,12 @@ export default function SheetDemo() {
     };
     getMenu();
   }, []);
+  const backToHome = () => {
+    router.push("/");
+    setOpen(false);
+  };
   return (
-    <Sheet>
-      <SheetTrigger asChild>
-        <div className="grid place-content-start content-center md:hidden">
-          <button>
-            <svg
-              width={24}
-              height={24}
-              className="text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3 17H21C21.5523 17 22 17.4477 22 18C22 18.5128 21.614 18.9355 21.1166 18.9933L21 19H3C2.44772 19 2 18.5523 2 18C2 17.4872 2.38604 17.0645 2.88338 17.0067L3 17H21H3ZM2.99988 11L20.9999 10.9978C21.5522 10.9978 22 11.4454 22 11.9977C22 12.5105 21.6141 12.9333 21.1167 12.9911L21.0001 12.9978L3.00012 13C2.44784 13.0001 2 12.5524 2 12.0001C2 11.4873 2.38594 11.0646 2.88326 11.0067L2.99988 11L20.9999 10.9978L2.99988 11ZM3 5H21C21.5523 5 22 5.44772 22 6C22 6.51284 21.614 6.93551 21.1166 6.99327L21 7H3C2.44772 7 2 6.55228 2 6C2 5.48716 2.38604 5.06449 2.88338 5.00673L3 5H21H3Z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-        </div>
-      </SheetTrigger>
-
+    <Sheet open={open} onOpenChange={(value) => setOpen(value)}>
       <SheetContent className="p-0 overflow-auto">
         <SheetHeader className="hidden">
           <SheetTitle>Edit profile</SheetTitle>
@@ -63,7 +50,7 @@ export default function SheetDemo() {
           </SheetDescription>
         </SheetHeader>
         <div className="py-3.5 px-4 flex justify-between items-center sticky top-0 z-10 bg-white border-b border-divider-1pt drop-shadow-md">
-          <Link className="shrink-0" href="/">
+          <span onClick={backToHome} className="shrink-0">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="145"
@@ -130,7 +117,7 @@ export default function SheetDemo() {
                 d=" M36.895142,35.924377   C36.681675,32.777748 37.570992,31.534437 40.586666,31.882507   C48.825375,32.833420 57.090744,33.553352 66.026146,34.431664   C65.599197,38.881714 65.143471,43.088169 64.800095,47.303776   C63.220482,66.696724 61.570221,86.084808 60.159981,105.490242   C59.545166,113.950333 59.234707,122.446129 59.164524,130.928833   C59.073483,141.932388 61.959236,144.971222 73.064674,144.915802   C94.932465,144.806732 116.538620,142.432312 137.601715,136.194946   C139.320389,135.686005 141.078003,135.308624 143.379776,134.728363   C145.422180,143.716187 147.392776,152.387985 149.582886,162.025833   C142.543320,163.531906 135.873184,165.455780 129.068604,166.316299   C112.428246,168.420654 95.759377,170.579102 79.033829,171.610489   C70.865173,172.114212 62.367809,170.937119 54.330288,169.134155   C39.064461,165.709778 32.096519,157.573807 32.231529,142.074219   C32.445923,117.460800 33.687099,92.852829 34.710911,68.251587   C35.153473,57.617180 36.136936,47.005287 36.895142,35.924377  z"
               ></path>
             </svg>
-          </Link>
+          </span>
           <SheetClose>
             <button
               type="button"

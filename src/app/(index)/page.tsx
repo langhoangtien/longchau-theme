@@ -1,8 +1,4 @@
-import Footer from "@/components/footer";
-import Header from "@/components/header";
-import MenuCategory from "@/components/menu-category";
-
-import { convertImagePathToUrl, mappedProduct } from "@/lib/common";
+import { mappedProduct } from "@/lib/common";
 import { CarouselDemo } from "@/components/home/carousel";
 import { SuggestionSection, ToopDiscountSection } from "@/components/home";
 import CategorySection from "@/components/home/category-section";
@@ -36,9 +32,7 @@ export default async function Home() {
   const productMapped = products.map(mappedProduct);
 
   return (
-    <div className="md:min-w-container-content lg:w-full flex flex-col min-h-screen">
-      <MenuCategory></MenuCategory>
-
+    <div>
       <CarouselDemo products={topNewProduct}></CarouselDemo>
       <CategorySection />
       <ToopDiscountSection

@@ -1,3 +1,27 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Image from "next/image";
+const questions = [
+  {
+    question: "Làm sao để biết sản phẩm chính hãng?",
+    answer:
+      "Sản phẩm từ Ludmila cam kết chính hãng. Khi nhận hàng bạn có thể kiểm tra bằng cách check mã vạch cũng như kiểm tra tem chống hàng giả, tem phụ của sản phẩm.",
+  },
+  {
+    question: "Bao lâu từ lúc đặt hàng thì tôi có thể nhận được hàng?",
+    answer:
+      "Nếu ở nội thành Hà Nội và Hồ Chí Minh, khách hàng sẽ được nhận hàng trong vòng 1-3 kể từ khi có cuộc gọi hoặc tin nhắn xác nhận trừ trường hợp đơn chưa đủ tồn kho Ludmila sẽ gửi đi từ kho vận hành khác tỉnh thì thời gian sẽ là 2-4 ngày. Nếu ở tỉnh khác, khách hàng sẽ nhận được hàng trong 2-3 ngày.",
+  },
+  {
+    question: "Tôi có thể đổi trả sản phẩm không?",
+    answer:
+      "Bạn không thể đổi trả sản phẩm ngoài những trường hợp đã nêu trong quy định mua hàng.",
+  },
+];
 export default function ProductDetailFaq() {
   return (
     <div
@@ -5,7 +29,26 @@ export default function ProductDetailFaq() {
       className="p-4 bg-white rounded-none md:rounded-xl"
     >
       <h2 className="text-heading3 mb-4 font-semibold">Câu hỏi thường gặp</h2>
-      <ul>
+      <Accordion type="single" collapsible className="w-full">
+        {questions.map((question, index) => (
+          <AccordionItem key={index} value={index.toString()}>
+            <AccordionTrigger className="hover:no-underline ">
+              <p className="flex items-center text-base text-gray-600 font-medium">
+                <Image
+                  src={"/icons/svg/question.svg"}
+                  width={24}
+                  height={24}
+                  alt="faq"
+                  className="mr-2 inline-block shrink-0 [&>*]:text-gray-600"
+                />
+                {question.question}
+              </p>
+            </AccordionTrigger>
+            <AccordionContent>{question.answer}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+      {/* <ul>
         <li className="border-divider-1pt border-t py-4 first:border-0 first:pt-0 last:pb-0">
           <div
             className="hover:cursor-pointer -my-4 flex cursor-pointer items-center py-4"
@@ -185,7 +228,7 @@ export default function ProductDetailFaq() {
             </div>
           </div>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 }

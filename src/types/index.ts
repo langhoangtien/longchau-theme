@@ -16,6 +16,7 @@ export type ProductVariantType = {
   attributes: AttributeType[];
   createdAt: string;
   updatedAt: string;
+  name?: string;
 };
 export type VariantInCartType = ProductVariantType & { name: string };
 export type ProductType = {

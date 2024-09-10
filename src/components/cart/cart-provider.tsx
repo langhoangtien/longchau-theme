@@ -78,7 +78,6 @@ const reducer = (state: any, action: any) => {
         ...state,
         variant: action.payload.variant,
       };
-      console.log("VARIANT_NEWSTATE", newState);
 
       return newState;
     case "ORDER_COMPLETED":
@@ -97,8 +96,6 @@ const reducer = (state: any, action: any) => {
 };
 export function CartProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  console.log("STATE", state);
-
   const headerRef = useRef(null);
   const cartRef = useRef(null);
 
@@ -190,8 +187,6 @@ export function CartProvider({ children }: any) {
 
   const setVariant = useCallback(
     (variant: ProductVariantType) => {
-      console.log("VARIANT_ONPROVIDER", variant);
-
       dispatch({
         type: "SET_VARIANT",
         payload: { variant: variant },

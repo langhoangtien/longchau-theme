@@ -92,6 +92,7 @@ export default function Search() {
     fetchData();
   }, [debounceText]);
   const handleRedirect = () => {
+    refSearchMobile.current?.classList.toggle("!hidden", true);
     router.push(`/tim-kiem?s=${value}`);
   };
   return (
@@ -154,7 +155,7 @@ export default function Search() {
               <li key={item} className="item">
                 <Link
                   key={item}
-                  href={`/tim-kiem?s=${item.replace(/ /g, "+")}`}
+                  href={`/tim-kiem?s=${encodeURIComponent(item)}`}
                 >
                   {item}
                 </Link>
@@ -241,16 +242,23 @@ export default function Search() {
           products={products}
           loading={loading}
           debounceText={debounceText}
+          handleSearchBack={handleSearchBack}
         />
       </div>
     </div>
   );
 }
-const SearchWrapper = ({ value, products, loading, debounceText }: any) => {
+const SearchWrapper = ({
+  value,
+  products,
+  loading,
+  debounceText,
+  handleSearchBack,
+}: any) => {
   if (loading) return <Loading />;
   if (products.length) return <Result products={products} />;
   if (debounceText) return <NoResult value={value} />;
-  return <HeaderSearchHistory />;
+  return <HeaderSearchHistory hideSearchWrapper={handleSearchBack} />;
 };
 const Loading = () => (
   <div className="bg-white p-10  md:p-20 flex justify-center content-center">
@@ -278,7 +286,7 @@ const Result = ({ products }: any) => (
             fill="currentColor"
           />
         </svg>
-        <span>tamamino tâm minh 3x10</span>
+        <span>omega</span>
       </a>
       <a
         id="search_header_line_2"
@@ -298,7 +306,7 @@ const Result = ({ products }: any) => (
             fill="currentColor"
           />
         </svg>
-        <span>sữa tắm</span>
+        <span>đột quỵ</span>
       </a>
     </div>
 
@@ -326,7 +334,7 @@ const Result = ({ products }: any) => (
                   className="block text-xs font-semibold text-white md:text-sm"
                   style={{ textShadow: "rgba(0, 0, 0, 0.25) 0.5px 0.5px 0px" }}
                 >
-                  -20%
+                  -{product.discount}%
                 </span>
               </div>
             ) : null}

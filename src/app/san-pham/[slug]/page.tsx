@@ -53,8 +53,7 @@ export default async function Product(props: any) {
     minSalePrice,
     maxSalePrice,
   };
-  console.log("product", product.variants[0].attributes);
-
+  const { description, ...productData } = product;
   return (
     <div className="sm:pb-6 md:pb-10 ">
       <ol
@@ -111,10 +110,10 @@ export default async function Product(props: any) {
         </li>
       </ol>
       <div className="md:container-lite md:space-y-4 md:space-y-8">
-        <ProductDetailInfo product={product} />
+        <ProductDetailInfo product={productData} />
 
-        <DetailProductContent description={product.description} />
-        <ProductRecentlyViewed product={product} />
+        <DetailProductContent description={description} />
+        <ProductRecentlyViewed product={productData} />
         <RelatedProduct title=" Sản phẩm liên quan" />
 
         <ProductDetailFaq />

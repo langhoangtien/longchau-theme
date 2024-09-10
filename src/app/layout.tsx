@@ -3,6 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./styles.css";
 import { CartProvider } from "@/components/cart";
+import { Toaster } from "@/components/ui/sonner";
+import { Sheet } from "lucide-react";
+import { SheetProvider } from "@/components/sheet-product";
+import { DialogProduct, SheetProduct } from "@/components/home";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,7 +56,14 @@ export default function RootLayout({
       ></meta>
 
       <body className="bg-gray-100">
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+          <SheetProvider>
+            {children}
+            <SheetProduct />
+            <DialogProduct />
+          </SheetProvider>
+        </CartProvider>
+        <Toaster />
       </body>
     </html>
   );

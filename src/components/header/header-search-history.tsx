@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { topSearch } from "./search";
+import { useRouter } from "next/navigation";
 
-export default function HeaderSearchHistory() {
+export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
   const [searchHistories, setSearchHistories] = useState([]);
   useEffect(() => {
     const searchHistories = localStorage.getItem("searchHistory");
@@ -10,6 +11,11 @@ export default function HeaderSearchHistory() {
       setSearchHistories(JSON.parse(searchHistories));
     }
   }, []);
+  const router = useRouter();
+  const handleSearch = (search: string) => {
+    router.push(`/tim-kiem?s=${encodeURIComponent(search)}`);
+    hideSearchWrapper();
+  };
   return (
     <div className="bg-white py-2 md:pt-3 md:pb-4">
       {!!searchHistories.length && (
@@ -63,11 +69,11 @@ export default function HeaderSearchHistory() {
         <p className="text-base  mb-2 font-medium md:mb-3">Tra cứu hàng đầu</p>
         <div className="flex gap-2 flex-wrap">
           {topSearch.map((item) => (
-            <Link key={item} href={`/tim-kiem?s=${item.replace(/ /g, "+")}`}>
+            <span onClick={() => handleSearch(item)} key={item}>
               <div className="inline-flex justify-center items-center pl-3 pr-3 rounded-[50px] border  relative font-medium  overflow-hidden cursor-pointer bg-white h-8 text-sm hover:bg-gray-200 duration-200 ease-in">
                 {item}
               </div>
-            </Link>
+            </span>
           ))}
         </div>
       </div>

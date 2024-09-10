@@ -10,8 +10,10 @@ export default async function MainLayout({
     <>
       <div className="md:w-[1280px] lg:w-full flex flex-col min-h-screen">
         <Header></Header>
-        <MenuCategory />
-        {children}
+        <div className="bg-gray-100 pb-9 flex-1 relative">
+          <MenuCategory />
+          {children}
+        </div>
         <Footer></Footer>
       </div>
     </>
