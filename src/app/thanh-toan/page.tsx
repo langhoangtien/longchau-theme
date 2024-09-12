@@ -71,7 +71,6 @@ export default function Checkout() {
   const { products, orderCompleted }: any = useCartContext();
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const productSelected = products.filter((item: any) => item.selected);
-  console.log(productSelected);
   const buttonRef2 = useRef<HTMLButtonElement>(null);
   const handleSubmit = () => {
     buttonRef2.current?.click();

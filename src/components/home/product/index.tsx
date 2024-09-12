@@ -37,7 +37,6 @@ export default function Product({ product }: ProductProps) {
   const { addToCart, headerRef, cartRef }: any = useCartContext();
   const { setOpen, setProduct, setOpenDialog }: any = useSheetContext();
   const [variant, setVariant] = useState<ProductVariantType | null>(null);
-  console.log("PRODUCT");
 
   const router = useRouter();
   useEffect(() => {
@@ -150,7 +149,7 @@ export default function Product({ product }: ProductProps) {
             onClick={handleClickBuyMobile}
             className="py-[8px] px-[12px] h-[36px] w-full md:hidden"
           >
-            Chọn mua M
+            Chọn mua
           </Button>
         </div>
       </div>

@@ -7,7 +7,6 @@ import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
 import {
   Accordion,
@@ -20,7 +19,8 @@ import { useEffect, useState } from "react";
 import { HOST_API } from "@/config-global";
 import { useRouter } from "next/navigation";
 import { set } from "react-hook-form";
-export default function SheetDemo({ open, setOpen }: any) {
+
+export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
   const router = useRouter();
   const [menu, setMenu] = useState([]);
   useEffect(() => {
@@ -39,6 +39,10 @@ export default function SheetDemo({ open, setOpen }: any) {
   const backToHome = () => {
     router.push("/");
     setOpen(false);
+  };
+  const handleOpneSignInDialog = () => {
+    setOpen(false);
+    setOpenDialog(true);
   };
   return (
     <Sheet open={open} onOpenChange={(value) => setOpen(value)}>
@@ -59,7 +63,7 @@ export default function SheetDemo({ open, setOpen }: any) {
               id="Layer_1"
               x="0px"
               y="0px"
-              enable-background="new 0 0 786 200"
+              enableBackground="new 0 0 786 200"
               height="32"
             >
               <path
@@ -146,7 +150,10 @@ export default function SheetDemo({ open, setOpen }: any) {
             Đăng nhập để hưởng những đặc quyền dành riêng cho thành viên.
           </div>
           <div className="mt-3 py-4 flex items-center gap-2 [&>*]:shrink-0">
-            <Button variant="outline"> Đăng nhập</Button>
+            <Button onClick={handleOpneSignInDialog} variant="outline">
+              {" "}
+              Đăng nhập
+            </Button>
           </div>
         </div>
         <div className="mt-1 py-4">

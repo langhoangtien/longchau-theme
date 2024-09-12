@@ -8,7 +8,6 @@ export default function OrderComplete(props: any) {
   const orders = localStorage.getItem("orders");
 
   const orderJson = orders ? JSON.parse(orders) : [];
-  console.log(orderJson, slug);
   const order = orderJson.find((item: any) => item._id === slug);
   if (!order) {
     return notFound();

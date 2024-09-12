@@ -91,9 +91,31 @@ export default function Search() {
     };
     fetchData();
   }, [debounceText]);
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleRedirect();
+    }
+  };
   const handleRedirect = () => {
     refSearchMobile.current?.classList.toggle("!hidden", true);
     router.push(`/tim-kiem?s=${value}`);
+    addHistory(value);
+  };
+
+  const addHistory = (search: string) => {
+    const searchHistories = localStorage.getItem("searchHistory");
+    if (searchHistories) {
+      const histories = JSON.parse(searchHistories);
+      if (!histories.includes(search)) {
+        histories.unshift(search);
+        localStorage.setItem(
+          "searchHistory",
+          JSON.stringify(histories.slice(0, 5))
+        );
+      }
+    } else {
+      localStorage.setItem("searchHistory", JSON.stringify([search]));
+    }
   };
   return (
     <div ref={refSearchWrap} className="cs-search-wrapper relative">
@@ -105,6 +127,7 @@ export default function Search() {
             maxLength={200}
             onChange={(e) => setValue(e.target.value)}
             value={value}
+            onKeyPress={handleKeyPress}
             className="w-full text-ellipsis bg-transparent outline-none placeholder:text-gray-500 placeholder-shown:text-ellipsis md:h-[40px] h-[28px] md:text-base text-sm placeholder:sm"
           />
           <span
@@ -266,7 +289,7 @@ const Loading = () => (
   </div>
 );
 
-const Result = ({ products }: any) => (
+const Result = ({ products, value }: any) => (
   <div className="bg-gray [&>*:not(:first-child)]:border-divider-1pt md:[&>*]:border-t">
     <div className="bg-white py-2">
       <a
@@ -365,7 +388,7 @@ const Result = ({ products }: any) => (
       ))}
     </div>
     <a
-      href="/tim-kiem?s=tăm &loai=tatca&doituong=tatca"
+      href={`/tim-kiem?s=${encodeURIComponent(value)}`}
       className="hover:bg-gray-200 bg-white border-divider-1pt border-t md:border-none text-primary flex flex-row items-center justify-center py-2"
     >
       <span className="text-sm font-medium">Xem tất cả</span>

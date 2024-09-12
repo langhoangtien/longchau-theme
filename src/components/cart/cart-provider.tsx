@@ -73,7 +73,6 @@ const reducer = (state: any, action: any) => {
       return newState;
 
     case "SET_VARIANT":
-      console.log("VARIANT_PAYLOAD", action.payload.variant);
       newState = {
         ...state,
         variant: action.payload.variant,

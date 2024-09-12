@@ -9,7 +9,6 @@ import {
   ProductDetailInfoPrice,
 } from "./product-detail-info-section";
 import { useState } from "react";
-import ProductDetailInfoBuyNowMobile from "./product-detail-info-buynow-mobile";
 
 export default function ProductDetailInfo({ product }: any) {
   return (

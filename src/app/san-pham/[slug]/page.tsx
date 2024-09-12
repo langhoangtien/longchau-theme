@@ -109,7 +109,7 @@ export default async function Product(props: any) {
           </span>
         </li>
       </ol>
-      <div className="md:container-lite md:space-y-4 md:space-y-8">
+      <div className="md:container-lite md:space-y-8">
         <ProductDetailInfo product={productData} />
 
         <DetailProductContent description={description} />

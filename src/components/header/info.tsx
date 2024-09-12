@@ -1,4 +1,7 @@
+import Image from "next/image";
 import { useCartContext } from "../cart";
+import Link from "next/link";
+import Loudspeaker from "../icons/loudspeaker";
 
 export default function Info() {
   const { headerRef }: any = useCartContext();
@@ -7,31 +10,28 @@ export default function Info() {
       <div className="py-2 px-4 md:px-0 md:container-lite mx-auto">
         <div className="flex items-center justify-end gap-4">
           <div className="flex w-full justify-between gap-4">
-            <div className="flex flex-1 items-center items-start">
+            <div className="flex flex-1 items-start">
               <span className="mr-2 flex h-4 w-4 shrink-0 text-white md:h-5 md:w-5">
-                <img
+                <Loudspeaker className="h-4 w-4 md:h-5 md:w-5 text-white" />
+                {/* <Image
                   alt=""
-                  loading="lazy"
                   width={20}
                   height={20}
-                  decoding="async"
-                  data-nimg={1}
                   className="h-4 w-4 md:h-5 md:w-5"
-                  srcSet="https://cdn.nhathuoclongchau.com.vn/unsafe/24x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/smalls/megaphone_b8025908d5.webp 1x, https://cdn.nhathuoclongchau.com.vn/unsafe/40x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/smalls/megaphone_b8025908d5.webp 2x"
-                  src="https://cdn.nhathuoclongchau.com.vn/unsafe/40x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/smalls/megaphone_b8025908d5.webp"
+                  src="/icons/png/megaphone.png"
                   style={{ color: "transparent" }}
-                />
+                /> */}
               </span>
-              <a
-                href="/trung-tam-tiem-chung"
+              <Link
+                href="/sieu-sale-99-uu-dai-lon-tu-99-30-9"
                 className="md:text-sm text-xs inline-block font-semibold text-white"
               >
-                Trung tâm tiêm chủng Long Châu
+                Siêu sale 9.9 - Ưu đãi lớn từ 9.9 - 30.9
                 <span className="ml-1 underline">Xem chi tiết</span>
-              </a>
+              </Link>
             </div>
             <div className="hidden items-center gap-4 md:flex">
-              <div className="inline-flex cursor-pointer items-center">
+              {/* <div className="inline-flex cursor-pointer items-center">
                 <svg
                   className="[&>*]:fill-white"
                   xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ export default function Info() {
                 <div className="ml-1 text-sm font-medium text-white">
                   Tải ứng dụng
                 </div>
-              </div>
+              </div> */}
               <div className="inline-flex items-center">
                 <svg
                   viewBox="0 0 48 48"

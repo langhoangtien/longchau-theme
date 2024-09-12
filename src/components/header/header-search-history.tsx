@@ -12,9 +12,20 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
     }
   }, []);
   const router = useRouter();
-  const handleSearch = (search: string) => {
-    router.push(`/tim-kiem?s=${encodeURIComponent(search)}`);
+  const handleSearch = (history: string) => {
+    router.push(`/tim-kiem?s=${encodeURIComponent(history)}`);
     hideSearchWrapper();
+  };
+  const removeSearchHistoryItem = (history: string) => {
+    const newSearchHistories = searchHistories.filter(
+      (item) => item !== history
+    );
+    setSearchHistories(newSearchHistories);
+    localStorage.setItem("searchHistory", JSON.stringify(newSearchHistories));
+  };
+  const removeSearchHistory = () => {
+    setSearchHistories([]);
+    localStorage.removeItem("searchHistory");
   };
   return (
     <div className="bg-white py-2 md:pt-3 md:pb-4">
@@ -23,15 +34,16 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
           <p className="text-base text-gray-1000 font-semibold">
             Lịch sử tìm kiếm
           </p>
-          <a className="cursor-pointer">
+          <span onClick={removeSearchHistory} className="cursor-pointer">
             <p className="text-sm text-primary font-medium">Xóa tất cả</p>
-          </a>
+          </span>
         </div>
       )}
       {searchHistories.map((history: string) => (
-        <div
+        <Link
+          href={`/tim-kiem/?s=${encodeURIComponent(history)}`}
           key={history}
-          className="box-history group flex w-full cursor-pointer items-center justify-between py-2 px-4"
+          className="box-history group flex w-full cursor-pointer items-center justify-between py-2 px-4 hover:bg-gray-100"
         >
           <div className="box-history-link flex w-full items-center gap-2">
             <svg
@@ -50,6 +62,7 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
             <p className="text-base text-primary text-text-focus">{history}</p>
           </div>
           <svg
+            onClick={() => removeSearchHistoryItem(history)}
             width={20}
             height={20}
             className="text-icon-secondary shrink-0"
@@ -62,7 +75,7 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
               fill="currentColor"
             />
           </svg>
-        </div>
+        </Link>
       ))}
 
       <div className="mt-2 px-4 first:mt-0 md:mt-4">

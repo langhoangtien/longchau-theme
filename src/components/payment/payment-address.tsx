@@ -17,6 +17,7 @@ import { Input, Input2 } from "../ui/input";
 import { Button } from "../ui/button";
 import ComboboxDemo from "./combobox-input";
 import { useEffect, useState } from "react";
+import UserDuoton from "../icons/user-duoton";
 const cities = [
   { id: 23, name: "Hồ Chí Minh", cityId: "23", locationSlug: "ho-chi-minh" },
   { id: 26, name: "Hà Nội", cityId: "26", locationSlug: "ha-noi" },
@@ -527,69 +528,22 @@ export function PaymentAddressForm2({ buttonRef, callback }: any) {
         <div>
           <div className="flex items-center gap-2 md:gap-3">
             <div className="w-6 h-6 shrink-0 grow-0">
-              <svg
-                className="w-full h-full"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 12C14.7614 12 17 9.76141 17 6.99998C17 4.23856 14.7614 1.99998 12 1.99998C9.23858 1.99998 7 4.23856 7 6.99998C7 9.76141 9.23858 12 12 12Z"
-                  fill="#ACC0F3"
-                />
-                <path
-                  d="M12.0002 14.5C6.99016 14.5 2.91016 17.86 2.91016 22C2.91016 22.28 3.13016 22.5 3.41016 22.5H20.5902C20.8702 22.5 21.0902 22.28 21.0902 22C21.0902 17.86 17.0102 14.5 12.0002 14.5Z"
-                  fill="url(#paint0_linear_3708_96166)"
-                />
-                <defs>
-                  <linearGradient
-                    id="paint0_linear_3708_96166"
-                    x1="21.0902"
-                    y1="22.5"
-                    x2="15.1916"
-                    y2="9.09562"
-                    gradientUnits="userSpaceOnUse"
-                  >
-                    <stop stopColor="#1250DC" />
-                    <stop offset={1} stopColor="#306DE4" />
-                  </linearGradient>
-                </defs>
-              </svg>
+              <UserDuoton className="w-full h-full" />
             </div>
             <span className="text-caption font-medium text-text-primary md:text-body1">
               Địa chỉ nhận hàng
             </span>
           </div>
           <div className="mt-3 grid grid-col s-1 md:grid-cols-2 gap-3">
-            <FormField
-              control={form.control}
+            <InputRHF
               name="fullName"
-              render={({ field }) => (
-                <FormItem className="">
-                  <div className="relative">
-                    <FormControl>
-                      <InputRHF {...field} type="text" />
-                    </FormControl>
-                    <FormLabel>Họ và tên người đặt</FormLabel>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
+              type="text"
+              placeholder="Họ và tên người nhận"
             />
-            <FormField
-              control={form.control}
-              name="phoneNumer"
-              render={({ field }) => (
-                <FormItem className="">
-                  <div className="relative">
-                    <FormControl>
-                      <InputRHF {...field} type="text" />
-                    </FormControl>
-                    <FormLabel>Số điện thoại</FormLabel>
-                  </div>
-                  <FormMessage />
-                </FormItem>
-              )}
+            <InputRHF
+              name="phoneNumber"
+              placeholder="Số điện thoại"
+              type="text"
             />
             <FormField
               control={form.control}
@@ -635,20 +589,10 @@ export function PaymentAddressForm2({ buttonRef, callback }: any) {
               />
             </div>
             <div className="md:col-span-2">
-              <FormField
-                control={form.control}
+              <InputRHF
                 name="address"
-                render={({ field }) => (
-                  <FormItem className="">
-                    <div className="relative">
-                      <FormControl>
-                        <InputRHF {...field} type="text" />
-                      </FormControl>
-                      <FormLabel>Nhập địa chỉ cụ thể</FormLabel>
-                    </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                placeholder="Nhập địa chỉ cụ thể"
+                type="text"
               />
             </div>
             <div className="md:col-span-2  ">

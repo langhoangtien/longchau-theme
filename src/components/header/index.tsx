@@ -1,16 +1,43 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import Dialog from "./dialog";
+import HeaderMobile from "./header-mobile";
 import Info from "./info";
 import Cart from "./cart";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "./search";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "../ui/dialog";
+import { Button } from "../ui/button";
+
+import { Input, Input2 } from "../ui/input";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormMessage,
+  InputRHF,
+  InputRHF2,
+} from "../ui/form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, useForm } from "react-hook-form";
+import { z } from "zod";
+import Email from "../icons/mail";
+import Phone from "../icons/phone";
+import User from "../icons/user";
+import Eye from "../icons/eye";
+import EyeSlash from "../icons/eye-slash";
 
 export default function Header() {
   const logoRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
       let moving = window.pageYOffset;
@@ -57,7 +84,11 @@ export default function Header() {
                   </svg>
                 </button>
               </div>
-              <Dialog open={open} setOpen={setOpen} />
+              <HeaderMobile
+                open={open}
+                setOpen={setOpen}
+                setOpenDialog={setOpenDialog}
+              />
               <div
                 ref={logoRef}
                 className="grid place-content-center content-center transition-[opacity] duration-300 md:place-content-start"
@@ -65,7 +96,7 @@ export default function Header() {
                 <Link href="/">
                   <Image
                     src="/logo/logo-5.svg"
-                    alt="Long Châu"
+                    alt="Ludmila"
                     width={100}
                     height={28}
                     className="h-[28px] w-[100px] !bg-transparent !bg-none object-contain md:h-[56px] md:w-[183px]"
@@ -76,20 +107,11 @@ export default function Header() {
                 <div className="flex h-full items-center justify-between">
                   <div className="hidden md:flex items-center">
                     <div className="flex items-center cursor-pointer">
-                      <svg
-                        width={24}
-                        height={24}
-                        className="text-white"
-                        viewBox="0 0 48 48"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <User className="w-6 h-6 text-white" />
+                      <div
+                        onClick={() => setOpenDialog(true)}
+                        className="ml-2 text-base font-medium text-white"
                       >
-                        <path
-                          d="M24 4C18.4772 4 14 8.47715 14 14C14 19.5228 18.4772 24 24 24C29.5228 24 34 19.5228 34 14C34 8.47715 29.5228 4 24 4ZM12.2499 28C9.90326 28 8.00002 29.9013 8 32.2489L8 33C8 36.7555 9.94167 39.5669 12.9202 41.3802C15.8491 43.1633 19.7861 44 24 44C28.2139 44 32.1509 43.1633 35.0798 41.3802C38.0583 39.5669 40 36.7555 40 33L40 32.2487C40 29.9011 38.0967 28 35.7502 28H12.2499Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      <div className="ml-2 text-body1 font-medium text-white">
                         Đăng nhập
                       </div>
                     </div>
@@ -108,6 +130,189 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <LoginDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
     </header>
   );
 }
+
+const LoginDialog = ({ openDialog, setOpenDialog }: any) => {
+  const [signIn, setSignIn] = useState("phoneNumber");
+  const [showPassword, setShowPassword] = useState(false);
+  const formSchema = z.object({
+    phoneNumer: z
+      .string()
+      .regex(
+        /^(?:\+84|84|0)(3|5|7|8|9|1[2689])[0-9]{8}$/,
+        "Số điện thoại không hợp lệ"
+      ),
+    password: z
+      .string({ required_error: "Mật khẩu không được để trống" })
+      .min(1, { message: "Mật khẩu không được để trống" }),
+  });
+  const formSchemaEmail = z.object({
+    email: z.string().email("Email không hợp lệ"),
+    password: z
+      .string({ required_error: "Mật khẩu không được để trống" })
+      .min(1, { message: "Mật khẩu không được để trống" }),
+  });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      phoneNumer: "",
+      password: "",
+    },
+  });
+  const formEmail = useForm<z.infer<typeof formSchemaEmail>>({
+    resolver: zodResolver(formSchemaEmail),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onSubmitEmail = (data: any) => {
+    console.log(data);
+  };
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+  const handleChangeSignIn = (value: string) => {
+    setSignIn(value);
+  };
+  return (
+    <Dialog onOpenChange={(value) => setOpenDialog(value)} open={openDialog}>
+      <DialogContent
+        className="p-4 bg-white h-full w-full  px-4 md:w-[450px] md:rounded-xl md:px-[53px] md:h-[520px]"
+        onOpenAutoFocus={(e) => e.preventDefault()}
+      >
+        <DialogTitle></DialogTitle>
+        <div className="relative  py-4  ">
+          {/* <DialogHeader className="border-b border-divider-1pt p-1">
+          <DialogTitle>Chọn số lượng, thuộc tính</DialogTitle>
+        </DialogHeader> */}
+
+          <div className="text-lg md:text-xl font-bold  text-center  ">
+            Đăng nhập hoặc Đăng ký
+          </div>
+          <div className="text-sm md:text-base font-normal text-gray-800/90 mt-2 text-center">
+            Vui lòng đăng nhập để hưởng những đặc quyền dành cho thành viên.
+          </div>
+          {signIn === "phoneNumber" && (
+            <Form {...form}>
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
+                <div className="mt-5">
+                  <div className="group relative z-0 flex-1 w-full">
+                    <InputRHF
+                      placeholder="Nhập số điện thoại"
+                      name="phoneNumer"
+                    />
+                  </div>
+                  <div className="group relative z-0 flex-1 w-full mt-4">
+                    <InputRHF
+                      placeholder="Mật khẩu"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      icon={
+                        showPassword ? (
+                          <span
+                            className="absolute top-1/2 right-2.5 transform -translate-y-1/2 h-8 w-8 hover:bg-gray-100 rounded-full flex justify-center items-center cursor-pointer"
+                            onClick={() => setShowPassword(false)}
+                          >
+                            <EyeSlash className="h-6 w-6 text-gray-400" />
+                          </span>
+                        ) : (
+                          <span
+                            className="absolute top-1/2 right-2.5 transform -translate-y-1/2 h-8 w-8 hover:bg-gray-100 rounded-full flex justify-center items-center cursor-pointer"
+                            onClick={() => setShowPassword(true)}
+                          >
+                            <Eye className="h-6 w-6 text-gray-400" />
+                          </span>
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+
+                <Button type="submit" className="w-full mt-4">
+                  Tiếp tục
+                </Button>
+              </form>
+            </Form>
+          )}
+          {signIn === "email" && (
+            <Form {...formEmail}>
+              <form
+                onSubmit={formEmail.handleSubmit(onSubmitEmail)}
+                className="space-y-8"
+              >
+                <div data-lc-component="input" className="mt-5">
+                  <div className="group relative z-0 flex-1 w-full">
+                    <InputRHF placeholder="Nhập email" name="email" />
+                  </div>
+                  <div className="group relative z-0 flex-1 w-full mt-4">
+                    <InputRHF
+                      placeholder="Mật khẩu"
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      icon={
+                        showPassword ? (
+                          <span
+                            className="absolute top-1/2 right-2.5 transform -translate-y-1/2 h-8 w-8 hover:bg-gray-100 rounded-full flex justify-center items-center cursor-pointer"
+                            onClick={() => setShowPassword(false)}
+                          >
+                            <EyeSlash className="h-6 w-6 text-gray-400" />
+                          </span>
+                        ) : (
+                          <span
+                            className="absolute top-1/2 right-2.5 transform -translate-y-1/2 h-8 w-8 hover:bg-gray-100 rounded-full flex justify-center items-center cursor-pointer"
+                            onClick={() => setShowPassword(true)}
+                          >
+                            <Eye className="h-6 w-6 text-gray-400" />
+                          </span>
+                        )
+                      }
+                    />
+                  </div>
+                </div>
+                <Button type="submit" className="w-full mt-4">
+                  Tiếp tục
+                </Button>
+              </form>
+            </Form>
+          )}
+          <div className="relative mt-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t" />
+            </div>
+            <div className="relative text-center">
+              <span className="text-sm font-normal text-gray-700/80 bg-white px-2">
+                hoặc đăng nhập bằng
+              </span>
+            </div>
+          </div>
+          <div className="mt-3 flex items-center justify-center gap-4">
+            {signIn !== "email" && (
+              <span
+                onClick={() => handleChangeSignIn("email")}
+                className="border-stroke-disable hover:bg-white-2 rounded-full border bg-white p-[11px] leading-[1]"
+              >
+                <Email className="w-6 h-6" />
+              </span>
+            )}
+            {signIn !== "phoneNumber" && (
+              <span
+                onClick={() => handleChangeSignIn("phoneNumber")}
+                className="border-stroke-disable hover:bg-white-2 rounded-full border bg-white p-[11px] leading-[1]"
+              >
+                <Phone className="w-6 h-6" />
+              </span>
+            )}
+          </div>
+          <div className="mt-5 hidden h-[84px] md:block" />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};

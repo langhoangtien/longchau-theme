@@ -30,7 +30,7 @@ import {
   DialogFooter,
   DialogHeader,
 } from "../ui/dialog";
-import { set } from "react-hook-form";
+import { ButtonSelect } from "../ui/button-select";
 
 export function SuggestionSection({
   products,
@@ -88,7 +88,7 @@ export function ToopDiscountSection({
               style={{ color: "transparent" }}
               src="/icons/png/san_pham_ban_chay_reponsive_282x36.png"
             />
-            <h2 className="pb-2 text-base md:text-lg text-white font-semibold absolute inline-block w-full text-center -top-1 -top-0.5 left-1/2 -translate-x-1/2">
+            <h2 className="pb-2 text-base md:text-lg text-white font-semibold absolute inline-block w-full text-center -top-1 left-1/2 -translate-x-1/2">
               Sản phẩm bán chạy
             </h2>
           </div>
@@ -323,17 +323,17 @@ export function SheetProduct() {
         </div>
         <SheetFooter className="p-4 flex [&>*]:flex-auto gap-2 md:gap-3 rounded-t-3xl md:rounded-t-none shadow-sm md:shadow-none border-t border-transparent md:border-divider-1pt">
           <Button
-            onClick={handleAddToCart}
+            onClick={handleBuyNow}
             variant={"ghost"}
             className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto "
           >
-            Thêm vào giỏ hàng
+            Mua ngay
           </Button>
           <Button
-            onClick={handleBuyNow}
+            onClick={handleAddToCart}
             className="py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto"
           >
-            Chọn mua
+            Thêm vào giỏ hàng
           </Button>
         </SheetFooter>
       </SheetContent>
@@ -360,6 +360,7 @@ export function DialogProduct() {
       toast.error("Có lỗi xảy ra, vui lòng thử lại sau");
       return;
     }
+
     const variantMapped: VariantInCartType = {
       ...variant,
       image: variant.image || product.image || "",
@@ -555,14 +556,14 @@ export function DialogProduct() {
         <DialogFooter className="p-4 flex [&>*]:flex-auto gap-2 md:gap-3 rounded-t-3xl md:rounded-t-none shadow-sm md:shadow-none border-t border-transparent md:border-divider-1pt">
           <Button
             onClick={handleAddToCart}
-            variant={"ghost"}
-            className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto "
+            className="py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto "
           >
             Thêm vào giỏ hàng
           </Button>
           <Button
+            variant={"ghost"}
             onClick={handleBuyNow}
-            className="py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto"
+            className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto"
           >
             Chọn mua
           </Button>
@@ -575,41 +576,18 @@ export function DialogProduct() {
 const Attribute = ({ attribute, valueSelect, selectVariant }: any) => {
   return (
     <div>
-      <p className="text-gray-700 mb-1 font-medium">Chọn đơn vị</p>
+      <p className="text-gray-700 mb-1 font-medium">{attribute.name}</p>
       <div className="quantity-tag-wrapper flex flex-wrap gap-2">
         {attribute.values.map((value: string, index: number) => {
-          return valueSelect === value ? (
-            <div
-              key={value}
-              className="inline-flex justify-center items-center rounded-[50px] relative font-medium  overflow-hidden cursor-pointer h-9  transition-all duration-300 border-blue-600 border border-solid bg-white pl-4 pr-6"
-            >
-              {value}
-              <div className="w-[0px] h-[0px] top-[6px] right-[10px] border-t-[26px] border-l-[26px] border-solid border-l-transparent border-t-blue-600 -mt-[6px] -mr-[12px] absolute">
-                <span className="absolute -top-[22px] right-[3px]">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={10}
-                    height={10}
-                    className="text-white"
-                  >
-                    <path
-                      d="M8.5 16.5858L4.70711 12.7929C4.31658 12.4024 3.68342 12.4024 3.29289 12.7929C2.90237 13.1834 2.90237 13.8166 3.29289 14.2071L7.79289 18.7071C8.18342 19.0976 8.81658 19.0976 9.20711 18.7071L20.2071 7.70711C20.5976 7.31658 20.5976 6.68342 20.2071 6.29289C19.8166 5.90237 19.1834 5.90237 18.7929 6.29289L8.5 16.5858Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div
-              key={value}
+          return (
+            <ButtonSelect
+              key={index}
+              selected={valueSelect == value}
               onClick={() => selectVariant(attribute.name, value)}
-              className="inline-flex justify-center items-center pl-3 pr-3 rounded-full border  border-gray-500 relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300"
             >
+              {" "}
               {value}
-            </div>
+            </ButtonSelect>
           );
         })}
       </div>

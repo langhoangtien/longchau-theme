@@ -50,7 +50,7 @@ const CommentItem = ({ name, content }: { name: string; content: string }) => {
             </p>
             <div className="user-comment">
               <span
-                className="md:text-label1 text-label2 font-normal"
+                className="md:text-base text-sm font-normal"
                 style={{ wordBreak: "break-word" }}
               >
                 {content}
@@ -97,9 +97,9 @@ const CommentItem = ({ name, content }: { name: string; content: string }) => {
               <p className="editor-paragraph" dir="ltr">
                 <span>
                   {" "}
-                  Dạ cảm ơn bạn tin tưởng và ủng hộ nhà thuốc FPT Long châu. Bất
-                  cứ khi nào bạn cần hỗ trợ, vui lòng liên hệ tổng đài miễn phí
-                  18006928 để được tư vấn và đặt hàng.
+                  Dạ cảm ơn bạn tin tưởng và ủng hộ Ludmila. Bất cứ khi nào bạn
+                  cần hỗ trợ, vui lòng liên hệ tổng đài miễn phí 0832667711 để
+                  được tư vấn và đặt hàng.
                 </span>
               </p>
               <p className="editor-paragraph" dir="ltr">
@@ -163,13 +163,15 @@ const ReplyItem = ({
       <div className="comment_reply-branch__NKquM" />
       <div className="comment-block flex gap-[12px]">
         <div className="avatar relative z-10 h-full w-full max-w-full basis-[44px] bg-white md:basis-[48px]">
-          <img className=" css-1f66ahq" src="/logo/avatar-moderator.svg" />
+          <div className="bg-blue-600 inline-flex h-[44px] w-[44px] items-center justify-center rounded-full px-[10px] text-[20px] leading-5 text-white md:h-[48px] md:w-[48px]">
+            {getInitials("A D")}
+          </div>
         </div>
         <div className="content flex-1">
           <p className=" mb-[8px] flex flex-col items-baseline font-bold capitalize md:inline-block">
             {name}
             <span className="text-sm bg-blue-100 text-blue-600 md mt-[4px] rounded px-[4px] py-[2px] font-medium md:ml-2 md:mt-0">
-              Dược sĩ
+              Admin
             </span>
           </p>
           <div className="user-comment">
