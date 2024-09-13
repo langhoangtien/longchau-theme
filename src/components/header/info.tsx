@@ -5,6 +5,7 @@ import Loudspeaker from "../icons/loudspeaker";
 
 export default function Info() {
   const { headerRef }: any = useCartContext();
+
   return (
     <div ref={headerRef} className="!bg-blue-600 md:block md:bg-transparent">
       <div className="py-2 px-4 md:px-0 md:container-lite mx-auto">

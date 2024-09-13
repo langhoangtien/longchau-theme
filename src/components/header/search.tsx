@@ -123,11 +123,11 @@ export default function Search() {
         <span className="relative inline-flex items-center bg-white md:rounded-[35px] md:pl-4 w-full rounded-[28px] p-1 pl-3">
           <input
             onFocus={handleSearchDesktop}
-            placeholder="Tìm tên sản phẩm, thực phẩm chức năng..."
+            placeholder="Tìm tên sản phẩm, thực phẩm chức năng... m"
             maxLength={200}
             onChange={(e) => setValue(e.target.value)}
             value={value}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyPress}
             className="w-full text-ellipsis bg-transparent outline-none placeholder:text-gray-500 placeholder-shown:text-ellipsis md:h-[40px] h-[28px] md:text-base text-sm placeholder:sm"
           />
           <span
@@ -138,7 +138,7 @@ export default function Search() {
           {value && (
             <button
               onClick={() => setValue("")}
-              className="ml-2 items-center h-[20px] w-[20px] shrink-0"
+              className="mr-2 items-center h-[20px] w-[20px] shrink-0"
             >
               <svg
                 width={24}
@@ -241,7 +241,10 @@ export default function Search() {
                       </svg>
                     </button>
                   )}
-                  <button className="shrink-0 rounded-full bg-blue-500 w-[28px] h-[28px] p-[6px] ml-2">
+                  <button
+                    onClick={handleRedirect}
+                    className="shrink-0 rounded-full bg-blue-500 w-[28px] h-[28px] p-[6px] ml-2"
+                  >
                     <svg
                       width="100%"
                       height="100%"
@@ -266,6 +269,7 @@ export default function Search() {
           loading={loading}
           debounceText={debounceText}
           handleSearchBack={handleSearchBack}
+          handleRedirect={handleRedirect}
         />
       </div>
     </div>
@@ -277,9 +281,11 @@ const SearchWrapper = ({
   loading,
   debounceText,
   handleSearchBack,
+  handleRedirect,
 }: any) => {
   if (loading) return <Loading />;
-  if (products.length) return <Result products={products} />;
+  if (products.length)
+    return <Result products={products} handleRedirect={handleRedirect} />;
   if (debounceText) return <NoResult value={value} />;
   return <HeaderSearchHistory hideSearchWrapper={handleSearchBack} />;
 };
@@ -289,12 +295,12 @@ const Loading = () => (
   </div>
 );
 
-const Result = ({ products, value }: any) => (
+const Result = ({ products, handleRedirect }: any) => (
   <div className="bg-gray [&>*:not(:first-child)]:border-divider-1pt md:[&>*]:border-t">
     <div className="bg-white py-2">
       <a
-        className="flex items-center px-4 py-1 md:py-2 text-body2 md:text-body1 hover:bg-gray-200 bg-white"
-        href="/tim-kiem?s=tamamino%20t%C3%A2m%20minh%203x10"
+        className="flex items-center px-4 py-1 md:py-2 text-sm md:text-base hover:bg-gray-200 bg-white"
+        href="/tim-kiem?s=omega"
       >
         <svg
           width={24}
@@ -314,7 +320,7 @@ const Result = ({ products, value }: any) => (
       <a
         id="search_header_line_2"
         className="flex items-center px-4 py-1 md:py-2 text-sm md:text-base hover:bg-gray-2 bg-white"
-        href="/tim-kiem?s=s%E1%BB%AFa%20t%E1%BA%AFm"
+        href="/tim-kiem?s=dot-quy"
       >
         <svg
           width={24}
@@ -329,7 +335,7 @@ const Result = ({ products, value }: any) => (
             fill="currentColor"
           />
         </svg>
-        <span>đột quỵ</span>
+        <span>dot quy</span>
       </a>
     </div>
 
@@ -387,11 +393,11 @@ const Result = ({ products, value }: any) => (
         </Link>
       ))}
     </div>
-    <a
-      href={`/tim-kiem?s=${encodeURIComponent(value)}`}
+    <span
+      onClick={handleRedirect}
       className="hover:bg-gray-200 bg-white border-divider-1pt border-t md:border-none text-primary flex flex-row items-center justify-center py-2"
     >
-      <span className="text-sm font-medium">Xem tất cả</span>
+      <span className="text-sm font-medium">Xem tất cả x</span>
       <svg
         viewBox="0 0 25 24"
         fill="none"
@@ -405,7 +411,7 @@ const Result = ({ products, value }: any) => (
           fill="currentColor"
         />
       </svg>
-    </a>
+    </span>
   </div>
 );
 const NoResult = ({ value }: { value?: string }) => (

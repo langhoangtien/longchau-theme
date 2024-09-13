@@ -6,49 +6,40 @@ import Cart from "./cart";
 import Link from "next/link";
 import Image from "next/image";
 import Search from "./search";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "../ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
 
-import { Input, Input2 } from "../ui/input";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormMessage,
-  InputRHF,
-  InputRHF2,
-} from "../ui/form";
+import { Form, InputRHF } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Email from "../icons/mail";
 import Phone from "../icons/phone";
 import User from "../icons/user";
 import Eye from "../icons/eye";
 import EyeSlash from "../icons/eye-slash";
+import { useCartContext } from "../cart";
 
 export default function Header() {
   const logoRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
+
   const [open, setOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const { headerRef }: any = useCartContext();
   useEffect(() => {
     const handleScroll = () => {
       let moving = window.pageYOffset;
 
-      if (moving >= 110 && logoRef.current && searchRef.current) {
+      if (moving >= 130 && logoRef.current && searchRef.current) {
         logoRef.current.style.opacity = "0";
         searchRef.current.classList.add("header-mobile-custom");
+        headerRef.current.classList.toggle("hidden", true);
       }
       if (moving < 90 && logoRef.current && searchRef.current) {
         logoRef.current.style.opacity = "1";
         searchRef.current.classList.remove("header-mobile-custom");
+        headerRef.current.classList.toggle("hidden", false);
       }
     };
     window.addEventListener("scroll", handleScroll);
