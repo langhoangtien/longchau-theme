@@ -22,8 +22,8 @@ const UserDuoton = ({ className }: { className?: string }) => (
         y2="9.09562"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#1250DC"></stop>
-        <stop offset="1" stop-color="#306DE4"></stop>
+        <stop stopColor="#1250DC"></stop>
+        <stop offset="1" stopColor="#306DE4"></stop>
       </linearGradient>
     </defs>
   </svg>

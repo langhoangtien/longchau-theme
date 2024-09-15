@@ -9,12 +9,9 @@ export default function OrderComplete() {
       <div className="css-1wn7moc">
         <div className="pt-0 md:pt-9" />
         <div className="lc-row relative flex flex-wrap gap-5 css-nnuuop">
-          <div
-            span={12}
-            className="lc-col lc-col-12  md:!max-w-[100%] md:!flex-1 css-8xf2v8"
-          >
+          <div className="lc-col lc-col-12  md:!max-w-[100%] md:!flex-1 css-8xf2v8">
             <div className="lc-row relative flex flex-wrap  css-nnuuop">
-              <div span={12} className="lc-col lc-col-12   css-gq202r">
+              <div className="lc-col lc-col-12   css-gq202r">
                 <div className="bg-white pb-4 md:rounded-xl">
                   <div className="shadow-divider-1pt flex px-4 py-3 shadow-[0_1px_0_0]">
                     <div className="flex max-w-[248px] flex-wrap leading-[1] flex-col md:flex-row md:flex md:max-w-[585px] md:flex-nowrap md:items-center mr-auto ">
@@ -36,10 +33,7 @@ export default function OrderComplete() {
                             #9807215
                           </span>
                         </div>
-                        <span
-                          size={20}
-                          className="estore-icon text-text-secondary ml-1 inline-block cursor-pointer md:!hidden css-wi4pw5"
-                        >
+                        <span className="estore-icon text-text-secondary ml-1 inline-block cursor-pointer md:!hidden css-wi4pw5">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -64,10 +58,7 @@ export default function OrderComplete() {
                     </div>
                   </div>
                   <div className="lc-row relative flex flex-wrap border-divider-1pt border-b px-4 py-4 md:border-b-2 css-nnuuop">
-                    <div
-                      span={12}
-                      className="lc-col lc-col-12  order-2 md:order-1 css-1tafiz8"
-                    >
+                    <div className="lc-col lc-col-12  order-2 md:order-1 css-1tafiz8">
                       <p className="css-e30d1v text-text-primary">
                         Đơn hàng đã hủy lúc 11:48 ngày 28/08/2024
                       </p>
@@ -77,14 +68,8 @@ export default function OrderComplete() {
                     </div>
                   </div>
                   <div className="lc-row relative flex flex-wrap border-divider-1pt !gap-3 border-b px-4 py-4 md:border-b-2 css-nnuuop">
-                    <div
-                      span={12}
-                      className="lc-col lc-col-12  md:!basic-[200px] !flex items-start md:!w-full md:!max-w-[200px] md:!py-2 css-8xf2v8"
-                    >
-                      <span
-                        size={20}
-                        className="estore-icon mr-[10px] css-wi4pw5"
-                      >
+                    <div className="lc-col lc-col-12  md:!basic-[200px] !flex items-start md:!w-full md:!max-w-[200px] md:!py-2 css-8xf2v8">
+                      <span className="estore-icon mr-[10px] css-wi4pw5">
                         <svg
                           viewBox="0 0 20 20"
                           fill="none"
@@ -160,10 +145,7 @@ export default function OrderComplete() {
                         Tài xế giao hàng
                       </span>
                     </div>
-                    <div
-                      span={12}
-                      className="lc-col lc-col-12  h-12 md:!flex md:h-9 md:!max-w-full md:!flex-1 md:justify-end css-icmukv"
-                    >
+                    <div className="lc-col lc-col-12  h-12 md:!flex md:h-9 md:!max-w-full md:!flex-1 md:justify-end css-icmukv">
                       <div className="inline-flex h-12 md:h-9">
                         <div className="h-12 w-12 md:!h-9 md:!w-9">
                           <picture className="h-12 w-12 md:!h-9 md:!w-9">
@@ -203,12 +185,9 @@ export default function OrderComplete() {
                     </div>
                   </div>
                   <div className="lc-row relative flex flex-wrap !items-stretch divide-y divide-[var(--gray-200)] px-[16px] md:!mx-[-12px] md:mt-[16px] md:divide-y-0 md:divide-x md:divide-[var(--gray-400)] css-1tnnxqh">
-                    <div
-                      span={12}
-                      className="lc-col lc-col-12  py-[16px] md:!max-w-none md:!flex-1 md:py-0 md:!px-[12px] css-yefnbq"
-                    >
+                    <div className="lc-col lc-col-12  py-[16px] md:!max-w-none md:!flex-1 md:py-0 md:!px-[12px] css-yefnbq">
                       <div className="flex items-center">
-                        <span size={20} className="estore-icon  css-wi4pw5">
+                        <span className="estore-icon  css-wi4pw5">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -254,12 +233,9 @@ export default function OrderComplete() {
                         </span>
                       </div>
                     </div>
-                    <div
-                      span={12}
-                      className="lc-col lc-col-12  py-[16px] md:!max-w-none md:!flex-1 md:py-0 md:!px-[12px] css-yefnbq"
-                    >
+                    <div className="lc-col lc-col-12  py-[16px] md:!max-w-none md:!flex-1 md:py-0 md:!px-[12px] css-yefnbq">
                       <div className="flex items-center">
-                        <span size={20} className="estore-icon  css-wi4pw5">
+                        <span className="estore-icon  css-wi4pw5">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -301,12 +277,9 @@ export default function OrderComplete() {
                         xxx, Phường An Khánh, Quận Ninh Kiều, Cần Thơ
                       </p>
                     </div>
-                    <div
-                      span={12}
-                      className="lc-col lc-col-12  pt-[16px] md:!max-w-none md:!flex-1 md:!px-[12px] md:pt-0 css-yefnbq"
-                    >
+                    <div className="lc-col lc-col-12  pt-[16px] md:!max-w-none md:!flex-1 md:!px-[12px] md:pt-0 css-yefnbq">
                       <div className="flex items-center">
-                        <span size={20} className="estore-icon  css-wi4pw5">
+                        <span className="estore-icon  css-wi4pw5">
                           <svg
                             viewBox="0 0 24 24"
                             fill="none"
@@ -352,10 +325,7 @@ export default function OrderComplete() {
               </div>
             </div>
           </div>
-          <div
-            span={12}
-            className="lc-col lc-col-12  md:!w-[372px] md:!max-w-[372px] md:!basis-[372px] css-icmukv"
-          >
+          <div className="lc-col lc-col-12  md:!w-[372px] md:!max-w-[372px] md:!basis-[372px] css-icmukv">
             <p className="text-text-primary text-body2 mx-4 mb-2 font-medium md:hidden">
               Thông tin thanh toán
             </p>
@@ -425,15 +395,13 @@ export default function OrderComplete() {
                   </div>
                   <div className="flex items-center justify-start mt-0">
                     <div className="shrink-0">
-                      <img
+                      <Image
                         alt="payment-method"
                         loading="lazy"
                         width={40}
                         height={40}
-                        decoding="async"
-                        data-nimg={1}
                         className="h-10 w-10"
-                        src="https://s3-sgn09.fptcloud.com/lc-public/app-lc/payment/cod.png"
+                        src="/icons/png/cod.png"
                         style={{ color: "transparent" }}
                       />
                     </div>

@@ -545,7 +545,7 @@ input[type="number"] {
   height: 100%;
   top: 22px;
   left: 23px;
-  background-color: var(--gray-200);
+  background-color: #e5e7eb;
   z-index: 1;
 }
 
@@ -554,8 +554,8 @@ input[type="number"] {
   width: 25px;
   border-bottom-left-radius: 10px;
   height: 20px;
-  border-left: 2px solid var(--gray-200);
-  border-bottom: 2px solid var(--gray-200);
+  border-left: 2px solid #e5e7eb;
+  border-bottom: 2px solid #e5e7eb;
   left: 23px;
 }
 
@@ -604,6 +604,7 @@ input[type="number"] {
   justify-content: start;
 }
 
+/* LOADING */
 .loader {
   width: 40px;
   aspect-ratio: 4;
@@ -623,3 +624,18 @@ input[type="number"] {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
 }
+/* END_LOADING */
+
+/* READ_MORE */
+.read-more-target,
+.read-more-trigger_opened {
+  display: none;
+}
+.read-more-state:checked ~ .read-more-wrap .read-more-target,
+.read-more-state:checked ~ .read-more-trigger_opened {
+  display: block;
+}
+.read-more-state:checked ~ .read-more-trigger_closed {
+  display: none;
+}
+/* END_READ_MORE */

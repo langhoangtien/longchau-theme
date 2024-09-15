@@ -1,21 +1,41 @@
-export default function ProductReviewStar() {
+import StarIcon from "../icons/star-icon";
+
+export default function ProductReviewStar({
+  ratingsCalc,
+}: {
+  ratingsCalc: any[];
+}) {
   return (
     <div>
-      <Stars star={5} percent={40} />
-      <Stars star={4} percent={10} />
-      <Stars star={3} percent={20} />
-      <Stars star={2} percent={10} />
-      <Stars star={1} percent={20} />
+      {ratingsCalc.reverse().map((rating: any, index: number) => (
+        <Stars
+          key={index}
+          star={5 - index}
+          percent={rating.percent}
+          rating={rating.rating}
+        />
+      ))}
     </div>
   );
 }
 
-const Stars = ({ percent = 0, star }: { percent?: number; star: number }) => (
+const Stars = ({
+  percent = 0,
+  star,
+  rating,
+}: {
+  percent?: number;
+  star: number;
+  rating: number;
+}) => (
   <div className="mb-[6px] flex h-[18px] items-center gap-2">
     <div className="rating">
       <ul className="flex">
         {Array.from({ length: 5 }).map((_, i) => (
-          <Star color={star > i ? "#F79009" : "#d1d5db"} key={i} />
+          <Star
+            color={star > i ? "text-orange-400" : "text-gray-200"}
+            key={i}
+          />
         ))}
       </ul>
     </div>
@@ -27,26 +47,12 @@ const Stars = ({ percent = 0, star }: { percent?: number; star: number }) => (
         />
       </div>
     </div>
-    <span className="text-caption2 text-text-primary">35</span>
+    <span className="text-sm text-gray-700">{rating}</span>
   </div>
 );
 
-const Star = ({ color = "#d1d5db" }: { color?: string }) => (
+const Star = ({ color = "text-orange-400" }: { color?: string }) => (
   <li>
-    <span className="text-inherit transition-colors svg-icon">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 16 16"
-        width={16}
-        height={16}
-        className="h-[1em] w-[1em]"
-      >
-        <path
-          fill={color}
-          d="M7.194 2.102a.9.9 0 011.614 0l1.521 3.082 3.401.494a.9.9 0 01.5 1.535l-2.462 2.4.581 3.387a.9.9 0 01-1.306.948L8.001 12.35l-3.042 1.6a.9.9 0 01-1.306-.95l.58-3.387-2.46-2.399a.9.9 0 01.499-1.535l3.4-.494 1.522-3.082z"
-        />
-      </svg>
-    </span>
+    <StarIcon className={`w-4 h-4 ${color}`} />
   </li>
 );

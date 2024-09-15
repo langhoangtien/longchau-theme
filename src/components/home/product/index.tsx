@@ -82,7 +82,7 @@ export default function Product({ product }: ProductProps) {
         href={"/san-pham/" + product.slug + "-" + product._id}
       >
         {!!product.discount && (
-          <div className="px-2 py-0.5 md:py-1 absolute z-10 bg-red-600 -top-[1px] -left-[1px] rounded-tl-xl rounded-br-xl">
+          <div className="px-2 py-0.5 md:py-1 absolute bg-red-600 -top-[1px] -left-[1px] rounded-tl-xl rounded-br-xl">
             <span
               className="block text-caption font-semibold text-white md:text-sm"
               style={{ textShadow: "rgba(0, 0, 0, 0.25) 0.5px 0.5px 0px" }}

@@ -35,7 +35,7 @@ export function ProductDetailInfoRight({ product }: any) {
           <span className="text-base text-gray-1000 font-normal">
             <Link
               className="text-blue-500"
-              href={"/thuong-hieu/" + product.brand.code}
+              href={`/thuong-hieu/${product.brand.code}-${product.brand._id}`}
             >
               {product.brand.name}
             </Link>
@@ -49,11 +49,11 @@ export function ProductDetailInfoRight({ product }: any) {
             data-test-id="sku"
             className="text-base font-normal text-gray-7 cursor-pointer transition-all duration-300 hover:opacity-70"
           >
-            00021309
+            {product.code}
           </span>
           <span className="mx-1.5 w-1 h-1 inline-block bg-gray-5 rounded-full" />
           <span className="text-base text-gray-7 inline-flex items-center">
-            4.7
+            {product.ratingAverage}
             <svg
               width={16}
               height={16}
@@ -82,9 +82,12 @@ export function ProductDetailInfoRight({ product }: any) {
             </svg>
           </span>
           <span className="mx-1.5 w-1 h-1 inline-block bg-gray-5 rounded-full" />
-          <span className="text-sm text-blue-500 cursor-pointer">
-            40 đánh giá
-          </span>
+          <a
+            href="#product-detail-preview"
+            className="text-sm text-blue-500 cursor-pointer"
+          >
+            {product.totalRating} đánh giá
+          </a>
           <span className="mx-1.5 w-1 h-1 inline-block bg-gray-5 rounded-full" />
           <span className="text-sm text-blue-500 cursor-pointer">
             <a href="#product-detail-preview">489 bình luận</a>

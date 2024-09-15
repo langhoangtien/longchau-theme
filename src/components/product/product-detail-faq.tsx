@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import QuestionIcon from "../icons/question";
 const questions = [
   {
     question: "Làm sao để biết sản phẩm chính hãng?",
@@ -34,13 +35,14 @@ export default function ProductDetailFaq() {
           <AccordionItem key={index} value={index.toString()}>
             <AccordionTrigger className="hover:no-underline ">
               <p className="flex items-center text-base text-gray-600 font-medium">
-                <Image
+                <QuestionIcon className="mr-2 h-6 w-6 text-gray-600 shrink-0" />
+                {/* <Image
                   src={"/icons/svg/question.svg"}
                   width={24}
                   height={24}
                   alt="faq"
                   className="mr-2 inline-block shrink-0 [&>*]:text-gray-600"
-                />
+                /> */}
                 {question.question}
               </p>
             </AccordionTrigger>

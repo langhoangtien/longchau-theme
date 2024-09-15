@@ -8,6 +8,9 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { LoadingCircle } from "../ui/loading";
 import HeaderSearchHistory from "./header-search-history";
+import SearchIcon from "@/components/icons/search";
+import Close from "../icons/close";
+import PreviousArrow from "../icons/previous-arrow";
 
 export const topSearch = [
   "Bò hầm",
@@ -199,18 +202,7 @@ export default function Search() {
                   onClick={handleSearchBack}
                   className="text-white mr-4 css-8u32eo"
                 >
-                  <svg
-                    width={24}
-                    height={24}
-                    viewBox="0 0 25 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M16.668 4.29289C17.0586 4.68342 17.0586 5.31658 16.668 5.70711L10.3752 12L16.668 18.2929C17.0586 18.6834 17.0586 19.3166 16.668 19.7071C16.2775 20.0976 15.6444 20.0976 15.2538 19.7071L8.25383 12.7071C7.86331 12.3166 7.86331 11.6834 8.25383 11.2929L15.2538 4.29289C15.6444 3.90237 16.2775 3.90237 16.668 4.29289Z"
-                      fill="currentColor"
-                    />
-                  </svg>
+                  <PreviousArrow className="h-6 w-6" />
                 </span>
                 <span className="relative inline-flex items-center bg-white rounded-[28px] p-1 pl-3 grow">
                   <input
@@ -225,7 +217,7 @@ export default function Search() {
                   {value && (
                     <button
                       onClick={() => setValue("")}
-                      className="ml-2 items-center h-[20px] w-[20px] shrink-0 inline-flex"
+                      className="ml-2 items-center h-[24px] w-[24px] shrink-0 inline-flex"
                     >
                       <svg
                         width={24}
@@ -302,19 +294,7 @@ const Result = ({ products, handleRedirect }: any) => (
         className="flex items-center px-4 py-1 md:py-2 text-sm md:text-base hover:bg-gray-200 bg-white"
         href="/tim-kiem?s=omega"
       >
-        <svg
-          width={24}
-          height={24}
-          className="mr-2 h-5 w-5 shrink-0 self-start md:h-6 md:w-6"
-          viewBox="0 0 25 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10.9414 1.93125C5.98269 1.93125 1.94336 5.97057 1.94336 10.9293C1.94336 15.888 5.98269 19.9352 10.9414 19.9352C13.0594 19.9352 15.0074 19.193 16.5469 17.9606L20.2949 21.7066C20.4841 21.888 20.7367 21.988 20.9987 21.9853C21.2607 21.9826 21.5112 21.8775 21.6966 21.6923C21.882 21.5072 21.9875 21.2569 21.9906 20.9949C21.9936 20.7329 21.8939 20.4801 21.7129 20.2907L17.9648 16.5427C19.1983 15.0008 19.9414 13.0498 19.9414 10.9293C19.9414 5.97057 15.9001 1.93125 10.9414 1.93125ZM10.9414 3.93128C14.8192 3.93128 17.9395 7.05148 17.9395 10.9293C17.9395 14.8071 14.8192 17.9352 10.9414 17.9352C7.06357 17.9352 3.94336 14.8071 3.94336 10.9293C3.94336 7.05148 7.06357 3.93128 10.9414 3.93128Z"
-            fill="currentColor"
-          />
-        </svg>
+        <SearchIcon className="mr-2 h-5 w-5 shrink-0 self-start md:h-6 md:w-6" />
         <span>omega</span>
       </a>
       <a
@@ -322,19 +302,7 @@ const Result = ({ products, handleRedirect }: any) => (
         className="flex items-center px-4 py-1 md:py-2 text-sm md:text-base hover:bg-gray-2 bg-white"
         href="/tim-kiem?s=dot-quy"
       >
-        <svg
-          width={24}
-          height={24}
-          className="text-icon-tertiary mr-2 h-5 w-5 shrink-0 self-start md:h-6 md:w-6"
-          viewBox="0 0 25 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10.9414 1.93125C5.98269 1.93125 1.94336 5.97057 1.94336 10.9293C1.94336 15.888 5.98269 19.9352 10.9414 19.9352C13.0594 19.9352 15.0074 19.193 16.5469 17.9606L20.2949 21.7066C20.4841 21.888 20.7367 21.988 20.9987 21.9853C21.2607 21.9826 21.5112 21.8775 21.6966 21.6923C21.882 21.5072 21.9875 21.2569 21.9906 20.9949C21.9936 20.7329 21.8939 20.4801 21.7129 20.2907L17.9648 16.5427C19.1983 15.0008 19.9414 13.0498 19.9414 10.9293C19.9414 5.97057 15.9001 1.93125 10.9414 1.93125ZM10.9414 3.93128C14.8192 3.93128 17.9395 7.05148 17.9395 10.9293C17.9395 14.8071 14.8192 17.9352 10.9414 17.9352C7.06357 17.9352 3.94336 14.8071 3.94336 10.9293C3.94336 7.05148 7.06357 3.93128 10.9414 3.93128Z"
-            fill="currentColor"
-          />
-        </svg>
+        <SearchIcon className="mr-2 h-5 w-5 shrink-0 self-start md:h-6 md:w-6" />
         <span>dot quy</span>
       </a>
     </div>

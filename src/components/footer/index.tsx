@@ -136,8 +136,9 @@ export default function Footer() {
                     HỖ TRỢ THANH TOÁN
                   </p>
                   <div className="mt-2 flex flex-wrap gap-1">
-                    {PAYMENT_METHODS.map((src, index) => (
+                    {PAYMENT_METHODS.map((src) => (
                       <Link
+                        key={src}
                         className="inline-flex h-[28px] w-[44px] items-center justify-center overflow-hidden rounded border"
                         href="/chinh-sach-thanh-toan"
                       >

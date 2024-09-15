@@ -1,5 +1,73 @@
+import { HOST_API } from "@/config-global";
 import { count } from "console";
 import Image from "next/image";
+import Link from "next/link";
+
+export default async function CategorySection({ products }: any) {
+  const resultJson = await fetch(`${HOST_API}/categories/?limit=12`);
+  const categoriesData = await resultJson.json();
+  const categories = categoriesData.items;
+  return (
+    <div>
+      <div className="relative py-4 mb-5">
+        <div className="container-lite relative z-10">
+          <div className="mb-2 flex">
+            <Image
+              alt="Danh mục nổi bật"
+              width={28}
+              height={28}
+              style={{ color: "transparent" }}
+              src="/icons/png/danh_muc_noi_bat.png"
+            />
+            <h2 className="ml-2 w-full flex items-center text-lg font-semibold">
+              Danh mục nổi bật
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-6 grid-cols-2 md:gap-3 gap-2">
+            {categories.map((category: any) => (
+              <Category category={category} key={category.name} />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+type CategoryProps = {
+  name: string;
+  icon: string;
+  _id: string;
+  code: string;
+};
+const Category = ({ category }: { category: CategoryProps }) => (
+  <div>
+    <Link href={`/danh-muc/${category.code}-${category._id}`}>
+      <div className="md:py-[22px] md:px-3.5 h-[118px] py-3 px-0.5 rounded-xl border border-gray-300 flex flex-col items-center justify-center hover:opacity-70 bg-white">
+        <div>
+          <Image
+            alt={category.name}
+            width={24}
+            height={24}
+            decoding="async"
+            className="basis-6 shrink-0"
+            style={{ color: "transparent" }}
+            src={`/icons/png/${category.icon}`}
+          />
+        </div>
+        <div>
+          <h3 className="mt-2 mb-1 text-sm font-semibold text-center text-gray-1000">
+            {category.name}
+          </h3>
+          <div className="text-sm text-gray-600 font-medium text-center">
+            {20}
+            {/* */} sản phẩm
+          </div>
+        </div>
+      </div>
+    </Link>
+  </div>
+);
 
 export const categories = [
   {
@@ -58,61 +126,69 @@ export const categories = [
     count: 33,
     image: "/icons/png/ho_tro_tinh_duc_level_2.png",
   },
+  {
+    name: "thuc_pham_chuc_nang_level_1.png",
+    count: 44,
+    image: "/icons/png/thuc_pham_chuc_nang_level_1.png",
+  },
+  {
+    name: "cham_soc_toc_da_dau_level_2.png",
+    count: 44,
+    image: "/icons/png/cham_soc_toc_da_dau_level_2.png",
+  },
+  {
+    name: "cham_soc_co_the_level_2.png",
+    count: 44,
+    image: "/icons/png/cham_soc_co_the_level_2.png",
+  },
+  {
+    name: "ve_sinh_ca_nhan_level_2.png",
+    count: 44,
+    image: "/icons/png/ve_sinh_ca_nhan_level_2.png",
+  },
+  {
+    name: "cham_soc_da_vung_mat_level_2.png",
+    count: 44,
+    image: "/icons/png/cham_soc_da_vung_mat_level_2.png",
+  },
+  {
+    name: "tinh_dau_cac_loai_level_2.png",
+    count: 44,
+    image: "/icons/png/tinh_dau_cac_loai_level_2.png",
+  },
+  {
+    name: "my_pham_trang_diem_level_2.png",
+    count: 44,
+    image: "/icons/png/my_pham_trang_diem_level_2.png",
+  },
+  {
+    name: "san_pham_tu_thien_nhien_level_2.png",
+    count: 44,
+    image: "/icons/png/san_pham_tu_thien_nhien_level_2.png",
+  },
+  {
+    name: "cham_soc_rang_mieng_level_2.png",
+    count: 44,
+    image: "/icons/png/cham_soc_rang_mieng_level_2.png",
+  },
+  {
+    name: "thuc_pham_do_uong_level_2.png",
+    count: 44,
+    image: "/icons/png/thuc_pham_do_uong_level_2.png",
+  },
+  {
+    name: "do_dung_gia_dinh_level_2.png",
+    count: 44,
+    image: "/icons/png/do_dung_gia_dinh_level_2.png",
+  },
+  {
+    name: "hang_tong_hop_level_2.png",
+    count: 44,
+    image: "/icons/png/hang_tong_hop_level_2.png",
+  },
+  {
+    name: "thiet_bi_lam_dep_level_2.png",
+    count: 44,
+    image: "/icons/png/thiet_bi_lam_dep_level_2.png",
+  },
 ];
-export default function CategorySection({ products }: any) {
-  return (
-    <div>
-      <div className="relative py-4 mb-5">
-        <div className="container-lite relative z-10">
-          <div className="mb-2 flex">
-            <Image
-              alt="Danh mục nổi bật"
-              width={28}
-              height={28}
-              style={{ color: "transparent" }}
-              src="/icons/png/danh_muc_noi_bat.png"
-            />
-            <h2 className="ml-2 w-full flex items-center text-lg font-semibold">
-              Danh mục nổi bật
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-6 grid-cols-2 md:gap-3 gap-2">
-            {categories.map((category) => (
-              <Category category={category} key={category.name} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-type CategoryProps = { name: string; count: number; image: string };
-const Category = ({ category }: { category: CategoryProps }) => (
-  <div>
-    <a href="thuc-pham-chuc-nang/than-kinh-nao">
-      <div className="md:py-[22px] md:px-3.5 h-[118px] py-3 px-0.5 rounded-xl border border-gray-300 flex flex-col items-center justify-center hover:opacity-70 bg-white">
-        <div>
-          <Image
-            alt={category.name}
-            width={24}
-            height={24}
-            decoding="async"
-            className="basis-6 shrink-0"
-            style={{ color: "transparent" }}
-            src={category.image}
-          />
-        </div>
-        <div>
-          <h3 className="mt-2 mb-1 text-sm font-semibold text-center text-gray-1000">
-            {category.name}
-          </h3>
-          <div className="text-sm text-gray-600 font-medium text-center">
-            {category.count}
-            {/* */} sản phẩm
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
-);

@@ -47,10 +47,13 @@ export default function MenuCategory() {
                 <NavigationMenuTrigger className="hover:text-blue-500 text-gray-1000 text-base">
                   {item.name}
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="top-[60px] ">
+                <NavigationMenuContent className="top-[60px] z-50 ">
                   <ul
-                    style={{ width: 270 * cols }}
-                    className={`rounded-md bg-white grid p-6 pt-4 gap-x-5 grid-cols-${cols}`}
+                    style={{
+                      width: 280 * cols,
+                      gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+                    }}
+                    className={`rounded-md bg-white grid p-6 pt-4 gap-x-6`}
                   >
                     {item.children.map((child: any, index: number) => {
                       const border = index < cols ? true : false;
@@ -62,16 +65,18 @@ export default function MenuCategory() {
                           }`}
                         >
                           <Link
-                            className="category-panel-left-anchor items-center flex  block select-none space-y-1  "
-                            href={"/danh-muc/" + child.code}
+                            className="category-panel-left-anchor items-center flex select-none space-y-1"
+                            href={`/danh-muc/${child.code}-${child._id}`}
                           >
-                            <Image
-                              alt="Dụng cụ y tế"
-                              className="h-6 w-6"
-                              height={24}
-                              width={24}
-                              src="/icons/png/sinh_li_noi_tiet_to_level_2.png"
-                            />
+                            {!!child.icon && (
+                              <Image
+                                alt="Dụng cụ y tế"
+                                className="h-6 w-6"
+                                height={24}
+                                width={24}
+                                src={`/icons/png/${child.icon}`}
+                              />
+                            )}
 
                             <p className="css-15sc8tc ml-[10px] flex flex-1 items-center line-clamp-1 mb-0 text-base">
                               {child.name}
