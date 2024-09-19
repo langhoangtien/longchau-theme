@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -17,17 +17,17 @@ export function CarouselDemo({ products }: any) {
       <div className="md:container-lite relative md:flex md:flex-row md:gap-3 md:py-4 ">
         <Carousel className="h-auto shrink-0 md:max-w-[805px] md:basis-[805px]">
           <CarouselContent>
-            {products.map((product: any) => (
+            {products.map((product: any, index: number) => (
               <CarouselItem key={product._id}>
                 <div className="p-1">
                   <CardContent className="flex aspect-[16/5] items-center justify-center rounded-xl p-0">
                     <Image
-                      width={0}
-                      height={0}
+                      width={600}
+                      height={400}
                       sizes="100vw"
                       src={product.image}
                       alt={product.name}
-                      priority={true}
+                      priority={!index}
                       className="object-cover w-full h-full rounded-xl"
                     />
                   </CardContent>

@@ -1,44 +1,22 @@
 "use client";
 
 import { useCartContext } from "@/components/cart";
-import { paths } from "@/routes/paths";
-import {
-  AttributeType,
-  ProductAttributeType,
-  ProductType,
-  ProductVariantType,
-  VariantInCartType,
-} from "@/types";
-
+import { ProductType, ProductVariantType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { stringifyArray } from "@/lib/common";
 import { useEffect, useState } from "react";
-
 import { useSheetContext } from "@/components/sheet-product";
+import useWindowSize from "@/hooks/use-window-size";
 
 type ProductProps = {
   product: ProductType;
-  // handleClickBuy: MouseEventHandler<HTMLButtonElement>;
 };
 export default function Product({ product }: ProductProps) {
   const { addToCart, headerRef, cartRef }: any = useCartContext();
   const { setOpen, setProduct, setOpenDialog }: any = useSheetContext();
   const [variant, setVariant] = useState<ProductVariantType | null>(null);
 
-  const router = useRouter();
   useEffect(() => {
     if (!variant) setVariant(product.variants[0]);
   }, [product.variants, setVariant, variant]);
@@ -74,6 +52,7 @@ export default function Product({ product }: ProductProps) {
       cartRef.current.classList.toggle("list-product-show", false);
     }, 2000);
   };
+  const { width, height } = useWindowSize();
 
   return (
     <div className="h-full relative flex rounded-xl border border-solid border-white bg-white transition-all duration-300 ease-out hover:border-blue-500 flex-col">
@@ -133,24 +112,24 @@ export default function Product({ product }: ProductProps) {
                 </div>
               )}
             </div>
-            {/* <p className="w-fit rounded-lg bg-gray-200 px-2 py-1 text-caption font-medium text-gray-600 line-clamp-2 md:text-sm">
-                Hộp 3 Vỉ x 20 Viên
-              </p> */}
           </div>
         </div>
         <div className="mt-4 px-3">
-          <Button
-            onClick={handleAddToCart}
-            className="py-[8px] px-[12px] h-[36px] w-full hidden md:flex"
-          >
-            Chọn mua
-          </Button>
-          <Button
-            onClick={handleClickBuyMobile}
-            className="py-[8px] px-[12px] h-[36px] w-full md:hidden"
-          >
-            Chọn mua
-          </Button>
+          {width && width > 768 ? (
+            <Button
+              onClick={handleAddToCart}
+              className="py-[8px] px-[12px] h-[36px] w-full hidden md:flex"
+            >
+              Chọn mua
+            </Button>
+          ) : (
+            <Button
+              onClick={handleClickBuyMobile}
+              className="py-[8px] px-[12px] h-[36px] w-full md:hidden"
+            >
+              Chọn mua
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -1,9 +1,18 @@
 import { mappedProduct } from "@/lib/common";
 import { CarouselDemo } from "@/components/home/carousel";
-import { SuggestionSection, ToopDiscountSection } from "@/components/home";
+// import { ToopDiscountSection } from "@/components/home";
+
 import CategorySection from "@/components/home/category-section";
 import { HOST_API } from "@/config-global";
-
+import dynamic from "next/dynamic";
+const TopSucces = dynamic(
+  () => import("@/components/home").then((mod) => mod.SuggestionSection),
+  { ssr: false }
+);
+const ToopDiscountSection = dynamic(
+  () => import("@/components/home").then((mod) => mod.ToopDiscountSection),
+  { ssr: false }
+);
 export const revalidate = 60;
 export default async function Home() {
   const homeData = await fetch(`${HOST_API}/home`);
@@ -35,7 +44,7 @@ export default async function Home() {
         products={newsestProducts}
         background="bg-gradient-to-b from-orange-50 to-blue-50"
       />
-      <SuggestionSection products={productMapped} />
+      <TopSucces products={productMapped} />
     </div>
   );
 }

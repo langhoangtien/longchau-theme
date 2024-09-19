@@ -4,9 +4,18 @@ import "./globals.css";
 import "./styles.css";
 import { CartProvider } from "@/components/cart";
 import { Toaster } from "@/components/ui/sonner";
-import { Sheet } from "lucide-react";
 import { SheetProvider } from "@/components/sheet-product";
-import { DialogProduct, SheetProduct } from "@/components/home";
+// import { DialogProduct, SheetProduct } from "@/components/home";
+import dynamic from "next/dynamic";
+// const DialogProduct = dynamic(() => import("@/components/home/dialog-product"));
+const DialogProduct = dynamic(
+  () => import("@/components/home/").then((mod) => mod.DialogProduct),
+  { ssr: false }
+);
+const SheetProduct = dynamic(
+  () => import("@/components/home/").then((mod) => mod.SheetProduct),
+  { ssr: false }
+);
 
 const inter = Inter({ subsets: ["latin"] });
 
