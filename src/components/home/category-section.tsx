@@ -3,7 +3,7 @@ import { count } from "console";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function CategorySection({ products }: any) {
+export default async function CategorySection() {
   const resultJson = await fetch(`${HOST_API}/categories/?limit=12`);
   const categoriesData = await resultJson.json();
   const categories = categoriesData.items;

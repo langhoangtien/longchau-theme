@@ -191,7 +191,7 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              <AccordionMenu />
+              {/* <AccordionMenu /> */}
 
               <div className="border-b py-3">
                 <div className="flex flex-col mt-1 gap-2">

@@ -27,6 +27,7 @@ export function CarouselDemo({ products }: any) {
                       sizes="100vw"
                       src={product.image}
                       alt={product.name}
+                      priority={true}
                       className="object-cover w-full h-full rounded-xl"
                     />
                   </CardContent>

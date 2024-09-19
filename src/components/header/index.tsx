@@ -20,6 +20,7 @@ import Eye from "../icons/eye";
 import EyeSlash from "../icons/eye-slash";
 import { useCartContext } from "../cart";
 import { Menu } from "lucide-react";
+import useWindowSize from "@/hooks/use-window-size";
 
 export default function Header() {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -48,16 +49,20 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+  const { width, height } = useWindowSize();
   return (
     <header
       id="header"
       className="sticky top-0 z-[49] bg-[#317dff] transition-[height] md:relative"
     >
-      <HeaderMobile
-        open={open}
-        setOpen={setOpen}
-        setOpenDialog={setOpenDialog}
-      />
+      {width && width < 768 && (
+        <HeaderMobile
+          open={open}
+          setOpen={setOpen}
+          setOpenDialog={setOpenDialog}
+        />
+      )}
+
       <div className="relative">
         <div className="relative md:static">
           <Info />

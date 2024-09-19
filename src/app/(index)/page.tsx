@@ -24,7 +24,6 @@ export default async function Home() {
   //   }));
   const newsestProducts = homeJson.topNewestProducts.map(mappedProduct);
   const topNewProduct = newsestProducts.slice(0, 5);
-  console.log("topNewProduct", topNewProduct);
 
   const productMapped = products.map(mappedProduct);
 

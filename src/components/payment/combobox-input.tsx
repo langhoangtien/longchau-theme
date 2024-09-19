@@ -17,6 +17,7 @@ import {
 import { FormItem, FormMessage, useFormField } from "../ui/form";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { set } from "react-hook-form";
+import useWindowSize from "@/hooks/use-window-size";
 export default function ComboboxDemo({
   label,
   disabled,
@@ -29,18 +30,15 @@ export default function ComboboxDemo({
   const [search, setSearch] = React.useState("");
   const { error } = useFormField();
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [width, setWidth] = React.useState(768);
+  const { width, height } = useWindowSize();
   const handleOpen = (op: boolean) => {
     setOpen(op);
     if (op && inputRef.current) {
       inputRef.current.blur();
     }
   };
-  React.useEffect(() => {
-    setWidth(window.innerWidth);
-  }, []);
 
-  if (width > 768)
+  if (width && width > 768)
     return (
       <FormItem>
         <Popover open={open && !disabled} onOpenChange={setOpen}>

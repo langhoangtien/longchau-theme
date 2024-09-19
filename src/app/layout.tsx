@@ -56,7 +56,7 @@ export default function RootLayout({
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
       ></meta>
 
-      <body className="bg-gray-100">
+      <body className={inter.className}>
         <CartProvider>
           <SheetProvider>
             {children}
