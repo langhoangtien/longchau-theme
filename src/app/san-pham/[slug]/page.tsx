@@ -105,7 +105,6 @@ export default async function Product(props: any) {
         <ProductDetailFaq />
 
         <ProductDetailPreview
-          // ratings={product.ratings}
           totalRating={totalRating}
           id={product._id}
           ratingAverage={product.ratingAverage}

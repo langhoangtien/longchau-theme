@@ -1,13 +1,23 @@
+import { use, useEffect, useState } from "react";
 import StarIcon from "../icons/star-icon";
+
+interface Rating {
+  percent: number;
+  rating: number;
+}
 
 export default function ProductReviewStar({
   ratingsCalc,
 }: {
-  ratingsCalc: any[];
+  ratingsCalc: Rating[];
 }) {
+  const [ratings, setRatings] = useState<Rating[]>([]);
+  useEffect(() => {
+    setRatings(ratingsCalc);
+  }, [ratingsCalc]);
   return (
     <div>
-      {ratingsCalc.reverse().map((rating: any, index: number) => (
+      {ratings.reverse().map((rating: Rating, index: number) => (
         <Stars
           key={index}
           star={5 - index}

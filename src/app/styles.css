@@ -639,3 +639,7 @@ input[type="number"] {
   display: none;
 }
 /* END_READ_MORE */
+
+.product-review-star li:hover ~ li > svg {
+  color: #e5e7eb;
+}

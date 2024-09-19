@@ -155,7 +155,7 @@ export default function CartPage() {
                     </div>
                   </div>
                   <div className="w-full h-[1px] bg-stroke-disable" />
-                  <div>
+                  <div className="mb-2">
                     <div className="flex items-center justify-between">
                       <div className="text-heading3 font-semibold text-text-primary">
                         Thành tiền
@@ -173,7 +173,7 @@ export default function CartPage() {
                       </div>
                     </div>
                   </div>
-                  <Link className="my-1" href="/thanh-toan">
+                  <Link className="my-2" href="/thanh-toan">
                     <Button className="w-full">Mua hàng</Button>
                   </Link>
                   <div className="text-text-primary text-base text-center indent-4">

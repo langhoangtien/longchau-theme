@@ -99,7 +99,7 @@ const FormLabel = React.forwardRef<
     <Label
       ref={ref}
       className={cn(
-        "font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 absolute text-base text-gray-500 duration-300 transform -translate-y-3 scale-[0.8] top-[15px] z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[0.8] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+        "font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 absolute text-base text-gray-500 duration-300 transform -translate-y-3 scale-[0.875] top-[15px] z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[0.875] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
         className,
         error && "text-destructive"
       )}
@@ -252,6 +252,56 @@ const InputRHF2 = ({ className, type, name = "", ...props }: any) => {
 
 InputRHF2.displayName = "InputRHF2";
 
+export interface TextareaProps
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  name: string;
+  label?: string;
+}
+const TextareaRHF = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
+  ({ className, name, label, ...props }, ref) => {
+    const { control } = useFormContext();
+    return (
+      <FormField
+        control={control}
+        name={name}
+        render={({ field, fieldState: { error } }) => (
+          <FormItem className="">
+            <FormControl>
+              <div className="relative">
+                <div>
+                  <div className="flex-1 w-full bg-white">
+                    <div
+                      className={cn(
+                        "flex group flex-col-reverse justify-end box-border rounded-lg border border-solid  hover:border-primary  py-[8px] h-[120px] bg-field-default-active disabled:!bg-field-default-disable border-stroke-default focus-within:border-stroke-focus disabled:!border-field-default-disable",
+                        className,
+                        error &&
+                          "border-destructive focus:border-destructive bg-red-50"
+                      )}
+                    >
+                      <textarea
+                        {...field}
+                        {...props}
+                        ref={ref}
+                        className="peer outline-none resize-none w-full px-4 text-base font-normal text-justify placeholder:text-base placeholder:font-normal placeholder:text-left bg-transparent  disabled:!text-gray-400 placeholder:text-placeholder disabled:placeholder:!text-gray-400 "
+                        name="note"
+                      />
+                      <label className="px-4 text-sm font-medium text-gray-400 peer-disabled:!text-gray-400">
+                        {label}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <FormMessage />
+              </div>
+            </FormControl>
+          </FormItem>
+        )}
+      />
+    );
+  }
+);
+TextareaRHF.displayName = "TextareaRHF";
+
 export {
   useFormField,
   Form,
@@ -263,4 +313,5 @@ export {
   FormField,
   InputRHF,
   InputRHF2,
+  TextareaRHF,
 };

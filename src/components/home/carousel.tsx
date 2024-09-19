@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Image from "next/image";
 
 export function CarouselDemo({ products }: any) {
   return (
@@ -20,7 +21,10 @@ export function CarouselDemo({ products }: any) {
               <CarouselItem key={product._id}>
                 <div className="p-1">
                   <CardContent className="flex aspect-[16/5] items-center justify-center rounded-xl p-0">
-                    <img
+                    <Image
+                      width={0}
+                      height={0}
+                      sizes="100vw"
                       src={product.image}
                       alt={product.name}
                       className="object-cover w-full h-full rounded-xl"
@@ -39,7 +43,7 @@ export function CarouselDemo({ products }: any) {
             className="hidden max-w-[399px] md:block"
             href="/bai-viet/thu-cu-doi-moi-binh-hen-suyen-va-but-tiem-tieu-duong-da-qua-su-dung-tai-nha-thuoc-fpt-long-chau.html"
           >
-            <img
+            <Image
               alt=""
               fetchPriority="high"
               loading="lazy"
@@ -49,7 +53,6 @@ export function CarouselDemo({ products }: any) {
               data-nimg={1}
               className="rounded-xl h-[117px] w-[399px] object-cover"
               style={{ color: "transparent" }}
-              srcSet="https://cdn.nhathuoclongchau.com.vn/unsafe/425x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/399x117_49d70d4809.png 1x, https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/399x117_49d70d4809.png 2x"
               src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/399x117_49d70d4809.png"
             />
           </a>
@@ -57,7 +60,7 @@ export function CarouselDemo({ products }: any) {
             className="hidden max-w-[399px] md:block"
             href="/chuyen-trang-suc-khoe"
           >
-            <img
+            <Image
               alt=""
               fetchPriority="high"
               loading="lazy"
@@ -67,7 +70,6 @@ export function CarouselDemo({ products }: any) {
               data-nimg={1}
               className="rounded-xl h-[117px] w-[399px] object-cover"
               style={{ color: "transparent" }}
-              srcSet="https://cdn.nhathuoclongchau.com.vn/unsafe/425x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/2_bde57743c1.png 1x, https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/2_bde57743c1.png 2x"
               src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/2_bde57743c1.png"
             />
           </a>

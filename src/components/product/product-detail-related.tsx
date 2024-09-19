@@ -35,7 +35,7 @@ export default function RelatedProduct({ title }: any) {
                 className=" basis-1/2 md:basis-1/4 xl:basis-1/5"
               >
                 <div className="h-full">
-                  <Product handleClickBuy={() => {}} product={product} />
+                  <Product product={product} />
                 </div>
               </CarouselItem>
             ))}

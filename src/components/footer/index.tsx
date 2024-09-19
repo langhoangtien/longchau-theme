@@ -161,29 +161,30 @@ export default function Footer() {
                     KẾT NỐI VỚI CHÚNG TÔI
                   </p>
                   <div className="flex gap-[16px] umd:py-1 mb-1">
-                    <a href="https://www.facebook.com/Nhathuocfptlongchau">
-                      <img
+                    <a
+                      href="https://www.facebook.com/ludmilavietnam
+                    "
+                    >
+                      <Image
                         alt="Facebook"
                         loading="lazy"
                         width={28}
                         height={28}
                         decoding="async"
                         data-nimg={1}
-                        srcSet="https://cdn1.nhathuoclongchau.com.vn/smalls/facebook_logo_3152b9bb16.svg 1x, https://cdn1.nhathuoclongchau.com.vn/smalls/facebook_logo_3152b9bb16.svg 2x"
-                        src="https://cdn1.nhathuoclongchau.com.vn/smalls/facebook_logo_3152b9bb16.svg"
+                        src="/icons/svg/facebook.svg"
                         style={{ color: "transparent" }}
                       />
                     </a>
-                    <a href="https://zalo.me/3822805105108870889">
-                      <img
+                    <a href="https://zalo.me/0832667711">
+                      <Image
                         alt="Zalo"
                         loading="lazy"
                         width={28}
                         height={28}
                         decoding="async"
                         data-nimg={1}
-                        srcSet="https://cdn1.nhathuoclongchau.com.vn/smalls/Logo_Zalo_979d41d52b.svg 1x, https://cdn1.nhathuoclongchau.com.vn/smalls/Logo_Zalo_979d41d52b.svg 2x"
-                        src="https://cdn1.nhathuoclongchau.com.vn/smalls/Logo_Zalo_979d41d52b.svg"
+                        src="/icons/svg/zalo.svg"
                         style={{ color: "transparent" }}
                       />
                     </a>
@@ -198,11 +199,8 @@ export default function Footer() {
                     CHỨNG NHẬN BỞI
                   </p>
                   <div className="flex justify-evenly items-center md:justify-start md:gap-x-3">
-                    <a
-                      href="http://online.gov.vn/(X(1)S(k3yc0ysr0jtxpy32mp52zd3n))/Home/WebDetails/94973?AspxAutoDetectCookieSupport=1"
-                      className="inline-block"
-                    >
-                      <img
+                    <a href="#" className="inline-block">
+                      <Image
                         alt="certificate-icon"
                         loading="lazy"
                         width={171}
@@ -210,16 +208,12 @@ export default function Footer() {
                         decoding="async"
                         data-nimg={1}
                         className="w-[171px] h-[56px] md:w-full md:h-full object-fill"
-                        srcSet="https://cdn1.nhathuoclongchau.com.vn/bo_cong_thuong_a8e5750f57.svg 1x, https://cdn1.nhathuoclongchau.com.vn/bo_cong_thuong_a8e5750f57.svg 2x"
-                        src="https://cdn1.nhathuoclongchau.com.vn/bo_cong_thuong_a8e5750f57.svg"
+                        src="/icons/svg/bo_cong_thuong.svg"
                         style={{ color: "transparent" }}
                       />
                     </a>
-                    <a
-                      href="https://www.dmca.com/Protection/Status.aspx?ID=98d66f66-5a62-47e9-b45c-edaebfb0c9b3&refurl=https://nhathuoclongchau.com.vn/"
-                      className="inline-block"
-                    >
-                      <img
+                    <a href="#" className="inline-block">
+                      <Image
                         alt="certificate-icon"
                         loading="lazy"
                         width={171}
@@ -227,8 +221,7 @@ export default function Footer() {
                         decoding="async"
                         data-nimg={1}
                         className="w-[171px] h-[56px] md:w-full md:h-full object-fill"
-                        srcSet="https://cdn1.nhathuoclongchau.com.vn/smalls/DMCA_1_1f84305343.svg 1x, https://cdn1.nhathuoclongchau.com.vn/smalls/DMCA_1_1f84305343.svg 2x"
-                        src="https://cdn1.nhathuoclongchau.com.vn/smalls/DMCA_1_1f84305343.svg"
+                        src="icons/svg/DMCA.svg"
                         style={{ color: "transparent" }}
                       />
                     </a>
@@ -330,8 +323,9 @@ export default function Footer() {
                       HỖ TRỢ THANH TOÁN
                     </p>
                     <div className="mt-2 flex flex-wrap gap-1">
-                      {PAYMENT_METHODS.map((src, index) => (
+                      {PAYMENT_METHODS.map((src) => (
                         <Link
+                          key={src}
                           className="inline-flex h-[28px] w-[44px] items-center justify-center overflow-hidden rounded border"
                           href="/chinh-sach-thanh-toan"
                         >

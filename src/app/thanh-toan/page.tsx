@@ -3,77 +3,23 @@ import { useCartContext } from "@/components/cart";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PaymentMethods from "@/components/payment/payment-methods";
-import { PaymentAddressForm2 } from "@/components/payment/payment-address";
 import { useRef, useState } from "react";
 import PaymentSummery from "@/components/payment/payment-summery";
 import { HOST_API } from "@/config-global";
 
 import { useRouter } from "next/navigation";
-
-export enum PAYMENT_METHOD {
-  COD = "cod",
-  QR = "qr",
-  VNPAY_ATM = "vnpay_atm",
-  CARD = "card",
-  ZALOPAY = "zalopay",
-  MOMO = "momo",
-  VNPAY = "vnpay",
-}
-const paymentMethods = [
-  {
-    method: PAYMENT_METHOD.COD,
-    label: " Thanh toán tiền mặt khi nhận hàng",
-    image: "/icons/png/cod.webp",
-    disabled: false,
-  },
-  {
-    method: PAYMENT_METHOD.QR,
-    label: "Thanh toán bằng chuyển khoản (QR Code)",
-    image: "/icons/png/qr.webp",
-    disabled: false,
-  },
-  {
-    method: PAYMENT_METHOD.VNPAY_ATM,
-    label: "Thanh toán bằng thẻ ATM nội địa và tài khoản ngân hàng",
-    image: "/icons/png/vnpay_atm.webp",
-    disabled: true,
-  },
-  {
-    method: PAYMENT_METHOD.CARD,
-    label:
-      "Thanh toán bằng thẻ quốc tế Visa, Master, JCB, AMEX (GooglePay, ApplePay)",
-    image: "/icons/png/card.webp",
-    disabled: true,
-  },
-  {
-    method: PAYMENT_METHOD.ZALOPAY,
-    label: "Thanh toán bằng ZaloPay",
-    image: "/icons/png/zalopay.webp",
-    disabled: true,
-  },
-  {
-    method: PAYMENT_METHOD.MOMO,
-    label: "Thanh toán bằng MoMo",
-    image: "/icons/png/momo.webp",
-    disabled: true,
-  },
-  {
-    method: PAYMENT_METHOD.VNPAY,
-    label: "Thanh toán bằng VNPAY",
-    image: "/icons/png/vnpay.webp",
-    disabled: true,
-  },
-];
+import PaymentForm from "@/components/payment/payment-form";
+import { paymentMethods } from "@/constants";
 
 export default function Checkout() {
   const { products, orderCompleted }: any = useCartContext();
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const productSelected = products.filter((item: any) => item.selected);
-  const buttonRef2 = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const handleSubmit = () => {
-    buttonRef2.current?.click();
+    buttonRef.current?.click();
   };
   const router = useRouter();
   const handlePost = async (data: any) => {
@@ -170,10 +116,11 @@ export default function Checkout() {
                         <div className="flex flex-col gap-4 md:gap-6">
                           {/* <PaymentAddressForm buttonRef={buttonRef} /> */}
 
-                          <PaymentAddressForm2
+                          <PaymentForm
                             callback={handlePost}
-                            buttonRef={buttonRef2}
+                            buttonRef={buttonRef}
                           />
+                          {/* <PaymentAddressForm2 /> */}
                         </div>
                       </div>
                     </div>

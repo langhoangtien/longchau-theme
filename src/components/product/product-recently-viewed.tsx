@@ -25,6 +25,7 @@ export default function ProductRecentlyViewed({ product }: any) {
     } else {
       localStorage.setItem("recentlyViewed", JSON.stringify([productClone]));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return null;
 }
