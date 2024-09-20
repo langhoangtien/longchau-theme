@@ -1,5 +1,5 @@
 import { HOST_API } from "@/config-global";
-import ProductsPage from "@/components/filter-page";
+import ProductsPage from "@/components/filter-page/product-list";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,8 +16,6 @@ export default async function BrandPage(props: any) {
   const slug = props?.params?.slug ?? null;
   const id = slug.split("-").pop();
   const resultJson = await fetch(`${HOST_API}/brands/${id}`);
-  const filterDataJson = await fetch(`${HOST_API}/home/select-info`);
-  const filterData = await filterDataJson.json();
   const result = await resultJson.json();
 
   return (
@@ -96,7 +94,7 @@ export default async function BrandPage(props: any) {
               </div>
             </div>
           </div>
-          <ProductsPage filterData={filterData} />;
+          <ProductsPage brand={id} />;
         </div>
 
         <div className="container-lite pt-4 md:pt-5" />

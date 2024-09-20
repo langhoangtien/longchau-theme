@@ -94,3 +94,15 @@ export const timeFormat = (d: string) => {
   const time = timeAgo(date);
   return { raw, time };
 };
+
+export function getLastDayOfMonth() {
+  const now = new Date();
+
+  const lastDay = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+
+  const formattedDate = `${String(lastDay).padStart(2, "0")}/${String(
+    now.getMonth() + 1
+  ).padStart(2, "0")}`;
+
+  return formattedDate;
+}

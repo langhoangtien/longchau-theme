@@ -10,6 +10,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/tooltip";
+import { getLastDayOfMonth } from "@/lib/common";
 import Image from "next/image";
 import Link from "next/link";
 export default function CartPage() {
@@ -104,19 +105,15 @@ export default function CartPage() {
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <span className="text-body1 text-text-secondary">
-                          Tổng tiền
-                        </span>
+                        <span className="text-base ">Tổng tiền</span>
                       </div>
-                      <div className="text-body1 font-medium text-text-primary">
+                      <div className="text-base font-medium text-text-primary">
                         7.605.000đ
                       </div>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <span className="text-body1 text-text-secondary">
-                          Giảm giá trực tiếp
-                        </span>
+                        <span className="text-base ">Giảm giá trực tiếp</span>
                       </div>
                       <span className="text-sm omd:text-base font-medium">
                         -2.628.300đ
@@ -139,17 +136,15 @@ export default function CartPage() {
                           </svg>
                         </button>
                       </div>
-                      <span className="umd:text-body2 omd:text-body1 font-medium text-semantic-warning">
+                      <span className="umd:text-body2 omd:text-base font-medium text-semantic-warning">
                         0đ
                       </span>
                     </div>
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <span className="text-body1 text-text-secondary">
-                          Tiết kiệm được
-                        </span>
+                        <span className="text-base ">Tiết kiệm được</span>
                       </div>
-                      <span className="umd:text-body2 omd:text-body1 font-medium text-semantic-warning">
+                      <span className="umd:text-body2 omd:text-base font-medium text-semantic-warning">
                         2.628.300đ
                       </span>
                     </div>
@@ -405,24 +400,31 @@ const ProductItem = ({
           </Button>
         </div>
       </div>
-      <div className="p-2 bg-gray-100 rounded-lg divide-y [&>*]:py-2 [&>:first-child]:pt-0 [&>:last-child]:pb-0 md:ml-[108px] ml-8 mt-3">
-        <div style={{ opacity: 1 }}>
-          <div className="flex items-center gap-2">
-            <Image
-              alt="Giảm ngay 300,000đ khi mua Online áp dụng đến 18/08"
-              loading="lazy"
-              width={36}
-              height={36}
-              className="shrink-0 w-9 h-9 ring-1 ring-inset ring-stroke-disable rounded overflow-hidden object-contain"
-              src="https://nhathuoclongchau.com.vn/estore-images/cart/promotion/promotion_available.svg"
-              style={{ color: "transparent" }}
-            />
-            <div className="text-sm flex-auto basis-full font-medium whitespace-pre-line">
-              Giảm ngay 300,000đ khi mua Online áp dụng đến 18/08
+      {!!product.discount && (
+        <div className="p-2 bg-gray-100 rounded-lg divide-y [&>*]:py-2 [&>:first-child]:pt-0 [&>:last-child]:pb-0 md:ml-[108px] ml-8 mt-3">
+          <div style={{ opacity: 1 }}>
+            <div className="flex items-center gap-2">
+              <Image
+                alt="Giảm ngay 300,000đ khi mua Online áp dụng đến 18/08"
+                loading="lazy"
+                width={36}
+                height={36}
+                className="shrink-0 w-9 h-9 ring-1 ring-inset ring-stroke-disable rounded overflow-hidden object-contain"
+                src="https://nhathuoclongchau.com.vn/estore-images/cart/promotion/promotion_available.svg"
+                style={{ color: "transparent" }}
+              />
+              <div className="text-sm flex-auto basis-full font-medium whitespace-pre-line">
+                Giảm ngay{" "}
+                {Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(product.price - product.salePrice)}{" "}
+                khi mua Online áp dụng đến {getLastDayOfMonth()}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

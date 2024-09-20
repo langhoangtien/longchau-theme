@@ -147,10 +147,7 @@ export default function Footer() {
                       CHỨNG NHẬN BỞI
                     </p>
                     <div className="flex justify-evenly items-center md:justify-start md:gap-x-3">
-                      <a
-                        href="http://online.gov.vn/(X(1)S(k3yc0ysr0jtxpy32mp52zd3n))/Home/WebDetails/94973?AspxAutoDetectCookieSupport=1"
-                        className="inline-block"
-                      >
+                      <a href="#" className="inline-block">
                         <Image
                           alt="certificate-icon"
                           loading="lazy"
@@ -161,10 +158,7 @@ export default function Footer() {
                           src="/icons/svg/bo_cong_thuong.svg"
                         />
                       </a>
-                      <a
-                        href="https://www.dmca.com/Protection/Status.aspx?ID=98d66f66-5a62-47e9-b45c-edaebfb0c9b3&refurl=https://nhathuoclongchau.com.vn/"
-                        className="inline-block"
-                      >
+                      <a href="#" className="inline-block">
                         <Image
                           alt="certificate-icon"
                           width={171}
@@ -248,13 +242,13 @@ export default function Footer() {
                       chóng
                     </p>
                     <div className="flex gap-x-2 md:hidden mt-3 gap-3">
-                      <a href="https://dl.ntlc.com.vn/app/home">
+                      <a href="https://facebook.com/ludmilavietnam">
                         <Image
                           alt="icon-download"
                           loading="lazy"
                           width={131}
                           height={43}
-                          className="w-[100px] md:w-[131px] umd:max-h-[43px] object-cover"
+                          className="w-[100px] md:w-[131px] max-h-[43px] object-cover"
                           src="/icons/svg/Download.svg"
                           style={{ color: "transparent" }}
                         />

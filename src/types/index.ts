@@ -45,3 +45,11 @@ export type ProductType = {
   maxSalePrice: number;
   id: string;
 };
+
+export type FilterType = {
+  brand: string[];
+  category: string[];
+  country: string[];
+  price: string[];
+  rating: number | null;
+};

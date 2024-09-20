@@ -1,3 +1,5 @@
+import { FilterType } from "@/types";
+
 export enum PAYMENT_METHOD {
   COD = "cod",
   QR = "qr",
@@ -19,7 +21,7 @@ export const paymentMethods = [
     method: PAYMENT_METHOD.QR,
     label: "Thanh toán bằng chuyển khoản (QR Code)",
     image: "/icons/png/qr.webp",
-    disabled: false,
+    disabled: true,
   },
   {
     method: PAYMENT_METHOD.VNPAY_ATM,
@@ -319,3 +321,11 @@ export const cities = [
   },
   { id: 64, name: "Tỉnh Yên Bái", cityId: "64", locationSlug: "tinh-yen-bai" },
 ];
+
+export const INIT_FILTERS: FilterType = {
+  brand: [],
+  category: [],
+  country: [],
+  price: [],
+  rating: null,
+};

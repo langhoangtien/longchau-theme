@@ -12,6 +12,7 @@ import { HOST_API } from "@/config-global";
 import { useRouter } from "next/navigation";
 import PaymentForm from "@/components/payment/payment-form";
 import { paymentMethods } from "@/constants";
+import { getLastDayOfMonth } from "@/lib/common";
 
 export default function Checkout() {
   const { products, orderCompleted }: any = useCartContext();
@@ -218,22 +219,29 @@ const ProductItem = ({ product }: any) => (
         </div>
       </div>
     </div>
-    <div className="p-2 bg-gray-200 rounded-lg divide-y [&>*]:py-2 [&>:first-child]:pt-0 [&>:last-child]:pb-0 md:ml-[72px] mt-3">
-      <div style={{ opacity: 1 }}>
-        <div className="flex items-center gap-2">
-          <Image
-            alt="Giảm ngay 300,000đ khi mua Online áp dụng đến 18/08"
-            width={36}
-            height={36}
-            className="shrink-0 w-9 h-9 ring-1 ring-inset ring-stroke-disable rounded overflow-hidden object-contain"
-            src="https://nhathuoclongchau.com.vn/estore-images/cart/promotion/promotion_available.svg"
-            style={{ color: "transparent" }}
-          />
-          <div className="text-sm flex-auto basis-full font-medium whitespace-pre-line">
-            Giảm ngay 300,000đ khi mua Online áp dụng đến 18/08
+    {!!product.discount && (
+      <div className="p-2 bg-gray-200 rounded-lg divide-y [&>*]:py-2 [&>:first-child]:pt-0 [&>:last-child]:pb-0 md:ml-[72px] mt-3">
+        <div style={{ opacity: 1 }}>
+          <div className="flex items-center gap-2">
+            <Image
+              alt="Giảm ngay 300,000đ khi mua Online áp dụng đến 18/08"
+              width={36}
+              height={36}
+              className="shrink-0 w-9 h-9 ring-1 ring-inset ring-stroke-disable rounded overflow-hidden object-contain"
+              src="https://nhathuoclongchau.com.vn/estore-images/cart/promotion/promotion_available.svg"
+              style={{ color: "transparent" }}
+            />
+            <div className="text-sm flex-auto basis-full font-medium whitespace-pre-line">
+              Giảm ngay{" "}
+              {Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(product.price - product.salePrice)}{" "}
+              khi mua Online áp dụng đến {getLastDayOfMonth()}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    )}
   </div>
 );

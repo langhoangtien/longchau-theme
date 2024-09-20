@@ -225,7 +225,7 @@ export function AccordionswitchboardMenu() {
                 decoding="async"
                 data-nimg={1}
                 className="w-[171px] h-[56px] md:w-full md:h-full object-fill"
-                src="icons/svg/DMCA.svg"
+                src="/icons/svg/DMCA.svg"
                 style={{ color: "transparent" }}
               />
             </a>

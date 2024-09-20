@@ -12,7 +12,9 @@ export default function PaymentMethods({ payment, payments, setPayment }: any) {
           {payments.map((item: any) => (
             <div
               key={item.method}
-              className="flex items-center gap-2 py-3 px-4 bg-white"
+              className={`flex items-center gap-2 py-3 px-4 bg-white ${
+                item.disabled ? "hidden" : ""
+              }`}
             >
               <Checkbox
                 checked={payment === item.method}
@@ -27,7 +29,7 @@ export default function PaymentMethods({ payment, payments, setPayment }: any) {
                 <div className="flex items-center">
                   <div className="mr-3 w-10 h-10">
                     <Image
-                      alt="Thanh toán tiền mặt khi nhận hàng"
+                      alt={item.label}
                       width={48}
                       height={48}
                       data-nimg={1}

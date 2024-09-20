@@ -3,10 +3,9 @@ import Product from "@/components/home/product";
 import Filter from "@/components/search/filter";
 import { ButtonSelect } from "@/components/ui/button-select";
 import { HOST_API } from "@/config-global";
-import { useBoolean } from "@/hooks/use-boolean";
 import { encodeData, mappedProduct } from "@/lib/common";
 
-import { use, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductSkeleton from "../home/product/product-skeleton";
 import { PaginationDemo } from "../ui/pagination";
 import Image from "next/image";
@@ -15,20 +14,15 @@ import FilterIcon from "@/components/icons/filter";
 import GridIcon from "../icons/grid-icon";
 import ListIcon from "../icons/list-icon";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
-  SheetTrigger,
 } from "@/components/ui/sheet";
-import { set } from "react-hook-form";
-import { get } from "http";
+import FilterEmpty from "./filter-empty";
+
 const INIT_FILTERS: FilterType = {
   brand: [],
   category: [],
@@ -49,11 +43,7 @@ const SORT_OPTIONS = [
   { value: "popular", label: "Bán chạy", orderBy: "sold", order: -1 },
 ];
 
-export default function ProductsPage({
-  search = "",
-  category = null,
-  filterData,
-}: any) {
+export default function ProductsPage({ search = "", filterData }: any) {
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
@@ -100,6 +90,9 @@ export default function ProductsPage({
     getData();
   }, [filter, search, sort, page]);
 
+  if (!loading && products.length === 0) {
+    return <FilterEmpty />;
+  }
   return (
     <div className="-mx-4 md:mx-0 md:grid md:grid-cols-[289px_907fr] md:gap-5">
       <div className="hidden md:block">
@@ -300,24 +293,3 @@ export default function ProductsPage({
     </div>
   );
 }
-
-const SheetFilter = ({
-  open,
-  setOpen,
-  children,
-}: {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  children?: React.ReactNode;
-}) => {
-  return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetContent side="right">
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-        </SheetHeader>
-        {children}
-      </SheetContent>
-    </Sheet>
-  );
-};

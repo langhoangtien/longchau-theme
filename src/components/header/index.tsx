@@ -283,7 +283,7 @@ const LoginDialog = ({ openDialog, setOpenDialog }: any) => {
             {signIn !== "email" && (
               <span
                 onClick={() => handleChangeSignIn("email")}
-                className="border-stroke-disable hover:bg-white-2 rounded-full border bg-white p-[11px] leading-[1]"
+                className="border-stroke-disable hover:bg-white-2 rounded-full border bg-white p-[11px] leading-[1] cursor-pointer"
               >
                 <Email className="w-6 h-6" />
               </span>
@@ -291,7 +291,7 @@ const LoginDialog = ({ openDialog, setOpenDialog }: any) => {
             {signIn !== "phoneNumber" && (
               <span
                 onClick={() => handleChangeSignIn("phoneNumber")}
-                className="border-stroke-disable hover:bg-white-2 rounded-full border bg-white p-[11px] leading-[1]"
+                className="border-stroke-disable hover:bg-white-2 rounded-full border bg-white p-[11px] leading-[1] cursor-pointer"
               >
                 <Phone className="w-6 h-6" />
               </span>
