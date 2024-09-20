@@ -20,7 +20,7 @@ export default function ProductDetailCarousel({
       <Carousel>
         <div className="relative h-auto shrink-0 md:max-w-[805px] md:basis-[805px]">
           <CarouselContent>
-            {slides.map((image: any) => (
+            {slides.map((image: any, index) => (
               <CarouselItem key={image}>
                 <div className="p-1">
                   <CardContent className="flex md:w-[475px] aspect-[1/1] items-center justify-center rounded-xl p-0">
@@ -29,6 +29,7 @@ export default function ProductDetailCarousel({
                       width={475}
                       height={475}
                       src={image}
+                      priority={!index}
                       className="object-cover w-full h-full rounded-xl"
                     />
                   </CardContent>

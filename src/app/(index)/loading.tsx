@@ -1,4 +1,4 @@
-import SplashScreen from "@/components/loading/splash-screen";
+// import SplashScreen from "@/components/loading/splash-screen";
 export default function Loading() {
-  return <SplashScreen />;
+  return <p>g</p>;
 }

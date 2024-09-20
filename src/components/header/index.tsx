@@ -20,7 +20,8 @@ import Eye from "../icons/eye";
 import EyeSlash from "../icons/eye-slash";
 import { useCartContext } from "../cart";
 import { Menu } from "lucide-react";
-import useWindowSize from "@/hooks/use-window-size";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { MAX_WIDTH_MOBILE } from "@/constants";
 
 export default function Header() {
   const logoRef = useRef<HTMLDivElement>(null);
@@ -49,13 +50,13 @@ export default function Header() {
       window.removeEventListener("scroll", handleScroll);
     };
   });
-  const { width, height } = useWindowSize();
+  const { width } = useWindowSize();
   return (
     <header
       id="header"
       className="sticky top-0 z-[49] bg-[#317dff] transition-[height] md:relative"
     >
-      {width && width < 768 && (
+      {width && width <= MAX_WIDTH_MOBILE && (
         <HeaderMobile
           open={open}
           setOpen={setOpen}
@@ -70,7 +71,7 @@ export default function Header() {
           <div className="h-full md:relative md:h-auto">
             <div className="container-lite grid grid-cols-[40px_1fr_40px] grid-rows-[40px] content-center pt-1.5 pb-2 md:grid-cols-[200px_1fr_270px] md:grid-rows-[56px] md:pt-4 md:pb-[44px]">
               <div className="grid place-content-start content-center md:hidden">
-                <button onClick={() => setOpen(true)}>
+                <button aria-label="open menu" onClick={() => setOpen(true)}>
                   <Menu className="w-6 h-6 text-white" />
                 </button>
               </div>

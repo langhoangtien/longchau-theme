@@ -7,7 +7,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useSheetContext } from "@/components/sheet-product";
-import useWindowSize from "@/hooks/use-window-size";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { MAX_WIDTH_MOBILE } from "@/constants";
 
 type ProductProps = {
   product: ProductType;
@@ -75,10 +76,9 @@ export default function Product({ product }: ProductProps) {
           <Image
             src={product.image}
             alt={product.name}
-            style={{ objectFit: "cover" }}
             width={250}
             height={250}
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full "
+            className="h-full w-full object-cover object-center"
           />
         </div>
       </Link>
@@ -115,7 +115,7 @@ export default function Product({ product }: ProductProps) {
           </div>
         </div>
         <div className="mt-4 px-3">
-          {width && width > 768 ? (
+          {width && width > MAX_WIDTH_MOBILE ? (
             <Button
               onClick={handleAddToCart}
               className="py-[8px] px-[12px] h-[36px] w-full hidden md:flex"

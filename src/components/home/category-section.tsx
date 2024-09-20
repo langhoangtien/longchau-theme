@@ -1,5 +1,4 @@
 import { HOST_API } from "@/config-global";
-import { count } from "console";
 import Image from "next/image";
 import Link from "next/link";
 

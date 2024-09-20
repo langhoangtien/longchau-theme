@@ -7,6 +7,7 @@ export enum PAYMENT_METHOD {
   MOMO = "momo",
   VNPAY = "vnpay",
 }
+export const MAX_WIDTH_MOBILE = 767;
 export const paymentMethods = [
   {
     method: PAYMENT_METHOD.COD,

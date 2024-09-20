@@ -19,7 +19,6 @@ export default async function CategoryPage(props: any) {
   const filterDataJson = await fetch(`${HOST_API}/home/select-info`);
   const filterData = await filterDataJson.json();
   const result = await resultJson.json();
-  console.log("VVVVVV");
 
   return (
     <div data-custom-container="true">

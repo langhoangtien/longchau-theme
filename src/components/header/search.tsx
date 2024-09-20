@@ -141,6 +141,7 @@ export default function Search() {
 
           {value && (
             <button
+              aria-label="clear search"
               onClick={() => setValue("")}
               className="mr-2 items-center h-[20px] w-[20px] shrink-0"
             >
@@ -148,6 +149,7 @@ export default function Search() {
             </button>
           )}
           <button
+            aria-label="search"
             onClick={handleRedirect}
             className="shrink-0 rounded-full bg-blue-600 text-white md:w-[40px] md:h-[40px] md:p-[10px] md:ml-3 w-[28px] h-[28px] p-[6px] sm:ml-2"
           >

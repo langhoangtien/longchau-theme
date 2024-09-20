@@ -1,4 +1,3 @@
-import RootLayout from "@/app/layout";
 import Header from "../header";
 import Footer from "../footer";
 import MenuCategory from "../menu-category";

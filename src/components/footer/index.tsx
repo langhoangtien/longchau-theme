@@ -2,7 +2,11 @@ import Link from "next/link";
 import Location from "../icons/location";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { AccordionMenu, AccordionswitchboardMenu } from "./accordion-menu";
+import {
+  AccordionMenu,
+  AccordionswitchboardMenu,
+  PAYMENT_METHODS,
+} from "./accordion-menu";
 export const FOOTER_MENU = [
   {
     title: "VỀ CHÚNG TÔI",
@@ -55,15 +59,7 @@ export const FOOTER_MENU = [
     ],
   },
 ];
-const PAYMENT_METHODS = [
-  "/icons/svg/visa.svg",
-  "/icons/svg/mtc.svg",
-  "/icons/svg/jcb.svg",
-  "/icons/svg/amex.svg",
-  "/icons/svg/vnpay.svg",
-  "/icons/svg/zalopay.svg",
-  "/icons/svg/momo.svg",
-];
+
 export const FOOTER_SWITCHBOARD_MENU = [
   { name: "Tư vấn mua hàng", phone: "0832667711", branch: "(Hotline 1)" },
   { name: "Hướng dẫn sử dụng", phone: "0365686630", branch: "(Hotline 2)" },
@@ -76,7 +72,7 @@ export default function Footer() {
         <div className="container-lite relative">
           <div className="flex justify-center md:justify-between flex-col md:flex-row items-center">
             <a
-              className="mb-2 text-sm md:text-xl omd:mb-0 omd:font-normal flex items-center text-white"
+              className="mb-2 text-sm md:text-xl md:mb-0 md:font-normal flex items-center text-white"
               href="/he-thong-cua-hang"
             >
               <Location className="hidden md:inline-block mr-2 w-7 h-7" />
@@ -94,140 +90,7 @@ export default function Footer() {
         <div className="container-lite relative">
           <div className="relative">
             <div className="md:hidden">
-              <div className="bg-layer-gray -mx-4 flex justify-between items-center p-4 gap-3 md:gap-2 md:flex-col md:items-start md:py-0">
-                <div className="flex-1">
-                  <h4 className="text-base text-gray-600/80 md:font-bold font-semibold ">
-                    ĐẶT HÀNG TẠI FANPAGE
-                  </h4>
-                  <p className="text-caption mt-1 text-text-secondary md:hidden">
-                    Mua hàng trực tuyến, giao hàng tận nơi dễ dàng và nhanh
-                    chóng
-                  </p>
-                  <div className="flex gap-x-2 md:hidden mt-3 gap-3">
-                    <a href="https://facebook.com/ludmilavietnam">
-                      <Image
-                        alt="icon-download"
-                        width={131}
-                        height={43}
-                        className="w-[100px] md:w-[131px] umd:max-h-[43px] object-cover"
-                        src="/icons/svg/Download.svg"
-                        style={{ color: "transparent" }}
-                      />
-                    </a>
-                  </div>
-                </div>
-                <div className="umd:p-3 bg-white rounded-lg w-fit h-fit flex-shrink-0">
-                  <Image
-                    alt="icon-download"
-                    loading="lazy"
-                    width={100}
-                    height={100}
-                    className="h-[72px] w-[72px] md:h-[100px] md:w-[100px]"
-                    src={"/icons/png/facebook_qr.png"}
-                    style={{ color: "transparent" }}
-                  />
-                </div>
-              </div>
               <AccordionswitchboardMenu />
-
-              <div className="border-b py-3">
-                <div className="flex flex-col gap-2">
-                  <p className="text-gray-600/80 font-semibold md:hidden">
-                    HỖ TRỢ THANH TOÁN
-                  </p>
-                  <div className="mt-2 flex flex-wrap gap-1">
-                    {PAYMENT_METHODS.map((src) => (
-                      <Link
-                        key={src}
-                        className="inline-flex h-[28px] w-[44px] items-center justify-center overflow-hidden rounded border"
-                        href="/chinh-sach-thanh-toan"
-                      >
-                        <Image
-                          alt=""
-                          loading="lazy"
-                          width={36}
-                          height={20}
-                          src={src}
-                          style={{ color: "transparent" }}
-                        />
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="border-b py-3">
-                <div className="flex md:flex-col justify-between items-center mt-1 gap-2">
-                  <p className="text-gray-600/80 font-semibold md:hidden">
-                    KẾT NỐI VỚI CHÚNG TÔI
-                  </p>
-                  <div className="flex gap-[16px] umd:py-1 mb-1">
-                    <a
-                      href="https://www.facebook.com/ludmilavietnam
-                    "
-                    >
-                      <Image
-                        alt="Facebook"
-                        loading="lazy"
-                        width={28}
-                        height={28}
-                        decoding="async"
-                        data-nimg={1}
-                        src="/icons/svg/facebook.svg"
-                        style={{ color: "transparent" }}
-                      />
-                    </a>
-                    <a href="https://zalo.me/0832667711">
-                      <Image
-                        alt="Zalo"
-                        loading="lazy"
-                        width={28}
-                        height={28}
-                        decoding="async"
-                        data-nimg={1}
-                        src="/icons/svg/zalo.svg"
-                        style={{ color: "transparent" }}
-                      />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              {/* <AccordionMenu /> */}
-
-              <div className="border-b py-3">
-                <div className="flex flex-col mt-1 gap-2">
-                  <p className="text-gray-600/80 font-semibold md:hidden">
-                    CHỨNG NHẬN BỞI
-                  </p>
-                  <div className="flex justify-evenly items-center md:justify-start md:gap-x-3">
-                    <a href="#" className="inline-block">
-                      <Image
-                        alt="certificate-icon"
-                        loading="lazy"
-                        width={171}
-                        height={56}
-                        decoding="async"
-                        data-nimg={1}
-                        className="w-[171px] h-[56px] md:w-full md:h-full object-fill"
-                        src="/icons/svg/bo_cong_thuong.svg"
-                        style={{ color: "transparent" }}
-                      />
-                    </a>
-                    <a href="#" className="inline-block">
-                      <Image
-                        alt="certificate-icon"
-                        loading="lazy"
-                        width={171}
-                        height={56}
-                        decoding="async"
-                        data-nimg={1}
-                        className="w-[171px] h-[56px] md:w-full md:h-full object-fill"
-                        src="icons/svg/DMCA.svg"
-                        style={{ color: "transparent" }}
-                      />
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className="md:flex py-6 hidden grid-cols-12 w-full gap-12">
               {FOOTER_MENU.map((menu, index) => (
@@ -323,7 +186,7 @@ export default function Footer() {
                       HỖ TRỢ THANH TOÁN
                     </p>
                     <div className="mt-2 flex flex-wrap gap-1">
-                      {PAYMENT_METHODS.map((src) => (
+                      {PAYMENT_METHODS.map((src: string) => (
                         <Link
                           key={src}
                           className="inline-flex h-[28px] w-[44px] items-center justify-center overflow-hidden rounded border"
@@ -349,7 +212,7 @@ export default function Footer() {
                     KẾT NỐI VỚI CHÚNG TÔI
                   </h4>
                   <div className="flex md:flex-col umd:justify-between umd:items-center mt-1 gap-2">
-                    <p className="text-body2 text-text-secondary font-semibold md:hidden">
+                    <p className="font-semibold md:hidden">
                       KẾT NỐI VỚI CHÚNG TÔI
                     </p>
                     <div className="flex gap-[16px] umd:py-1 mb-1">
@@ -424,8 +287,8 @@ export default function Footer() {
                 Địa chỉ: T10, Tòa Benka, Lệ chi, Gia Lâm, Hà Nội
               </p>
               <ul className="list-disc inline-block">
-                <li className="inline-block mr-2 ">
-                  <span className="h-1 w-1 bg-gray-700/80 inline-block rounded-full align-middle  mr-2"></span>
+                <li className="md:inline-block ml-4 py-1 md:mr-2 ">
+                  <span className="h-1 w-1 bg-gray-700/80 hidden md:inline-block rounded-full align-middle  mr-2"></span>
                   Số điện thoại:{" "}
                   <a
                     className="text-primary"
@@ -436,8 +299,8 @@ export default function Footer() {
                     (0832)667711&nbsp;
                   </a>
                 </li>
-                <li className="inline-block mr-2">
-                  <span className="h-1 w-1 bg-gray-700/80 inline-block rounded-full align-middle mr-2"></span>
+                <li className="md:inline-block ml-4  py-1  md:mr-2">
+                  <span className="h-1 w-1 bg-gray-700/80 hidden md:inline-block rounded-full align-middle mr-2 "></span>
                   Email:{" "}
                   <a
                     className="text-primary"
@@ -448,8 +311,8 @@ export default function Footer() {
                     support@ludmila.vn
                   </a>
                 </li>
-                <li className="inline-block mr-2">
-                  <span className="h-1 w-1 bg-gray-700/80 inline-block rounded-full align-middle  mr-2"></span>
+                <li className="md:inline-block ml-4   py-1 md:mr-2">
+                  <span className="h-1 w-1 bg-gray-700/80 hidden md:inline-block rounded-full align-middle  mr-2"></span>
                   Người quản lý nội dung: Nguyễn Thanh Phương
                 </li>
               </ul>

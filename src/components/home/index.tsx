@@ -61,7 +61,7 @@ export function SuggestionSection({
   );
 }
 
-export function ToopDiscountSection({
+export function TopDiscountSection({
   products,
   background = "bg-blue-100",
 }: any) {

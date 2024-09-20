@@ -1,5 +1,5 @@
 "use client";
-import "./style.css";
+
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
@@ -16,10 +16,13 @@ import {
 import { HOST_API } from "@/config-global";
 import Image from "next/image";
 import Link from "next/link";
+import { useWindowSize } from "@/hooks/use-window-size";
+import { MAX_WIDTH_MOBILE } from "@/constants";
 
 const COL_NUMBER = 5;
 export default function MenuCategory() {
   const [menu, setMenu] = React.useState([]);
+  const { width } = useWindowSize();
   React.useEffect(() => {
     const getMenu = async () => {
       if (!localStorage.getItem("menu")) {
@@ -33,7 +36,7 @@ export default function MenuCategory() {
     };
     getMenu();
   }, []);
-  if (!menu.length) return null;
+  if (!menu.length || !width || width <= MAX_WIDTH_MOBILE) return null;
 
   return (
     <div className="bg-white flex-1 justify-center relative hidden md:flex">

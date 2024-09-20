@@ -17,7 +17,6 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 export const revalidate = 30;
@@ -111,7 +110,7 @@ export default async function Product(props: any) {
           ratingsCalc={ratingsCalc}
         />
 
-        <RelatedProduct products={[product]} title="Sản phẩm vừa xem" />
+        <RelatedProduct title="Sản phẩm vừa xem" />
       </div>
     </div>
   );
