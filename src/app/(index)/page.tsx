@@ -1,4 +1,4 @@
-import { mappedProduct } from "@/lib/common";
+import { mappedProduct, mappedProduct800 } from "@/lib/common";
 import { CarouselDemo } from "@/components/home/carousel";
 
 import CategorySection from "@/components/home/category-section";
@@ -23,7 +23,7 @@ export default async function Home() {
   //     ...product,
   //     image: images[index],
   //   }));
-  const newsestProducts = homeJson.topNewestProducts.map(mappedProduct);
+  const newsestProducts = homeJson.topNewestProducts.map(mappedProduct800);
   const topNewProduct = newsestProducts.slice(0, 5);
 
   const productMapped = products.map(mappedProduct);

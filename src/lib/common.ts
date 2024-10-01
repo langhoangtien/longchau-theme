@@ -42,6 +42,24 @@ export const mappedProduct = (product: ProductType) => {
   };
 };
 
+export const mappedProduct800 = (product: ProductType) => {
+  const varitants: ProductVariantType[] = product.variants.map(
+    (variant: ProductVariantType) => {
+      const image = variant.image
+        ? convertImagePathToUrl(variant.image, 450)
+        : undefined;
+      return {
+        ...variant,
+        image: image,
+      };
+    }
+  );
+  return {
+    ...product,
+    image: convertImagePathToUrl(product.image, 450),
+    variants: varitants,
+  };
+};
 export function fDateTime(date: Date) {
   const formatter = new Intl.DateTimeFormat("vi-VN", {
     year: "numeric",

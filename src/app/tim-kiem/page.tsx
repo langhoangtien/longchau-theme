@@ -28,13 +28,13 @@ export default async function SearchPage(props: any) {
                 <Slash />
               </BreadcrumbSeparator>
               <BreadcrumbItem>
-                <BreadcrumbLink>fdgf</BreadcrumbLink>
+                <BreadcrumbLink>tìm kiếm</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </ol>
         <div className="overflow-hidden container-lite">
-          <ProductsPage filterData={filterData} search={search} />;
+          <ProductsPage filterData={filterData} search={search} />
         </div>
         <div className="container-lite pt-4 md:pt-5" />
       </div>

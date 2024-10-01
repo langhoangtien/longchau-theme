@@ -94,7 +94,7 @@ export default async function BrandPage(props: any) {
               </div>
             </div>
           </div>
-          <ProductsPage brand={id} />;
+          <ProductsPage brand={id} />
         </div>
 
         <div className="container-lite pt-4 md:pt-5" />
