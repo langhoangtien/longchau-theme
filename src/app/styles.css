@@ -642,3 +642,37 @@ input[type="number"] {
 .product-review-star li:hover ~ li > svg {
   color: #e5e7eb;
 }
+
+.lc-view-full-cont img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding: 1rem;
+}
+.lc-view-full-cont h1 {
+  font-size: 1.75rem;
+}
+.lc-view-full-cont h2 {
+  font-size: 1.5rem;
+}
+.lc-view-full-cont h3 {
+  font-size: 1.25rem;
+}
+.lc-view-full-cont h4 {
+  font-size: 1.125rem;
+}
+.lc-view-full-cont h5 {
+  font-size: 1rem;
+}
+.lc-view-full-cont h6 {
+  font-size: 0.875rem;
+}
+.lc-view-full-cont h1,
+.lc-view-full-cont h2,
+.lc-view-full-cont h3,
+.lc-view-full-cont h4,
+.lc-view-full-cont h5,
+.lc-view-full-cont h6 {
+  font-weight: 700;
+}

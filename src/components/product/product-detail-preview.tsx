@@ -47,7 +47,6 @@ export default function ProductDetailPreview({
   const [parent, setParent] = useState<ParentCommentType | null>(null);
 
   const [lastItem, setLastItem] = useState<CommentItemType | null>(null);
-  console.log("LAST ITEM", lastItem);
 
   useEffect(() => {
     const getData = async () => {
