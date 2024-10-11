@@ -80,15 +80,14 @@ export const CommentItem = ({
             </div>
           </div>
           <div className="content flex-1">
-            <p className=" mb-[8px] flex flex-col text-gray-800/80 items-baseline font-bold capitalize md:inline-block">
+            <p className=" mb-1 flex flex-col text-gray-800/80 items-baseline font-bold capitalize md:inline-block">
               {name}
             </p>
             {!!rating && (
-              <div className="score mt-[2px] flex items-center">
-                <span className="text-body2 md:text-body1 text-text-secondary mr-[6px] font-normal">
-                  {rating}
-                </span>
-                <StarIcon className="h-6 w-4 text-orange-400" />
+              <div className="score flex items-center">
+                {Array.from({ length: rating }).map((_, index) => (
+                  <StarIcon key={index} className="h-6 w-4 text-orange-400" />
+                ))}
               </div>
             )}
 
@@ -105,13 +104,7 @@ export const CommentItem = ({
                 <span className="text-gray-500 font-medium">
                   <ToolTipCustom time={time} raw={raw} />
                 </span>
-                <div className="bullet-dot bg-icon-tertiary mx-[8px] h-[4px] w-[4px] rounded-full" />
-                <p className="flex cursor-pointer items-center">
-                  <HelpfulIcon className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-600 ml-1 font-medium">
-                    Hữu ích
-                  </span>
-                </p>
+
                 <div className="bullet-dot bg-icon-tertiary mx-[8px] h-[4px] w-[4px] rounded-full" />
                 <span
                   onClick={handleReplyComment}
@@ -192,16 +185,16 @@ const ReplyItem = ({
         <div className="comment_reply-branch__NKquM" />
         <div className="comment-block flex gap-[12px]">
           <div className="avatar relative z-10 h-full w-full max-w-full basis-[44px] bg-white md:basis-[48px]">
-            <div className="bg-blue-600 inline-flex h-[44px] w-[44px] items-center justify-center rounded-full px-[10px] text-[20px] leading-5 text-white md:h-[48px] md:w-[48px]">
-              {getInitials("A D")}
+            <div className="bg-gray-400 inline-flex h-[44px] w-[44px] items-center justify-center rounded-full px-[10px] text-[20px] leading-5 text-white md:h-[48px] md:w-[48px]">
+              {getInitials(name)}
             </div>
           </div>
           <div className="content flex-1">
             <p className=" mb-[8px] flex flex-col items-baseline font-bold capitalize md:inline-block">
               {name}
-              <span className="text-sm bg-blue-100 text-blue-600 md mt-[4px] rounded px-[4px] py-[2px] font-medium md:ml-2 md:mt-0">
+              {/* <span className="text-sm bg-blue-100 text-blue-600 md mt-[4px] rounded px-[4px] py-[2px] font-medium md:ml-2 md:mt-0">
                 Admin
-              </span>
+              </span> */}
             </p>
             <div className="user-comment">
               <span
@@ -217,13 +210,7 @@ const ReplyItem = ({
                   <ToolTipCustom time={time} raw={raw}></ToolTipCustom>
                 </span>
                 <div className="bullet-dot  mx-[8px] h-[4px] w-[4px] rounded-full" />
-                <p className="flex cursor-pointer items-center">
-                  <HelpfulIcon className="w-4 h-4 text-gray-600" />
-                  <span className="text-sm text-gray-500 ml-1 font-medium">
-                    Hữu ích
-                  </span>
-                </p>
-                <div className="bullet-dot  mx-[8px] h-[4px] w-[4px] rounded-full" />
+
                 <span
                   onClick={handleReplyComment}
                   className="text-base text-blue-600 cursor-pointer font-medium"

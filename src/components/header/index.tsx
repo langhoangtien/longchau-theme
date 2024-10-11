@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import HeaderMobile from "./header-mobile";
-import Info from "./info";
+
 import Cart from "./cart";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,17 +19,18 @@ import User from "../icons/user";
 import Eye from "../icons/eye";
 import EyeSlash from "../icons/eye-slash";
 import { useCartContext } from "../cart";
-import { Menu } from "lucide-react";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { MAX_WIDTH_MOBILE } from "@/constants";
+import MenuIcon from "../icons/menu-icon";
+import CategoryMenu from "../layout/category-menu";
 
 export default function Header() {
   const logoRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-
+  const { headerRef }: any = useCartContext();
   const [open, setOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  const { headerRef }: any = useCartContext();
+  const [display, setDisplay] = useState("block");
   useEffect(() => {
     const handleScroll = () => {
       let moving = window.pageYOffset;
@@ -37,12 +38,10 @@ export default function Header() {
       if (moving >= 130 && logoRef.current && searchRef.current) {
         logoRef.current.style.opacity = "0";
         searchRef.current.classList.add("header-mobile-custom");
-        headerRef.current.classList.toggle("hidden", true);
       }
       if (moving < 90 && logoRef.current && searchRef.current) {
         logoRef.current.style.opacity = "1";
         searchRef.current.classList.remove("header-mobile-custom");
-        headerRef.current.classList.toggle("hidden", false);
       }
     };
     window.addEventListener("scroll", handleScroll);
@@ -51,9 +50,11 @@ export default function Header() {
     };
   });
   const { width } = useWindowSize();
+
   return (
     <header
       id="header"
+      ref={headerRef}
       className="sticky top-0 z-[49] bg-[#317dff] transition-[height] md:relative"
     >
       {width && width <= MAX_WIDTH_MOBILE && (
@@ -66,15 +67,19 @@ export default function Header() {
 
       <div className="relative">
         <div className="relative md:static">
-          <Info />
+          {/* <Info /> */}
 
           <div className="h-full md:relative md:h-auto">
             <div className="container-lite grid grid-cols-[40px_1fr_40px] grid-rows-[40px] content-center pt-1.5 pb-2 md:grid-cols-[200px_1fr_270px] md:grid-rows-[56px] md:pt-4 md:pb-[44px]">
               <div className="grid place-content-start content-center md:hidden">
                 <button aria-label="open menu" onClick={() => setOpen(true)}>
-                  <Menu className="w-6 h-6 text-white" />
+                  <MenuIcon className="w-5 h-4 text-white" />
                 </button>
               </div>
+              {/* <Button>
+                {" "}
+                <MenuIcon className="w-5 h-4 text-white" />
+              </Button> */}
 
               <div
                 ref={logoRef}
@@ -89,7 +94,12 @@ export default function Header() {
                     className="h-[28px] w-[100px] !bg-transparent !bg-none object-contain md:h-[56px] md:w-[183px]"
                   />
                 </Link>
+                {/* <Button className="">
+                  {" "}
+                  <MenuIcon className="w-5 h-4 text-white" />
+                </Button> */}
               </div>
+
               <div className="grid place-content-end content-center md:col-start-3 md:col-end-4 md:place-content-stretch">
                 <div className="flex h-full items-center justify-between">
                   <div className="hidden md:flex items-center">
@@ -109,8 +119,17 @@ export default function Header() {
               </div>
               <div
                 ref={searchRef}
-                className="search-section col-span-full mt-1.5 grid h-[36px] content-center transition-[margin] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:mx-auto md:mt-0 md:h-auto md:w-[680px]"
+                className="search-section col-span-full mt-1.5 grid grid-cols-[150px_1fr] h-[36px] content-center transition-[margin] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:mx-auto md:mt-0 md:h-auto md:w-[680px]"
               >
+                <span
+                  id="menu-category-pc"
+                  onMouseEnter={() => setDisplay("block")}
+                  className="inline-flex text-white text-base font-medium cursor-pointer items-center justify-center w-10 h-10 bg-black/40 rounded-full md:w-[134px] md:h-[48px] md:rounded-[42px]"
+                >
+                  {" "}
+                  <MenuIcon className="w-6 h-5 mr-2 " />
+                  Danh mục
+                </span>
                 <Search />
               </div>
             </div>
@@ -118,6 +137,7 @@ export default function Header() {
         </div>
       </div>
       <LoginDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
+      <CategoryMenu display={display} setDisplay={setDisplay} />
     </header>
   );
 }

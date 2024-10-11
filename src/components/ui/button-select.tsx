@@ -6,7 +6,7 @@ const ButtonSelect = ({ selected, children, className, ...props }: any) => {
       <div
         {...props}
         className={cn(
-          "inline-flex text-sm justify-center items-center rounded-[50px] text-primary relative font-medium  overflow-hidden cursor-pointer h-9  transition-all duration-300 border-blue-600 border border-solid bg-white pl-4 pr-6",
+          "inline-flex text-sm justify-center items-center rounded-md text-primary relative font-medium  overflow-hidden cursor-pointer h-9  transition-all duration-300 border-blue-600 border border-solid bg-white pl-4 pr-6",
           className
         )}
       >
@@ -34,7 +34,7 @@ const ButtonSelect = ({ selected, children, className, ...props }: any) => {
     <div
       {...props}
       className={cn(
-        "inline-flex text-sm justify-center items-center pl-3 pr-3 rounded-full border  border-gray-300 relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300",
+        "inline-flex text-sm justify-center items-center pl-3 pr-3 rounded-md border border-gray-300 relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300",
         className
       )}
     >

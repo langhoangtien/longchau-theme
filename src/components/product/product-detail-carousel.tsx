@@ -1,4 +1,5 @@
 import {
+  CaroselIndex,
   Carousel,
   CarouselContent,
   CarouselItem,
@@ -9,7 +10,8 @@ import {
 
 import { CardContent } from "@/components/ui/card";
 import Image from "next/image";
-
+import useEmblaCarousel from "embla-carousel-react";
+import { useCallback, useEffect, useState } from "react";
 export default function ProductDetailCarousel({
   slides,
 }: {
@@ -19,6 +21,7 @@ export default function ProductDetailCarousel({
     <div className="bg-transparent md:max-w-[475px] md:mr-8 ">
       <Carousel>
         <div className="relative h-auto shrink-0 md:max-w-[805px] md:basis-[805px]">
+          <CaroselIndex />
           <CarouselContent>
             {slides.map((image: any, index) => (
               <CarouselItem key={image}>
@@ -38,8 +41,20 @@ export default function ProductDetailCarousel({
             ))}
           </CarouselContent>
 
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious
+            style={{
+              boxShadow:
+                " rgba(0, 39, 102, 0.1) 0px 0px 8px -2px, rgba(0, 39, 102, 0.06) 0px 0px 4px -2px",
+            }}
+            className="hidden md:flex  -translate-x-[50%] -translate-y-[50%] bg-white hover:bg-white text-primary hover:text-primary md:border md:hover:border-text-primary h-10 w-10"
+          />
+          <CarouselNext
+            style={{
+              boxShadow:
+                "rgba(0, 39, 102, 0.1) 0px 0px 8px -2px, rgba(0, 39, 102, 0.06) 0px 0px 4px -2px",
+            }}
+            className="hidden md:flex translate-x-[50%] -translate-y-[50%] bg-white hover:bg-white text-primary hover:text-primary md:border md:hover:border-text-primary h-10 w-10"
+          />
         </div>
 
         <CarouselThumb slides={slides} />

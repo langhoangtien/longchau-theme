@@ -19,7 +19,7 @@ export default function RelatedProduct({ title }: any) {
     }
   }, []);
   return (
-    <div className="px-4">
+    <div className="px-4 py-2">
       <div className="bg-transparent">
         <div className="mb-4 flex items-center">
           <h2 className="flex w-full items-center text-heading3 font-semibold">

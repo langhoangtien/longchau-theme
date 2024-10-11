@@ -35,6 +35,7 @@ html {
   width: 4px !important;
   height: 4px !important;
 }
+
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
@@ -240,7 +241,7 @@ object {
   -webkit-box-pack: justify;
   justify-content: space-between;
   place-items: center;
-  border-radius: 34px;
+  border-radius: 6px;
   margin: 2px 4px;
   -webkit-box-align: center;
 }
@@ -429,14 +430,12 @@ input[type="number"] {
 .readmore-collapse .lc-wrap-content .lc-wrap-link {
   position: absolute;
   bottom: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.7) 21.88%,
-    rgba(255, 255, 255, 0.95) 45.31%,
-    #fff 67.71%,
-    #fff 100%
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.7) 21.88%,
+      rgba(255, 255, 255, 0.95) 45.31%,
+      #fff 67.71%,
+      #fff 100%);
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -486,6 +485,7 @@ input[type="number"] {
 }
 
 @media (min-width: 768px) {
+
   .cart-button:hover .list-product,
   .cart-button:focus .list-product {
     padding-top: 20px;
@@ -612,17 +612,21 @@ input[type="number"] {
   background-size: calc(100% / 3) 100%;
   animation: l7 1s infinite linear;
 }
+
 @keyframes l7 {
   33% {
     background-size: calc(100% / 3) 0%, calc(100% / 3) 100%, calc(100% / 3) 100%;
   }
+
   50% {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 0%, calc(100% / 3) 100%;
   }
+
   66% {
     background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
   }
 }
+
 /* END_LOADING */
 
 /* READ_MORE */
@@ -630,44 +634,57 @@ input[type="number"] {
 .read-more-trigger_opened {
   display: none;
 }
-.read-more-state:checked ~ .read-more-wrap .read-more-target,
-.read-more-state:checked ~ .read-more-trigger_opened {
+
+.read-more-state:checked~.read-more-wrap .read-more-target,
+.read-more-state:checked~.read-more-trigger_opened {
   display: block;
 }
-.read-more-state:checked ~ .read-more-trigger_closed {
+
+.read-more-state:checked~.read-more-trigger_closed {
   display: none;
 }
+
 /* END_READ_MORE */
 
-.product-review-star li:hover ~ li > svg {
+.product-review-star li:hover~li>svg {
   color: #e5e7eb;
 }
+
 
 .lc-view-full-cont img {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
-  padding: 1rem;
+  border-radius: 26px;
+  padding: 18px;
+  max-width: 90%;
+
 }
+
 .lc-view-full-cont h1 {
   font-size: 1.75rem;
 }
+
 .lc-view-full-cont h2 {
   font-size: 1.5rem;
 }
+
 .lc-view-full-cont h3 {
   font-size: 1.25rem;
 }
+
 .lc-view-full-cont h4 {
   font-size: 1.125rem;
 }
+
 .lc-view-full-cont h5 {
   font-size: 1rem;
 }
+
 .lc-view-full-cont h6 {
   font-size: 0.875rem;
 }
+
 .lc-view-full-cont h1,
 .lc-view-full-cont h2,
 .lc-view-full-cont h3,

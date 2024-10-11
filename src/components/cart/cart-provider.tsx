@@ -17,6 +17,7 @@ const INITIAL_STATE = {
   shippingFee: SHIPPING_FEE,
   normalPrice: 0,
   variant: null,
+  open: true,
 };
 
 const getInitialStateFromLocalStorage = () => {
@@ -76,6 +77,14 @@ const reducer = (state: any, action: any) => {
       newState = {
         ...state,
         variant: action.payload.variant,
+      };
+
+      return newState;
+
+    case "SET_DIALOG":
+      newState = {
+        ...state,
+        open: action.payload.open,
       };
 
       return newState;
@@ -194,6 +203,15 @@ export function CartProvider({ children }: any) {
     [dispatch]
   );
 
+  const setOpen = useCallback(
+    (open: boolean) => {
+      dispatch({
+        type: "SET_DIALOG",
+        payload: { open: open },
+      });
+    },
+    [dispatch]
+  );
   const contextValue = useMemo(
     () => ({
       ...state,
@@ -206,6 +224,7 @@ export function CartProvider({ children }: any) {
       setVariant,
       headerRef,
       cartRef,
+      setOpen,
     }),
     [
       state,
@@ -215,6 +234,7 @@ export function CartProvider({ children }: any) {
       setSelected,
       setAllSelected,
       setVariant,
+      setOpen,
     ]
   );
   return (

@@ -13,8 +13,9 @@ import { encodeData } from "@/lib/common";
 import React, { useEffect, useState } from "react";
 import Readmore from "../icons/readmore";
 import { ButtonSelect } from "../ui/button-select";
-import { RotateCw } from "lucide-react";
+import { RotateCw, Star } from "lucide-react";
 import Image from "next/image";
+import { Textarea } from "../ui/textarea";
 type CommentItemType = {
   _id: string;
   fullName: string;
@@ -127,18 +128,16 @@ export default function ProductDetailPreview({
         <div className="mb-4 border-b pb-4 md:flex">
           <div className="md:mr-8">
             <div className="mb-4 flex items-center justify-between md:mb-0 md:block">
-              <div>
-                <p className="text-text-secondary te font-semibold">
-                  Trung bình
-                </p>
+              <div className="mb-2">
+                <p className="text-text-secondary  font-semibold">Trung bình</p>
                 <p className="md:text-3xl text-2xl  flex items-center font-semibold">
                   {ratingAverage}
                   <StarIcon className="ml-2 w-6 h-6 text-orange-400" />
                 </p>
               </div>
-              <Button onClick={handleAddComment} className="h-12">
+              <Button onClick={handleAddComment} className="h-10">
                 {" "}
-                Gửi đánh giá
+                Viết đánh giá
               </Button>
             </div>
           </div>
@@ -146,22 +145,33 @@ export default function ProductDetailPreview({
         </div>
         <div>
           <div className="my-[12px] md:my-[16px]">
-            <div className="flex flex-col justify-start gap-[8px] md:flex-row md:items-center md:gap-[16px]">
-              <p className="md:te text-base ">Lọc theo:</p>
+            <div className="flex flex-col md:flex-row justify-between gap-[8px] md:flex-row md:items-center md:gap-[16px]">
+              <p className="md:text-lg font-semibold ">
+                {totalRating} Bình luận
+              </p>
               <div className="flex flex-wrap gap-2">
-                {[5, 4, 3, 2, 1].map((value) => (
-                  <ButtonSelect
-                    selected={value === star}
+                {[0, 5, 4, 3, 2, 1].map((value) => (
+                  <span
                     onClick={() => handleChangStar(value)}
                     key={value}
-                    className="h-8"
+                    className={`inline-flex h-8 text-sm justify-center items-center pl-3 pr-3 rounded-md border border-gray-300 relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300 ${
+                      value === star ? "border border-primary text-primary" : ""
+                    } `}
                   >
-                    {value} sao
-                  </ButtonSelect>
+                    {value ? value : "Tất cả"} <Star className="ml-1 h-3 w-3" />
+                  </span>
                 ))}
               </div>
             </div>
+            <div className="mt-4 flex gap-2 flex-col md:flex-row items-end md:mt-4 md:text-center">
+              <div className="flex flex-col w-full md:flex-grow-1">
+                <Textarea placeholder="Nhập nội dung bình luận" />
+              </div>
+
+              <Button>Gửi bình luận </Button>
+            </div>
           </div>
+          <div className="block border-gray-300 border-b mb-4 mt-3 h-full"></div>
           <div>
             <ul>
               {reviews.map((review: any) => (

@@ -12,6 +12,9 @@ import { useRouter } from "next/navigation";
 import { stringifyArray } from "@/lib/common";
 import Link from "next/link";
 import { toast } from "sonner";
+import { ButtonSelect } from "../ui/button-select";
+import Phone from "../icons/phone";
+import CartPlusIcon from "../icons/cart-plus-icon";
 
 export function ProductDetailInfoPrice({ variant }: any) {
   return (
@@ -25,10 +28,6 @@ export function ProductDetailInfoPrice({ variant }: any) {
             style: "currency",
             currency: "VND",
           }).format(variant?.salePrice || 0)}
-        </span>
-        <span className="relative bottom-[1px] ml-2 md:text-2xl sm:text-xl omd:font-normal font-medium">
-          {" "}
-          / <span>Hộp</span>
         </span>
       </div>
       {!!variant?.discount && (
@@ -157,38 +156,14 @@ const Attribute = ({ attribute, valueSelect, selectVariant }: any) => {
       </td>
       <td className="text-base text-gray-700 space-x-3">
         {attribute.values.map((value: string, index: number) => {
-          return valueSelect === value ? (
-            <div
-              key={value}
-              className="inline-flex justify-center items-center rounded-[50px] relative font-medium  overflow-hidden cursor-pointer h-9  transition-all duration-300 border-blue-600 border border-solid bg-white pl-4 pr-6"
-            >
-              {value}
-              <div className="w-[0px] h-[0px] top-[6px] right-[10px] border-t-[26px] border-l-[26px] border-solid border-l-transparent border-t-blue-600 -mt-[6px] -mr-[12px] absolute">
-                <span className="absolute -top-[22px] right-[3px]">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width={10}
-                    height={10}
-                    className="text-white"
-                  >
-                    <path
-                      d="M8.5 16.5858L4.70711 12.7929C4.31658 12.4024 3.68342 12.4024 3.29289 12.7929C2.90237 13.1834 2.90237 13.8166 3.29289 14.2071L7.79289 18.7071C8.18342 19.0976 8.81658 19.0976 9.20711 18.7071L20.2071 7.70711C20.5976 7.31658 20.5976 6.68342 20.2071 6.29289C19.8166 5.90237 19.1834 5.90237 18.7929 6.29289L8.5 16.5858Z"
-                      fill="currentColor"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </div>
-          ) : (
-            <div
+          return (
+            <ButtonSelect
               key={value}
               onClick={() => selectVariant(attribute.name, value)}
-              className="inline-flex justify-center items-center pl-3 pr-3 rounded-full border  relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300"
+              selected={valueSelect === value}
             >
               {value}
-            </div>
+            </ButtonSelect>
           );
         })}
       </td>
@@ -317,52 +292,40 @@ export function ProductDetailInfoActions({ name, image, variant }: any) {
         <div className="mt-4 flex gap-4">
           <Button
             onClick={handleAddToCart}
-            className=" py-[14px] h-[56px] rounded-[42px] text-xl flex-auto px-6"
+            variant={"outline"}
+            className="border-primary text-primary hover:text-primary py-[14px] h-[48px] text-xl flex-auto px-6"
           >
-            Thêm vào giỏ hàng
+            <CartPlusIcon className="h-9 w-9" />
           </Button>
           <Button
             onClick={handleBuyNow}
-            variant={"ghost"}
-            className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[14px] h-[56px] rounded-[42px] text-xl flex-auto px-6"
+            className="py-[14px] h-[48px] rounded-md text-lg flex-auto px-6"
           >
             Mua ngay
           </Button>
         </div>
       </div>
 
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[11] w-full bg-white">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[11] w-full bg-white shadow-2xl">
         <div>
-          <div className="shadow-3xl w-full rounded-t-3xl px-4 pt-4 pb-[30px]">
+          <div className="shadow-2xl w-full rounded-t-3xl p-4">
             <div className="flex gap-x-2">
               <a
                 href="tel:0832667711"
-                className="inline-flex items-center justify-center   [&>*]:shrink-0 bg-blue-500  p-[12px] h-[48px] w-[48px] rounded-[50px]"
+                className="inline-flex items-center justify-center border border-primary  [&>*]:shrink-0 bg-white  p-[12px] h-[44px] w-[44px] rounded-[50px]"
               >
-                <svg
-                  viewBox="0 0 48 48"
-                  fill="curentColor"
-                  className="text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                >
-                  <path
-                    d="M22.0946 6.8943C21.3154 5.33601 19.6859 4.0754 17.6833 4.29774C15.892 4.49664 13.2323 5.16288 11.4203 7.34634C9.55886 9.58932 8.86485 13.0882 10.2943 18.3285C11.8196 23.9201 14.0861 29.4313 16.9028 33.8791C19.6988 38.2941 23.143 41.8273 27.094 43.1824C30.5884 44.3808 33.2596 43.8808 35.2093 42.5645C37.0881 41.2961 38.1215 39.3872 38.6554 38.0646C39.2533 36.5839 38.8592 35.0433 38.0787 33.9082L35.2017 29.7238C33.8969 27.8261 31.5078 27.0003 29.3096 27.6872L25.3345 28.9294C25.047 29.0193 24.769 28.9283 24.6108 28.7429C22.8418 26.6702 20.8583 23.7785 20.3188 20.8526C20.3009 20.7555 20.3204 20.6759 20.3522 20.6224C20.9367 19.6397 21.9435 18.5257 22.9446 17.551C24.642 15.8984 25.2844 13.273 24.1652 11.035L22.0946 6.8943Z"
-                    fill="currentColor"
-                  ></path>
-                </svg>
+                <Phone className="h-7 w-7 text-primary animate-pulse" />
               </a>
               <Button
                 onClick={handleAddToCartMobile}
-                className="py-[12px] h-[48px] rounded-[42px] px-6 flex-auto"
+                variant={"outline"}
+                className="border-primary text-primary hover:text-primary py-[12px] h-[44px] px-6 flex-auto"
               >
-                giỏ hàng
+                <CartPlusIcon className="w-8 h-8 text-primary" />
               </Button>
               <Button
                 onClick={handleBuyNow}
-                variant={"ghost"}
-                className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto"
+                className="py-[12px] h-[44px]  px-6 flex-auto"
               >
                 Mua ngay
               </Button>

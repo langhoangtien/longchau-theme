@@ -110,15 +110,13 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
           </Accordion>
         </div>
         <div className="mt-auto py-3 px-4 border-t border-divider-1pt bg-white sticky bottom-0 z-10">
-          <div className="text-caption font-semibold">
-            Đặt hàng trực tiếp hoặc Zalo, Facebook
+          <div className="text-sm font-semibold text-gray-800/80">
+            Đặt hàng trực tiếp tại Zalo, Facebook
           </div>
-          <div className="mt-2 flex items-center gap-2">
-            <div className="inline-block">Zalo</div>
-          </div>
+
           <a
             href="tel:0832667711"
-            className="inline-flex items-center justify-center font-medium bg-blue-50 text-primary  py-[8px] px-[12px] rounded-[50px] text-sm mt-4 w-full h-auto"
+            className="inline-flex items-center justify-center font-medium bg-blue-50 text-primary  py-[8px] px-[8px] rounded-[25px] text-sm mt-4 w-full h-auto"
           >
             <Phone className="w-5 h-5 shrink-0" />
 

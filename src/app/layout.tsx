@@ -5,9 +5,8 @@ import "./styles.css";
 import { CartProvider } from "@/components/cart";
 import { Toaster } from "@/components/ui/sonner";
 import { SheetProvider } from "@/components/sheet-product";
-// import { DialogProduct, SheetProduct } from "@/components/home";
 import dynamic from "next/dynamic";
-// const DialogProduct = dynamic(() => import("@/components/home/dialog-product"));
+import { AddToCartDialog } from "@/components/home/";
 const DialogProduct = dynamic(
   () => import("@/components/home/").then((mod) => mod.DialogProduct),
   { ssr: false }
@@ -72,6 +71,7 @@ export default function RootLayout({
             <SheetProduct />
             <DialogProduct />
           </SheetProvider>
+          <AddToCartDialog />
         </CartProvider>
         <Toaster />
       </body>

@@ -4,11 +4,15 @@ import { useCartContext } from "@/components/cart";
 import { ProductType, ProductVariantType } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { useSheetContext } from "@/components/sheet-product";
 import { useWindowSize } from "@/hooks/use-window-size";
 import { MAX_WIDTH_MOBILE } from "@/constants";
+
+import CartPlusIcon from "@/components/icons/cart-plus-icon";
+import StarIcon from "@/components/icons/star-icon";
+import { SHIPPING_THRESHOLD } from "@/components/cart/cart-provider";
+import ShippingFreeIcon from "@/components/icons/shipping-free-icon";
 
 type ProductProps = {
   product: ProductType;
@@ -22,7 +26,8 @@ export default function Product({ product }: ProductProps) {
     if (!variant) setVariant(product.variants[0]);
   }, [product.variants, setVariant, variant]);
 
-  const handleClickBuyMobile = () => {
+  const handleClickBuyMobile = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault();
     setOpen(true);
     setVariant(product.variants[0]);
     setProduct(product);
@@ -32,7 +37,8 @@ export default function Product({ product }: ProductProps) {
     setVariant(product.variants[0]);
     setProduct(product);
   };
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent<HTMLSpanElement>) => {
+    e.preventDefault();
     if (!product.variants || product.variants.length === 0) {
       return;
     }
@@ -61,18 +67,7 @@ export default function Product({ product }: ProductProps) {
         className="px-3 block pt-3"
         href={"/san-pham/" + product.slug + "-" + product._id}
       >
-        {!!product.discount && (
-          <div className="px-2 py-0.5 md:py-1 absolute bg-red-600 -top-[1px] -left-[1px] rounded-tl-xl rounded-br-xl">
-            <span
-              className="block text-caption font-semibold text-white md:text-sm"
-              style={{ textShadow: "rgba(0, 0, 0, 0.25) 0.5px 0.5px 0px" }}
-            >
-              {product.discount}%
-            </span>
-          </div>
-        )}
-
-        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75  aspect-square">
+        <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75  aspect-square relative">
           <Image
             src={product.image}
             alt={product.name}
@@ -80,6 +75,23 @@ export default function Product({ product }: ProductProps) {
             height={250}
             className="h-full w-full object-cover object-center"
           />
+          {width && width > MAX_WIDTH_MOBILE ? (
+            <span
+              onClick={handleAddToCart}
+              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white text-white w-9 h-9 p-1 cursor-pointer flex items-center justify-center"
+            >
+              {" "}
+              <CartPlusIcon className="w-6 h-6 text-primary" />
+            </span>
+          ) : (
+            <span
+              onClick={handleClickBuyMobile}
+              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white text-white text-white w-9 h-9  p-1 cursor-pointer flex items-center justify-center"
+            >
+              {" "}
+              <CartPlusIcon className="w-6 h-6 text-primary" />
+            </span>
+          )}
         </div>
       </Link>
       <div className="flex min-w-0 flex-1 flex-col justify-between pb-3">
@@ -88,23 +100,21 @@ export default function Product({ product }: ProductProps) {
             className="block px-3"
             href={"/san-pham/" + product.slug + "-" + product._id}
           >
-            <div className="mb-1 flex min-h-[36px] items-end md:mt-0 md:min-h-[20px]" />
-            <h3 className="overflow-hidden text-gray-600 text-sm font-semibold line-clamp-2 md:line-clamp-3 mb-1 md:mb-2">
+            <div className="mb-1 flex min-h-[12px] items-end md:mt-0 md:min-h-[16px]" />
+            <h3 className="overflow-hidden text-gray-600 text-sm font-semibold line-clamp-2 mb-1 md:mb-2">
               {product.name}
             </h3>
           </Link>
           <div className="px-3">
-            <div className="mb-1">
-              <div className="text-blue-500">
-                <span className="font-semibold">
-                  {Intl.NumberFormat("vi-VN", {
-                    style: "currency",
-                    currency: "VND",
-                  }).format(product.salePrice)}
-                </span>
+            <div className="mb-1 flex justify-start items-center">
+              <div className="text-blue-500 font-semibold">
+                {Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(product.salePrice)}
               </div>
               {!!product.discount && (
-                <div className="text-md font-normal text-gray-600 line-through md:text-sm ">
+                <div className="text-xs font-normal text-gray-600 line-through md:text-sm ml-1 ">
                   {Intl.NumberFormat("vi-VN", {
                     style: "currency",
                     currency: "VND",
@@ -112,9 +122,28 @@ export default function Product({ product }: ProductProps) {
                 </div>
               )}
             </div>
+            <div className="mb-1 flex items-center ">
+              {!!(product.salePrice > SHIPPING_THRESHOLD) && (
+                <ShippingFreeIcon className="w-7 h-7 text-teal-400 mr-1" />
+              )}
+              {!!product.discount && (
+                <span className="bg-blue-400 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                  Giảm {product.discount}%
+                </span>
+              )}
+              <span className="text-xs font-semibold border border-primary/80 rounded-sm text-primary px-0.5">
+                COD
+              </span>
+            </div>
+            {!!product.ratingAverage && (
+              <div className="text-sm flex items-center text-gray-700/80">
+                {product.ratingAverage.toFixed(1)}
+                <StarIcon className="text-yellow-500 h-3 w-3 ml-[1px]"></StarIcon>
+              </div>
+            )}
           </div>
         </div>
-        <div className="mt-4 px-3">
+        {/* <div className="mt-4 px-3">
           {width && width > MAX_WIDTH_MOBILE ? (
             <Button
               onClick={handleAddToCart}
@@ -130,7 +159,7 @@ export default function Product({ product }: ProductProps) {
               Chọn mua
             </Button>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

@@ -282,6 +282,17 @@ const CarouselNext = React.forwardRef<
   );
 });
 CarouselNext.displayName = "CarouselNext";
+
+const CaroselIndex = () => {
+  const { api } = useCarousel();
+  const { selectedIndex, scrollSnaps } = useDotButton(api);
+  if (!scrollSnaps.length) return null;
+  return (
+    <span className="border border-gray-300 rounded-full text-xs text-gray-700 py-1 px-3 bg-white absolute bottom-5 left-5 z-[30] ">
+      {selectedIndex + 1}/{scrollSnaps.length}
+    </span>
+  );
+};
 const CarouselDot = () => {
   const { api } = useCarousel();
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
@@ -434,4 +445,5 @@ export {
   CarouselNext,
   CarouselDot,
   CarouselThumb,
+  CaroselIndex,
 };

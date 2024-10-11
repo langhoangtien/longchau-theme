@@ -45,7 +45,7 @@ export default async function CategoryPage(props: any) {
               <div className="my-2 py-4 !px-4 pb-4 md:!px-0 grid grid-cols-2 md:grid-cols-5 gap-5 ">
                 <div>
                   <div className="flex items-center h-[64px] cursor-pointer rounded-xl p-3 md:h-[80px] md:py-[10px] md:px-4 shadow-gray-200 shadow-[0_0_0_1px] md:bg-white">
-                    <div className="w-10 h-10 md:w-12 omd:h-12">
+                    <div className="w-10 h-10 md:w-12 md:h-12">
                       <Image
                         alt="Thực phẩm chức năng"
                         loading="lazy"

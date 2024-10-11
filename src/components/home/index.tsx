@@ -27,10 +27,15 @@ import { useSheetContext } from "../sheet-product";
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogTitle,
 } from "../ui/dialog";
 import { ButtonSelect } from "../ui/button-select";
+import CartPlusIcon from "../icons/cart-plus-icon";
+import { Label } from "../ui/label";
+import CartCheckedIcon from "../icons/cart-checked-icon";
 
 export function SuggestionSection({
   products,
@@ -324,16 +329,16 @@ export function SheetProduct() {
         <SheetFooter className="p-4 flex [&>*]:flex-auto gap-2 md:gap-3 rounded-t-3xl md:rounded-t-none shadow-sm md:shadow-none border-t border-transparent md:border-divider-1pt">
           <Button
             onClick={handleBuyNow}
-            variant={"ghost"}
-            className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto "
+            className="py-[12px] h-[48px]  px-6 flex-auto"
           >
             Mua ngay
           </Button>
           <Button
             onClick={handleAddToCart}
-            className="py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto"
+            variant={"outline"}
+            className=" border-primary  text-primary hover:text-primary py-[12px] h-[48px]  px-6 flex-auto "
           >
-            Thêm vào giỏ hàng
+            <CartPlusIcon className="w-9 h-9 text-primary" />
           </Button>
         </SheetFooter>
       </SheetContent>
@@ -556,16 +561,16 @@ export function DialogProduct() {
         <DialogFooter className="p-4 flex [&>*]:flex-auto gap-2 md:gap-3 rounded-t-3xl md:rounded-t-none shadow-sm md:shadow-none border-t border-transparent md:border-divider-1pt">
           <Button
             onClick={handleAddToCart}
-            className="py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto "
+            variant={"outline"}
+            className=" border-primary  text-primary hover:text-primary py-[12px] h-[48px] px-6 flex-auto"
           >
-            Thêm vào giỏ hàng
+            <CartPlusIcon className="w-9 h-9 text-primary" />
           </Button>
           <Button
-            variant={"ghost"}
             onClick={handleBuyNow}
-            className=" bg-gray-200 hover:bg-gray-200 text-primary hover:text-primary py-[12px] h-[48px] rounded-[42px]  px-6 flex-auto"
+            className="py-[12px] h-[48px] px-6 flex-auto "
           >
-            Chọn mua
+            Mua ngay
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -594,3 +599,34 @@ const Attribute = ({ attribute, valueSelect, selectVariant }: any) => {
     </div>
   );
 };
+
+export function AddToCartDialog() {
+  const { open, setOpen }: any = useCartContext();
+  useEffect(() => {
+    let timer: NodeJS.Timeout | undefined;
+    if (open) {
+      timer = setTimeout(() => {
+        setOpen(false);
+      }, 2000);
+    }
+    return () => clearTimeout(timer);
+  }, [open]);
+
+  return (
+    <Dialog onOpenChange={setOpen} open={open}>
+      <DialogContent className="sm:max-w-[425px] bg-[#090d14cc] border-none">
+        <DialogHeader>
+          <DialogTitle>Edit profile</DialogTitle>
+          <DialogDescription className="text-white text-lg text-center">
+            Sản phẩm đã được thêm vào giỏ hàng
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="flex items-center justify-center flex-col gap-2 ">
+          <CartCheckedIcon className="w-16 h-16 text-green-500/80" />
+          <Button variant={"outline"}>Xem giỏ hàng</Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
