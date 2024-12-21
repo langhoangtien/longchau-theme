@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import HeaderMobile from "./header-mobile";
 
 import Cart from "./cart";
@@ -18,46 +18,25 @@ import Phone from "../icons/phone";
 import User from "../icons/user";
 import Eye from "../icons/eye";
 import EyeSlash from "../icons/eye-slash";
-import { useCartContext } from "../cart";
-import { useWindowSize } from "@/hooks/use-window-size";
+
 import { MAX_WIDTH_MOBILE } from "@/constants";
 import MenuIcon from "../icons/menu-icon";
-import CategoryMenu from "../layout/category-menu";
+import MenuCategory from "../menu-category";
+import { useIsMobile } from "@/hooks/use-mobile";
+import Logo from "./logo";
 
 export default function Header() {
-  const logoRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLDivElement>(null);
-  const { headerRef }: any = useCartContext();
   const [open, setOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  const [display, setDisplay] = useState("block");
-  useEffect(() => {
-    const handleScroll = () => {
-      let moving = window.pageYOffset;
 
-      if (moving >= 130 && logoRef.current && searchRef.current) {
-        logoRef.current.style.opacity = "0";
-        searchRef.current.classList.add("header-mobile-custom");
-      }
-      if (moving < 90 && logoRef.current && searchRef.current) {
-        logoRef.current.style.opacity = "1";
-        searchRef.current.classList.remove("header-mobile-custom");
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  });
-  const { width } = useWindowSize();
+  const isMobile = useIsMobile();
 
   return (
     <header
       id="header"
-      ref={headerRef}
-      className="sticky top-0 z-[49] bg-[#317dff] transition-[height] md:relative"
+      className="sticky top-0 z-[49] bg-gradient-to-r from-primary to-primary/80 transition-[height] "
     >
-      {width && width <= MAX_WIDTH_MOBILE && (
+      {isMobile && (
         <HeaderMobile
           open={open}
           setOpen={setOpen}
@@ -76,68 +55,34 @@ export default function Header() {
                   <MenuIcon className="w-5 h-4 text-white" />
                 </button>
               </div>
-              {/* <Button>
-                {" "}
-                <MenuIcon className="w-5 h-4 text-white" />
-              </Button> */}
 
-              <div
-                ref={logoRef}
-                className="grid place-content-center content-center transition-[opacity] duration-300 md:place-content-start"
-              >
-                <Link href="/">
-                  <Image
-                    src="/logo/logo-5.svg"
-                    alt="Ludmila"
-                    width={100}
-                    height={28}
-                    className="h-[28px] w-[100px] !bg-transparent !bg-none object-contain md:h-[56px] md:w-[183px]"
-                  />
-                </Link>
-                {/* <Button className="">
-                  {" "}
-                  <MenuIcon className="w-5 h-4 text-white" />
-                </Button> */}
+              <div className="grid place-content-center content-center transition-[opacity] duration-300 md:place-content-start text-primary">
+                <Logo />
               </div>
 
-              <div className="grid place-content-end content-center md:col-start-3 md:col-end-4 md:place-content-stretch">
-                <div className="flex h-full items-center justify-between">
-                  <div className="hidden md:flex items-center">
-                    <div className="flex items-center cursor-pointer">
+              <div className="grid place-content-end content-center md:col-start-3 md:col-end-4 md:place-content-stretch text-black">
+                <div className="flex h-full items-center justify-end space-x-2 ">
+                  <div className="hidden md:flex items-center justify-center h-11 w-11 rounded-full bg-gray-700/80">
+                    <div
+                      onClick={() => setOpenDialog(true)}
+                      className="flex items-center cursor-pointer"
+                    >
                       <User className="w-6 h-6 text-white" />
-                      <div
-                        onClick={() => setOpenDialog(true)}
-                        className="ml-2 text-base font-medium text-white"
-                      >
-                        Đăng nhập
-                      </div>
                     </div>
                   </div>
 
                   <Cart></Cart>
                 </div>
               </div>
-              <div
-                ref={searchRef}
-                className="search-section col-span-full mt-1.5 grid grid-cols-[150px_1fr] h-[36px] content-center transition-[margin] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:mx-auto md:mt-0 md:h-auto md:w-[680px]"
-              >
-                <span
-                  id="menu-category-pc"
-                  onMouseEnter={() => setDisplay("block")}
-                  className="inline-flex text-white text-base font-medium cursor-pointer items-center justify-center w-10 h-10 bg-black/40 rounded-full md:w-[134px] md:h-[48px] md:rounded-[42px]"
-                >
-                  {" "}
-                  <MenuIcon className="w-6 h-5 mr-2 " />
-                  Danh mục
-                </span>
-                <Search />
-              </div>
+
+              <Search />
             </div>
           </div>
         </div>
       </div>
       <LoginDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
-      <CategoryMenu display={display} setDisplay={setDisplay} />
+
+      <MenuCategory />
     </header>
   );
 }

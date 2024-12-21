@@ -1,18 +1,14 @@
 "use client";
 import { useCartContext } from "@/components/cart";
-import Cart from "@/components/header/cart";
+
 import MinusIcon from "@/components/icons/minus-icon";
 import QuestionIcon from "@/components/icons/question";
-import TrashIcon from "@/components/icons/trash";
-import { Badge } from "@/components/ui/badge";
+import TrashIcon from "@/components/icons/trash-icon";
+import PaymentSummery from "@/components/payment/payment-summery";
+
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Tooltip,
-  TooltipProvider,
-  TooltipTrigger,
-  TooltipContent,
-} from "@/components/ui/tooltip";
+
 import { getLastDayOfMonth } from "@/lib/common";
 import Image from "next/image";
 import Link from "next/link";
@@ -88,105 +84,8 @@ export default function CartPage() {
                   ))}
                 </div>
               </div>
-              <div className="sticky top-2.5 w-full">
-                <div className="rounded-t-xl py-3 px-4 bg-white space-y-4">
-                  <Button className="py-2.5 px-3 w-full rounded-lg  text-primary items-center text-base  justify-between bg-gray-100 hover:bg-gray-100 font-medium">
-                    Áp dụng ưu đãi để được giảm giá
-                    <svg
-                      viewBox="0 0 25 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="w-5 h-5 ml-1 shrink-0 text-icon-primary"
-                    >
-                      <path
-                        d="M9.25383 4.29289C8.86331 4.68342 8.86331 5.31658 9.25383 5.70711L15.5467 12L9.25383 18.2929C8.86331 18.6834 8.86331 19.3166 9.25383 19.7071C9.64436 20.0976 10.2775 20.0976 10.668 19.7071L17.668 12.7071C18.0586 12.3166 18.0586 11.6834 17.668 11.2929L10.668 4.29289C10.2775 3.90237 9.64435 3.90237 9.25383 4.29289Z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </Button>
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <span className="text-base ">Tổng tiền</span>
-                      </div>
-                      <div className="text-base font-medium">7.605.000đ</div>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <span className="text-base ">Giảm giá trực tiếp</span>
-                      </div>
-                      <span className="text-sm md:text-base font-medium">
-                        -2.628.300đ
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <span className="text-base">Giảm giá voucher</span>
-                        <button data-state="closed" className="ml-2">
-                          <QuestionIcon className="w-4 h-4 text-gray-500" />
-                        </button>
-                      </div>
-                      <span className="umd:text-body2 omd:text-base font-medium text-semantic-warning">
-                        0đ
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <span className="text-base ">Tiết kiệm được</span>
-                      </div>
-                      <span className="text-sm md:text-base font-medium text-orange-400">
-                        2.628.300đ
-                      </span>
-                    </div>
-                  </div>
-                  <div className="w-full h-[1px] bg-stroke-disable" />
-                  <div className="mb-4">
-                    <div className="flex items-center justify-between">
-                      <div className="text-heading3 font-semibold text-text-primary">
-                        Thành tiền
-                      </div>
-                      <div className="flex items-baseline">
-                        <span className="text-lg font-semibold text-primary">
-                          {Intl.NumberFormat("vi-VN", {
-                            style: "currency",
-                            currency: "VND",
-                          }).format(totalPrice)}
-                        </span>
-                        <span className="ml-[6px] text-gray-500 font-medium line-through">
-                          4.976.700đ
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <Link className="my-2" href="/thanh-toan">
-                    <Button className="w-full">Mua hàng</Button>
-                  </Link>
-                  <div className="text-base text-center indent-4">
-                    <div>Bằng việc tiến hành đặt mua hàng, bạn đồng ý với </div>
-                    <a
-                      className="font-medium underline underline-offset-[3px]"
-                      href="/tos"
-                    >
-                      Điều khoản dịch vụ
-                    </a>
-                    <span> và </span>
-                    <a
-                      className="font-medium underline underline-offset-[3px]"
-                      href="/chinh-sach-thu-thap-va-xu-ly-du-lieu-ca-nhan"
-                    >
-                      Chính sách xử lý dữ liệu cá nhân
-                    </a>
-                    <div> của Ludmila</div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    height: 24,
-                    background: "white",
-                    mask: "radial-gradient(11.52px at 50% calc(100% - 15.45px), rgb(0, 0, 0) 99%, rgba(0, 0, 0, 0) 101%) calc(50% - 20.6px) 0px / 41.2px 100%, radial-gradient(11.52px at 50% calc(100% + 5.15px), rgba(0, 0, 0, 0) 99%, rgb(0, 0, 0) 101%) 50% calc(100% - 10.3px) / 41.2px 100% repeat-x",
-                  }}
-                />
-              </div>
+              <PaymentSummery />
+           
             </div>
           ) : (
             <CarEmpty />
@@ -361,7 +260,7 @@ const ProductItem = ({
             onClick={handleRemoveFromCart}
             className="ml-3 md:ml-4 h-10 p-[3px] text-gray-500 hover:text-gray-400 shrink-0 hover:bg-transparent bg-transparent"
           >
-            <TrashIcon className="h-[18px] w-[18px]" />
+            <TrashIcon className="h-5 w-5" />
           </Button>
         </div>
       </div>

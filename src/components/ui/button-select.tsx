@@ -6,12 +6,12 @@ const ButtonSelect = ({ selected, children, className, ...props }: any) => {
       <div
         {...props}
         className={cn(
-          "inline-flex text-sm justify-center items-center rounded-md text-primary relative font-medium  overflow-hidden cursor-pointer h-9  transition-all duration-300 border-blue-600 border border-solid bg-white pl-4 pr-6",
+          "inline-flex text-sm justify-center items-center rounded-md text-primary relative font-medium  overflow-hidden cursor-pointer h-9  transition-all duration-300 border-primary border border-solid bg-white pl-4 pr-6",
           className
         )}
       >
         {children}
-        <div className="w-[0px] h-[0px] top-[6px] right-[10px] border-t-[26px] border-l-[26px] border-solid border-l-transparent border-t-blue-600 -mt-[6px] -mr-[12px] absolute">
+        <div className="w-[0px] h-[0px] top-[6px] right-[10px] border-t-[26px] border-l-[26px] border-solid border-l-transparent border-t-primary -mt-[6px] -mr-[12px] absolute">
           <span className="absolute -top-[22px] right-[3px]">
             <svg
               viewBox="0 0 24 24"

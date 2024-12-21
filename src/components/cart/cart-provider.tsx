@@ -17,7 +17,7 @@ const INITIAL_STATE = {
   shippingFee: SHIPPING_FEE,
   normalPrice: 0,
   variant: null,
-  open: true,
+  open: false,
 };
 
 const getInitialStateFromLocalStorage = () => {
@@ -63,7 +63,7 @@ const reducer = (state: any, action: any) => {
         products: action.payload.products,
       };
       saveStateToLocalStorage(newState);
-      return newState;
+      return { ...newState, open: action.payload.open };
     case "REMOVE_FROM_CART":
       newState = {
         ...state,
@@ -104,8 +104,6 @@ const reducer = (state: any, action: any) => {
 };
 export function CartProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const headerRef = useRef(null);
-  const cartRef = useRef(null);
 
   useEffect(() => {
     const initialState = getInitialStateFromLocalStorage();
@@ -128,7 +126,7 @@ export function CartProvider({ children }: any) {
 
       dispatch({
         type: "ADD_TO_CART",
-        payload: { products },
+        payload: { products, open: true },
       });
     },
 
@@ -142,7 +140,7 @@ export function CartProvider({ children }: any) {
       );
       dispatch({
         type: "ADD_TO_CART",
-        payload: { products: productInCart },
+        payload: { products: productInCart, open: false },
       });
     },
     [state.products]
@@ -174,7 +172,7 @@ export function CartProvider({ children }: any) {
       );
       dispatch({
         type: "ADD_TO_CART",
-        payload: { products: productsSelected },
+        payload: { products: productsSelected, open: false },
       });
     },
     [state.products]
@@ -187,7 +185,7 @@ export function CartProvider({ children }: any) {
       }));
       dispatch({
         type: "ADD_TO_CART",
-        payload: { products: productsSelected },
+        payload: { products: productsSelected, open: false },
       });
     },
     [state.products]
@@ -222,8 +220,6 @@ export function CartProvider({ children }: any) {
       setSelected,
       setAllSelected,
       setVariant,
-      headerRef,
-      cartRef,
       setOpen,
     }),
     [

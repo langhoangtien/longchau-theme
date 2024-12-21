@@ -34,8 +34,9 @@ import {
 } from "../ui/dialog";
 import { ButtonSelect } from "../ui/button-select";
 import CartPlusIcon from "../icons/cart-plus-icon";
-import { Label } from "../ui/label";
+
 import CartCheckedIcon from "../icons/cart-checked-icon";
+import { Check } from "lucide-react";
 
 export function SuggestionSection({
   products,
@@ -143,7 +144,6 @@ export function SheetProduct() {
       name: product.name,
     };
     addToCart(variantMapped, quantity);
-    toast.info("Sản phẩm đã được thêm vào giỏ hàng");
     setOpen(false);
   };
 
@@ -351,7 +351,7 @@ export function DialogProduct() {
 
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
-  const { addToCart, headerRef, cartRef }: any = useCartContext();
+  const { addToCart, headerRef }: any = useCartContext();
 
   useEffect(() => {
     if (!product) return;
@@ -373,11 +373,6 @@ export function DialogProduct() {
     };
     addToCart(variantMapped, quantity);
     setOpenDialog(false);
-    headerRef.current.scrollIntoView({ behavior: "smooth" });
-    cartRef.current.classList.toggle("list-product-show", true);
-    setTimeout(() => {
-      cartRef.current.classList.toggle("list-product-show", false);
-    }, 2000);
   };
 
   const handleBuyNow = () => {
@@ -607,24 +602,23 @@ export function AddToCartDialog() {
     if (open) {
       timer = setTimeout(() => {
         setOpen(false);
-      }, 2000);
+      }, 1500);
     }
     return () => clearTimeout(timer);
   }, [open]);
 
   return (
     <Dialog onOpenChange={setOpen} open={open}>
-      <DialogContent className="sm:max-w-[425px] bg-[#090d14cc] border-none">
+      <DialogContent className="sm:max-w-[325px] max-w-[200px] bg-gray-900/90 border-none rounded-sm">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle></DialogTitle>
           <DialogDescription className="text-white text-lg text-center">
-            Sản phẩm đã được thêm vào giỏ hàng
+            Đã thêm vào giỏ hàng
           </DialogDescription>
         </DialogHeader>
 
         <div className="flex items-center justify-center flex-col gap-2 ">
-          <CartCheckedIcon className="w-16 h-16 text-green-500/80" />
-          <Button variant={"outline"}>Xem giỏ hàng</Button>
+          <Check className="w-12 h-12 text-white" />
         </div>
       </DialogContent>
     </Dialog>

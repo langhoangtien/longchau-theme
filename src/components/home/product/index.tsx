@@ -6,19 +6,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useSheetContext } from "@/components/sheet-product";
-import { useWindowSize } from "@/hooks/use-window-size";
-import { MAX_WIDTH_MOBILE } from "@/constants";
 
 import CartPlusIcon from "@/components/icons/cart-plus-icon";
 import StarIcon from "@/components/icons/star-icon";
 import { SHIPPING_THRESHOLD } from "@/components/cart/cart-provider";
 import ShippingFreeIcon from "@/components/icons/shipping-free-icon";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type ProductProps = {
   product: ProductType;
 };
 export default function Product({ product }: ProductProps) {
-  const { addToCart, headerRef, cartRef }: any = useCartContext();
+  const { addToCart }: any = useCartContext();
   const { setOpen, setProduct, setOpenDialog }: any = useSheetContext();
   const [variant, setVariant] = useState<ProductVariantType | null>(null);
 
@@ -53,16 +52,11 @@ export default function Product({ product }: ProductProps) {
       image: variant?.image || product.image,
     };
     addToCart(variantData, 1);
-    headerRef.current.scrollIntoView({ behavior: "smooth" });
-    cartRef.current.classList.toggle("list-product-show", true);
-    setTimeout(() => {
-      cartRef.current.classList.toggle("list-product-show", false);
-    }, 2000);
   };
-  const { width, height } = useWindowSize();
+  const isMobile = useIsMobile();
 
   return (
-    <div className="h-full relative flex rounded-xl border border-solid border-white bg-white transition-all duration-300 ease-out hover:border-blue-500 flex-col">
+    <div className="h-full relative flex rounded-xl border border-solid border-white bg-white transition-all duration-300 ease-out hover:border-primary flex-col">
       <Link
         className="px-3 block pt-3"
         href={"/san-pham/" + product.slug + "-" + product._id}
@@ -75,7 +69,7 @@ export default function Product({ product }: ProductProps) {
             height={250}
             className="h-full w-full object-cover object-center"
           />
-          {width && width > MAX_WIDTH_MOBILE ? (
+          {isMobile ? (
             <span
               onClick={handleAddToCart}
               className="rounded-full absolute bottom-1 right-1 border-primary border bg-white text-white w-9 h-9 p-1 cursor-pointer flex items-center justify-center"
@@ -86,7 +80,7 @@ export default function Product({ product }: ProductProps) {
           ) : (
             <span
               onClick={handleClickBuyMobile}
-              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white text-white text-white w-9 h-9  p-1 cursor-pointer flex items-center justify-center"
+              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white  text-white w-9 h-9  p-1 cursor-pointer flex items-center justify-center"
             >
               {" "}
               <CartPlusIcon className="w-6 h-6 text-primary" />
@@ -107,7 +101,7 @@ export default function Product({ product }: ProductProps) {
           </Link>
           <div className="px-3">
             <div className="mb-1 flex justify-start items-center">
-              <div className="text-blue-500 font-semibold">
+              <div className="text-primary font-semibold">
                 {Intl.NumberFormat("vi-VN", {
                   style: "currency",
                   currency: "VND",
@@ -127,7 +121,7 @@ export default function Product({ product }: ProductProps) {
                 <ShippingFreeIcon className="w-7 h-7 text-teal-400 mr-1" />
               )}
               {!!product.discount && (
-                <span className="bg-blue-400 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+                <span className="bg-primary/75 text-white text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                   Giảm {product.discount}%
                 </span>
               )}
@@ -143,23 +137,6 @@ export default function Product({ product }: ProductProps) {
             )}
           </div>
         </div>
-        {/* <div className="mt-4 px-3">
-          {width && width > MAX_WIDTH_MOBILE ? (
-            <Button
-              onClick={handleAddToCart}
-              className="py-[8px] px-[12px] h-[36px] w-full hidden md:flex"
-            >
-              Chọn mua
-            </Button>
-          ) : (
-            <Button
-              onClick={handleClickBuyMobile}
-              className="py-[8px] px-[12px] h-[36px] w-full md:hidden"
-            >
-              Chọn mua
-            </Button>
-          )}
-        </div> */}
       </div>
     </div>
   );

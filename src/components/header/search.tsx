@@ -1,3 +1,4 @@
+"use client";
 import { HOST_API } from "@/config-global";
 import useClickOutside from "@/hooks/use-click-out-side";
 import { useDebounce } from "@/hooks/use-debounce";
@@ -8,10 +9,10 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
 import { LoadingCircle } from "../ui/loading";
 import HeaderSearchHistory from "./header-search-history";
-import SearchIcon from "@/components/icons/search";
-import Close from "../icons/close";
+
 import PreviousArrow from "../icons/previous-arrow";
 import CloseIcon from "../icons/close-icon";
+import { SearchIcon } from "lucide-react";
 
 export const topSearch = [
   "Bò hầm",
@@ -32,14 +33,11 @@ interface Product {
   path: string;
 }
 
-interface ResultProps {
-  products: Product[];
-}
-
 export default function Search() {
   const refSearchMobile = useRef<HTMLDivElement>(null);
   const refSearchWrap = useRef<HTMLDivElement>(null);
   const refInput = useRef<HTMLInputElement>(null);
+  const searchRef = useRef<HTMLDivElement>(null);
   const [value, setValue] = useState<string>("");
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -60,6 +58,24 @@ export default function Search() {
     refSearchMobile.current?.classList.toggle("!hidden", true);
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      let moving = window.pageYOffset;
+
+      if (moving >= 130 && searchRef.current) {
+        // logoRef.current.style.opacity = "0";
+        searchRef.current.classList.add("header-mobile-custom");
+      }
+      if (moving < 90 && searchRef.current) {
+        // logoRef.current.style.opacity = "1";
+        searchRef.current.classList.remove("header-mobile-custom");
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  });
   useClickOutside(refSearchWrap, () => handleSearchBack());
   useEffect(() => {
     const fetchData = async () => {
@@ -96,7 +112,7 @@ export default function Search() {
     fetchData();
   }, [debounceText]);
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" || e.which === 13) {
       handleRedirect();
     }
   };
@@ -122,106 +138,115 @@ export default function Search() {
     }
   };
   return (
-    <div ref={refSearchWrap} className="cs-search-wrapper relative">
-      <div>
-        <span className="relative inline-flex items-center bg-white md:rounded-[35px] md:pl-4 w-full rounded-[28px] p-1 pl-3">
-          <input
-            onFocus={handleSearchDesktop}
-            placeholder="Tìm tên sản phẩm, thực phẩm chức năng... m"
-            maxLength={200}
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-            onKeyDown={handleKeyPress}
-            className="w-full text-ellipsis bg-transparent outline-none placeholder:text-gray-500 placeholder-shown:text-ellipsis md:h-[40px] h-[28px] md:text-base text-sm placeholder:sm"
-          />
-          <span
-            onClick={handleSearch}
-            className="absolute w-full h-full t-0 bg-transparent md:hidden "
-          ></span>
-
-          {value && (
-            <button
-              aria-label="clear search"
-              onClick={() => setValue("")}
-              className="mr-2 items-center h-[20px] w-[20px] shrink-0"
-            >
-              <CloseIcon className="h-6 w-6" />
-            </button>
-          )}
-          <button
-            aria-label="search"
-            onClick={handleRedirect}
-            className="shrink-0 rounded-full bg-blue-600 text-white md:w-[40px] md:h-[40px] md:p-[10px] md:ml-3 w-[28px] h-[28px] p-[6px] sm:ml-2"
-          >
-            <SearchIcon className="h-full w-full" />
-          </button>
-        </span>
-        <div className="hidden md:block css-1azp7v2">
-          <ul className="flex items-center text-white">
-            {topSearch.map((item) => (
-              <li key={item} className="item">
-                <Link
-                  key={item}
-                  href={`/tim-kiem?s=${encodeURIComponent(item)}`}
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+    <div
+      ref={searchRef}
+      className="search-section col-span-full mt-1.5 grid  h-[36px] content-center transition-[margin] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:mx-auto md:mt-0 md:h-auto md:w-[680px]"
+    >
       <div
-        ref={refSearchMobile}
-        className="!bg-gray-200 md:bg-white shadow md:rounded-2xl !hidden css-1o42jah"
+        ref={refSearchWrap}
+        className="cs-search-wrapper  relative rounded-sm"
       >
-        <div className="h-[52px] min-w-[375px] md:hidden">
-          <div className="inner bg-blue-500 px-4 py-2">
-            <div className="">
-              <div className="lc-row relative flex flex-wrap  css-1b11mx9">
-                <span
-                  onClick={handleSearchBack}
-                  className="text-white mr-4 css-8u32eo"
-                >
-                  <PreviousArrow className="h-6 w-6" />
-                </span>
-                <span className="relative inline-flex items-center bg-white rounded-[28px] p-1 pl-3 grow">
-                  <input
-                    ref={refInput}
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Tìm tên sản phẩm, mỹ phẩm, thực phẩm chức năng..."
-                    maxLength={200}
-                    className="w-full text-ellipsis bg-transparent outline-none  placeholder-shown:text-ellipsis h-[28px] text-base placeholder:text-sm"
-                  />
+        <div>
+          <span className="relative inline-flex items-center bg-white md:rounded-sm md:pl-4 w-full pl-3">
+            <input
+              onFocus={handleSearchDesktop}
+              placeholder="Tìm tên sản phẩm, thực phẩm chức năng... m"
+              maxLength={200}
+              onChange={(e) => setValue(e.target.value)}
+              value={value}
+              onKeyDown={handleKeyPress}
+              className="w-full text-ellipsis bg-transparent outline-none placeholder:text-gray-500 placeholder-shown:text-ellipsis md:h-[40px] h-[28px] md:text-base text-sm placeholder:sm"
+            />
+            <span
+              onClick={handleSearch}
+              className="absolute w-full h-full t-0 bg-transparent md:hidden "
+            ></span>
 
-                  {value && (
-                    <button
-                      onClick={() => setValue("")}
-                      className="ml-2 items-center h-[24px] w-[24px] shrink-0 inline-flex"
-                    >
-                      <CloseIcon className="h-6 w-6" />
-                    </button>
-                  )}
-                  <button
-                    onClick={handleRedirect}
-                    className="shrink-0 rounded-full bg-blue-500 w-[28px] h-[28px] p-[6px] ml-2"
+            {value && (
+              <button
+                aria-label="clear search"
+                onClick={() => setValue("")}
+                className="mr-2 items-center h-[20px] w-[20px] shrink-0"
+              >
+                <CloseIcon className="h-6 w-6" />
+              </button>
+            )}
+            <button
+              aria-label="search"
+              onClick={handleRedirect}
+              className="shrink-0 flex justify-center items-center rounded-r-sm bg-primary/50  md:w-10 md:h-10 md:p-[3px] md:ml-3 w-8 h-8 p-[6px] sm:ml-2"
+            >
+              <SearchIcon className="h-6 w-6 text-white" />
+            </button>
+          </span>
+          <div className="hidden md:block css-1azp7v2">
+            <ul className="flex items-center text-white">
+              {topSearch.map((item) => (
+                <li key={item} className="item">
+                  <Link
+                    key={item}
+                    href={`/tim-kiem?s=${encodeURIComponent(item)}`}
                   >
-                    <SearchIcon className="h-full w-full" />
-                  </button>
-                </span>
+                    {item}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div
+          ref={refSearchMobile}
+          className="!bg-gray-200 md:bg-white shadow md:rounded-2xl !hidden css-1o42jah"
+        >
+          <div className="h-[52px] min-w-[375px] md:hidden">
+            <div className="inner bg-primary px-4 py-2">
+              <div>
+                <div className="lc-row relative flex flex-wrap  css-1b11mx9">
+                  <span
+                    onClick={handleSearchBack}
+                    className="text-white mr-4 css-8u32eo"
+                  >
+                    <PreviousArrow className="h-6 w-6" />
+                  </span>
+                  <span className="relative inline-flex items-center bg-white rounded-md h-[34px] border border-gray-200  pl-3 grow">
+                    <input
+                      ref={refInput}
+                      value={value}
+                      onChange={(e) => setValue(e.target.value)}
+                      onKeyDown={handleKeyPress}
+                      placeholder="Tìm tên sản phẩm, mỹ phẩm, thực phẩm chức năng..."
+                      maxLength={200}
+                      className="w-full text-ellipsis bg-transparent outline-none placeholder-shown:text-ellipsis h-full text-base placeholder:text-sm"
+                    />
+
+                    {value && (
+                      <button
+                        onClick={() => setValue("")}
+                        className="ml-2 items-center h-[24px] w-[24px] shrink-0 inline-flex"
+                      >
+                        <CloseIcon className="h-6 w-6" />
+                      </button>
+                    )}
+                    <button
+                      onClick={handleRedirect}
+                      className="shrink-0 rounded-r-sm bg-primary w-8 h-8 flex items-center justify-center ml-2 "
+                    >
+                      <SearchIcon className="h-5 w-5 text-white" />
+                    </button>
+                  </span>
+                </div>
               </div>
             </div>
           </div>
+          <SearchWrapper
+            value={value}
+            products={products}
+            loading={loading}
+            debounceText={debounceText}
+            handleSearchBack={handleSearchBack}
+            handleRedirect={handleRedirect}
+          />
         </div>
-        <SearchWrapper
-          value={value}
-          products={products}
-          loading={loading}
-          debounceText={debounceText}
-          handleSearchBack={handleSearchBack}
-          handleRedirect={handleRedirect}
-        />
       </div>
     </div>
   );

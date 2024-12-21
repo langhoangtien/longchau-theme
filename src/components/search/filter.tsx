@@ -5,8 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CheckboxSquare } from "@/components/ui/checkbox";
-
-import { ButtonSelect } from "../ui/button-select";
 const PRICE_FILTERS = [
   { name: "Dưới 100.000₫", _id: "0-100000" },
   { name: "100.000₫ - 200.000₫", _id: "100000-200000" },
@@ -37,22 +35,25 @@ export default function Filter({
       className="w-full"
     >
       <AccordionItem value="price">
-        <AccordionTrigger className="hover:no-underline">
+        <AccordionTrigger className="hover:no-underline py-2">
           Giá bán
         </AccordionTrigger>
         <AccordionContent>
           <ul>
             {PRICE_FILTERS.map((price: any) => (
-              <li key={price._id} className="mt-1 flex p-1">
-                <div className="flex w-full items-center space-x-2 ">
-                  <ButtonSelect
-                    className="w-full rounded-sm h-10  "
-                    selected={filter.price.includes(price._id)}
+              <li key={price._id} className="mt-1 flex pb-2">
+                <div className="flex items-center space-x-2">
+                  <CheckboxSquare
+                    checked={filter.price.includes(price._id)}
                     id={price._id}
-                    onClick={() => handleFilter("price", price._id)}
+                    onCheckedChange={() => handleFilter("price", price._id)}
+                  />
+                  <label
+                    htmlFor={price._id}
+                    className="text-sm font-medium  text-gray-800/90"
                   >
                     {price.name}
-                  </ButtonSelect>
+                  </label>
                 </div>
               </li>
             ))}
@@ -60,13 +61,13 @@ export default function Filter({
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="brand">
-        <AccordionTrigger className="hover:no-underline">
+        <AccordionTrigger className="hover:no-underline py-2">
           Thương hiệu
         </AccordionTrigger>
         <AccordionContent>
           <ul>
             {filterData.brands.map((brand: any) => (
-              <li key={brand.name} className="mt-1 flex p-1">
+              <li key={brand.name} className="mt-1 flex pb-2">
                 <div className="flex items-center space-x-2 ">
                   <CheckboxSquare
                     checked={filter.brand.includes(brand._id)}
@@ -86,13 +87,13 @@ export default function Filter({
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="category">
-        <AccordionTrigger className="hover:no-underline">
+        <AccordionTrigger className="hover:no-underline py-2">
           Loại sản phẩm
         </AccordionTrigger>
         <AccordionContent>
           <ul>
             {filterData.categories.map((category: any) => (
-              <li key={category._id} className="mt-1 flex p-1">
+              <li key={category._id} className="mt-1 flex pb-2">
                 <div className="flex items-center space-x-2">
                   <CheckboxSquare
                     checked={filter.category.includes(category._id)}
@@ -114,13 +115,13 @@ export default function Filter({
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="country">
-        <AccordionTrigger className="hover:no-underline">
+        <AccordionTrigger className="hover:no-underline py-2">
           Xuất xứ
         </AccordionTrigger>
         <AccordionContent>
           <ul>
             {filterData.countries.map((country: any) => (
-              <li key={country._id} className="mt-1 flex p-1">
+              <li key={country._id} className="mt-1 flex pb-2">
                 <div className="flex items-center space-x-2">
                   <CheckboxSquare
                     checked={filter.country.includes(country._id)}

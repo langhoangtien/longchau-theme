@@ -27,7 +27,15 @@ export default async function BrandPage(props: any) {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink className="text-primary" href="/">
-                  Home
+                  Trang chủ
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator>
+                <Slash />
+              </BreadcrumbSeparator>
+              <BreadcrumbItem>
+                <BreadcrumbLink className="text-primary" href="/thuong-hieu">
+                  Thương hiệu
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
@@ -41,7 +49,7 @@ export default async function BrandPage(props: any) {
         </ol>
         <div className="overflow-hidden container-lite">
           <div data-lcpr="prr-id-brand-information">
-            <div className="-mx-4 md:mx-0 px-4 md:px-0">
+            <div className="-mx-4 md:mx-0 px-4 md:px-0 mb-4">
               <div className="bg-gray-100 ">
                 <div className="!m-0 pt-0">
                   <div className="!flex rounded-xl bg-white p-4 md:items-center">
@@ -59,35 +67,6 @@ export default async function BrandPage(props: any) {
                       </h1>
                       <p className="css-osuj7x text-gray-600">Thương hiệu</p>
                       <Description description={result.description} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="-mx-4 bg-white md:bg-transparent md:mx-0">
-              <div className="my-2 py-4 !px-4 pb-4 md:!px-0 grid grid-cols-2 md:grid-cols-5 gap-5 ">
-                <div>
-                  <div className="flex items-center h-[64px] cursor-pointer rounded-xl p-3 md:h-[80px] md:py-[10px] md:px-4 shadow-gray-200 shadow-[0_0_0_1px] md:bg-white">
-                    <div className="w-10 h-10 md:w-12 omd:h-12">
-                      <Image
-                        alt="Thực phẩm chức năng"
-                        loading="lazy"
-                        width={40}
-                        height={40}
-                        decoding="async"
-                        data-nimg={1}
-                        className="w-full h-full object-cover"
-                        src="/icons/png/tpcn_vitamin_khoang_chat_level_2.png"
-                        style={{ color: "transparent" }}
-                      />
-                    </div>
-                    <div className="ml-3 flex flex-1 flex-col justify-center">
-                      <h3 className="price mb-0 text-sm font-medium line-clamp-2">
-                        Thực phẩm chức năng
-                      </h3>
-                      <p className="text-sm text-gray-700 font-normal">
-                        16 sản phẩm
-                      </p>
                     </div>
                   </div>
                 </div>

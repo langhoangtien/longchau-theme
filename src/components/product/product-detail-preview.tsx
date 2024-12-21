@@ -145,7 +145,7 @@ export default function ProductDetailPreview({
         </div>
         <div>
           <div className="my-[12px] md:my-[16px]">
-            <div className="flex flex-col md:flex-row justify-between gap-[8px] md:flex-row md:items-center md:gap-[16px]">
+            <div className="flex flex-col md:flex-row justify-between gap-[8px]  md:items-center md:gap-[16px]">
               <p className="md:text-lg font-semibold ">
                 {totalRating} Bình luận
               </p>
@@ -154,7 +154,7 @@ export default function ProductDetailPreview({
                   <span
                     onClick={() => handleChangStar(value)}
                     key={value}
-                    className={`inline-flex h-8 text-sm justify-center items-center pl-3 pr-3 rounded-md border border-gray-300 relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300 ${
+                    className={`inline-flex text-sm justify-center items-center pl-3 pr-3 rounded-md border border-gray-300 relative font-medium  overflow-hidden cursor-pointer bg-white h-9  transition-all duration-300 ${
                       value === star ? "border border-primary text-primary" : ""
                     } `}
                   >
@@ -178,7 +178,11 @@ export default function ProductDetailPreview({
                 <CommentItem
                   childNumber={review.childNumber || 0}
                   key={review._id}
-                  name={review.fullName}
+                  name={
+                    review.user
+                      ? review.user.firstName + " " + review.user.lastName
+                      : review.fullName
+                  }
                   createdAt={review.createdAt}
                   id={review._id}
                   content={review.content}

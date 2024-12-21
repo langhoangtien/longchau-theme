@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { ToolTipCustom } from "../ui/tooltip";
 import Readmore from "../icons/readmore";
 import { RotateCw } from "lucide-react";
-import HelpfulIcon from "../icons/helpful-icon";
 import StarIcon from "../icons/star-icon";
 function getInitials(fullName: string) {
   const words = fullName.split(" ");
@@ -61,8 +60,6 @@ export const CommentItem = ({
     );
     const response = await responseJson.json();
     setLoading(false);
-    console.log(response);
-
     setItems(response.items);
   };
 
@@ -108,7 +105,7 @@ export const CommentItem = ({
                 <div className="bullet-dot bg-icon-tertiary mx-[8px] h-[4px] w-[4px] rounded-full" />
                 <span
                   onClick={handleReplyComment}
-                  className="md:text-base text-blue-600 cursor-pointer font-medium"
+                  className="md:text-base text-primary cursor-pointer font-medium"
                 >
                   Trả lời
                 </span>

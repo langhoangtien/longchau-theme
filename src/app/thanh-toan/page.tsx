@@ -165,7 +165,6 @@ export default function Checkout() {
             <PaymentSummery handleSubmit={handleSubmit} />
           </div>
         </div>
-        <div className="Toastify" id="cart.root.toast-container-id" />
       </div>
     </div>
   );

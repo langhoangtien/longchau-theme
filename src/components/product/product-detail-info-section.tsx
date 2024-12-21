@@ -19,7 +19,7 @@ import CartPlusIcon from "../icons/cart-plus-icon";
 export function ProductDetailInfoPrice({ variant }: any) {
   return (
     <div>
-      <div className="text-blue-600 inline-flex items-baseline">
+      <div className="text-primary inline-flex items-baseline">
         <span
           data-test="price"
           className="md:text-4xl sm:text-2xl text-xl md:font-semibold font-bold animate-in fade-in-0"
@@ -82,8 +82,8 @@ export function ProductDetailInfoAttribute({
             </td>
             <td className="flex-1">
               <Link
-                className="text-blue-500"
-                href={"/danh-muc/" + product.category.code}
+                className="text-primary"
+                href={`/danh-muc/${product.category.code}-${product.category._id}`}
               >
                 <p>{product.category.name}</p>
               </Link>
@@ -172,7 +172,7 @@ const Attribute = ({ attribute, valueSelect, selectVariant }: any) => {
 };
 
 export function ProductDetailInfoActions({ name, image, variant }: any) {
-  const { addToCart, headerRef, cartRef }: any = useCartContext();
+  const { addToCart, headerRef }: any = useCartContext();
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
 
@@ -186,11 +186,6 @@ export function ProductDetailInfoActions({ name, image, variant }: any) {
       name,
     };
     addToCart(variantMapped, quantity);
-    headerRef.current.scrollIntoView({ behavior: "smooth" });
-    cartRef.current.classList.toggle("list-product-show", true);
-    setTimeout(() => {
-      cartRef.current.classList.toggle("list-product-show", false);
-    }, 2000);
   };
 
   const handleAddToCartMobile = () => {
@@ -204,7 +199,6 @@ export function ProductDetailInfoActions({ name, image, variant }: any) {
       name,
     };
     addToCart(variantMapped, quantity);
-    toast.info("Sản phẩm đã được thêm vào giỏ hàng");
   };
   const handleBuyNow = () => {
     if (!variant) {

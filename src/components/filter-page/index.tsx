@@ -89,9 +89,6 @@ export default function ProductsPage({ search = "", filterData }: any) {
     getData();
   }, [filter, search, sort, page]);
 
-  if (!loading && products.length === 0) {
-    return <FilterEmpty />;
-  }
   return (
     <div className="-mx-4 md:mx-0 md:grid md:grid-cols-[289px_907fr] md:gap-5">
       <div className="hidden md:block">
@@ -219,25 +216,29 @@ export default function ProductsPage({ search = "", filterData }: any) {
             </div>
           </div>
         </div>
-        <div className="px-4 pt-3 md:px-0 md:pt-0">
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-5">
-            {loading
-              ? Array.from({ length: 10 }).map((_, index) => (
-                  <ProductSkeleton key={index} />
-                ))
-              : products.map((product: any) => (
-                  <Product key={product._id} product={product} />
-                ))}
+        {!loading && products.length === 0 ? (
+          <FilterEmpty clearFilter={() => setFilter(INIT_FILTERS)} />
+        ) : (
+          <div className="pt-3 md:px-0 md:pt-0">
+            <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-5">
+              {loading
+                ? Array.from({ length: 10 }).map((_, index) => (
+                    <ProductSkeleton key={index} />
+                  ))
+                : products.map((product: any) => (
+                    <Product key={product._id} product={product} />
+                  ))}
+            </div>
+            <div className="mt-3 flex w-full items-center justify-center p-[10px]">
+              <PaginationDemo
+                count={count}
+                page={page}
+                perPage={10}
+                onChangePage={setPage}
+              />
+            </div>
           </div>
-          <div className="mt-3 flex w-full items-center justify-center p-[10px]">
-            <PaginationDemo
-              count={count}
-              page={page}
-              perPage={10}
-              onChangePage={setPage}
-            />
-          </div>
-        </div>
+        )}
       </section>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetContent className="overflow-auto py-12" side="right">

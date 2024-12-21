@@ -7,7 +7,9 @@ export const convertImagePathToUrl = (
   filePath: string,
   dimension: string | number
 ) => {
-  if (!filePath) return undefined;
+  if (!filePath) return "/icons/svg/img-error.svg";
+  if (dimension === "originals")
+    return `${HOST_API}/files/originals/${filePath}`;
   return `${HOST_API}/files${
     dimension ? `/${dimension}x${dimension}` : ""
   }/${filePath}`;

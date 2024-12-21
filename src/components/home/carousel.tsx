@@ -10,8 +10,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import Link from "next/link";
 
-export function CarouselDemo({ products }: any) {
+export function CarouselSilde({ products }: any) {
   return (
     <div className="relative bg-slate-50 pb-[21px] md:pb-0">
       <div className="md:container-lite relative md:flex md:flex-row md:gap-3 md:py-4 ">
@@ -19,7 +20,10 @@ export function CarouselDemo({ products }: any) {
           <CarouselContent>
             {products.map((product: any, index: number) => (
               <CarouselItem key={product._id}>
-                <div className="p-1">
+                <Link
+                  href={"/san-pham/" + product.slug + "-" + product._id}
+                  className="p-1"
+                >
                   <CardContent className="flex aspect-[16/5] items-center justify-center rounded-xl p-0">
                     <Image
                       width={600}
@@ -31,7 +35,7 @@ export function CarouselDemo({ products }: any) {
                       className="object-cover w-full h-full rounded-xl"
                     />
                   </CardContent>
-                </div>
+                </Link>
               </CarouselItem>
             ))}
           </CarouselContent>

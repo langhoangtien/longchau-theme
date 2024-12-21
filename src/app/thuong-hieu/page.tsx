@@ -1,5 +1,3 @@
-import { HOST_API } from "@/config-global";
-import ProductsPage from "@/components/filter-page";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,10 +6,10 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import { Slash } from "lucide-react";
-export default async function SearchPage(props: any) {
-  const search = props?.searchParams?.s;
-  const filterDataJson = await fetch(`${HOST_API}/home/select-info`);
-  const filterData = await filterDataJson.json();
+
+import BrandList from "@/components/brand/list-brand";
+export const revalidate = 60;
+export default async function BrandPage(props: any) {
   return (
     <div data-custom-container="true">
       <div className="pb-6 md:pb-9">
@@ -28,14 +26,15 @@ export default async function SearchPage(props: any) {
                 <Slash />
               </BreadcrumbSeparator>
               <BreadcrumbItem>
-                <BreadcrumbLink>Tìm kiếm</BreadcrumbLink>
+                <BreadcrumbLink>Thương hiệu</BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </ol>
         <div className="overflow-hidden container-lite">
-          <ProductsPage filterData={filterData} search={search} />
+          <BrandList />
         </div>
+
         <div className="container-lite pt-4 md:pt-5" />
       </div>
     </div>

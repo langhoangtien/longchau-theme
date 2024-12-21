@@ -1,5 +1,5 @@
 import { mappedProduct, mappedProduct800 } from "@/lib/common";
-import { CarouselDemo } from "@/components/home/carousel";
+import { CarouselSilde } from "@/components/home/carousel";
 
 import CategorySection from "@/components/home/category-section";
 import { HOST_API } from "@/config-global";
@@ -30,7 +30,7 @@ export default async function Home() {
 
   return (
     <div>
-      <CarouselDemo products={topNewProduct}></CarouselDemo>
+      <CarouselSilde products={topNewProduct}></CarouselSilde>
       <CategorySection />
       <TopDiscountSection
         products={newsestProducts}

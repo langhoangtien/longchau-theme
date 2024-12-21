@@ -1,6 +1,5 @@
 import Header from "../header";
 import Footer from "../footer";
-import MenuCategory from "../menu-category";
 
 export default async function MainLayout({
   children,
@@ -11,7 +10,7 @@ export default async function MainLayout({
         <Header></Header>
 
         <div className="bg-gray-100 pb-9 flex-1 relative">
-          <MenuCategory />
+          {/* <MenuCategory /> */}
           {children}
         </div>
         <Footer></Footer>

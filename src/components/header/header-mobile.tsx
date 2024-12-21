@@ -30,7 +30,6 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
       if (!localStorage.getItem("menu")) {
         const res = await fetch(`${HOST_API}/home/menu`);
         const data = await res.json();
-        setMenu(data);
         localStorage.setItem("menu", JSON.stringify(data));
         return;
       }
@@ -46,6 +45,7 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
     setOpen(false);
     setOpenDialog(true);
   };
+
   return (
     <Sheet open={open} onOpenChange={(value) => setOpen(value)}>
       <SheetContent className="p-0 overflow-auto">
@@ -70,7 +70,7 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
           </SheetClose>
         </div>
 
-        <div className="py-3 mt-10 px-4 bg-blue-500">
+        <div className="py-3 mt-10 px-4 bg-primary">
           <div className="text-sm font-medium text-white">
             Đăng nhập để hưởng những đặc quyền dành riêng cho thành viên.
           </div>
@@ -82,22 +82,24 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
           </div>
         </div>
         <div className="mt-1 py-4">
-          <Accordion type="single" collapsible className="w-full p-4">
+          <Accordion type="single" collapsible className="w-full">
             {menu.map((item: any) => (
               <AccordionItem
                 className="border-b-0"
                 key={item._id}
                 value={item._id}
               >
-                <AccordionTrigger className="text-base font-semibold text-primary hover:no-underline">
-                  {item.name}
+                <AccordionTrigger className="text-base font-normal text-gray-800 hover:no-underline p-3  uppercase">
+                  <Link href={`/danh-muc/${item.code}-${item._id}`}>
+                    {item.name}
+                  </Link>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <div className="mb-2 rounded-lg bg-blue-50 divide-y border-stroke-disable">
+                  <div className="mb-2 pr-1 ml-4 border-l border-gray-100 border-stroke-disable">
                     {item.children.map((category: any) => (
                       <Link
                         key={category.name}
-                        className="block px-4 py-3 text-gray-1000 text-sm font-medium border-b border-gray-200 hover:text-primary transition-colors"
+                        className="block px-4 py-3 text-gray-800 text-sm font-normal hover:bg-gray-100   hover:text-primary transition-colors"
                         href={`/danh-muc/${category.code}-${category._id}`}
                       >
                         {category.name}
@@ -107,6 +109,15 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
                 </AccordionContent>
               </AccordionItem>
             ))}
+            <AccordionItem
+              className="border-b-0"
+              key="thuong-hieu"
+              value={"thuong-hieu"}
+            >
+              <p className="text-base font-normal text-gray-800 hover:no-underline p-4  border-gray-200 flex flex-1 items-center justify-between py-4  transition-all uppercase ">
+                <Link href="/thuong-hieu">Thương hiệu</Link>
+              </p>
+            </AccordionItem>
           </Accordion>
         </div>
         <div className="mt-auto py-3 px-4 border-t border-divider-1pt bg-white sticky bottom-0 z-10">

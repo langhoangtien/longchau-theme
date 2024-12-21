@@ -68,7 +68,7 @@ export const FOOTER_SWITCHBOARD_MENU = [
 export default function Footer() {
   return (
     <footer>
-      <div className="relative top-0 left-0 bg-[#2167dd] py-4 px-0 text-center">
+      <div className="relative top-0 left-0 bg-primary py-4 px-0 text-center">
         <div className="container-lite relative">
           <div className="flex justify-center md:justify-between flex-col md:flex-row items-center">
             <a

@@ -1,7 +1,8 @@
 import { HOST_API } from "@/config-global";
+import { convertImagePathToUrl } from "@/lib/common";
 import Image from "next/image";
 import Link from "next/link";
-
+export const revalidate = 60;
 export default async function CategorySection() {
   const resultJson = await fetch(`${HOST_API}/categories/?limit=12`);
   const categoriesData = await resultJson.json();
@@ -38,6 +39,7 @@ type CategoryProps = {
   icon: string;
   _id: string;
   code: string;
+  image: string;
 };
 const Category = ({ category }: { category: CategoryProps }) => (
   <div>
@@ -51,7 +53,7 @@ const Category = ({ category }: { category: CategoryProps }) => (
             decoding="async"
             className="basis-6 shrink-0"
             style={{ color: "transparent" }}
-            src={`/icons/png/${category.icon}`}
+            src={convertImagePathToUrl(category.image, 80)}
           />
         </div>
         <div>

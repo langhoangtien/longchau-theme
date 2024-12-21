@@ -1,77 +1,48 @@
 "use client";
-import Product from "@/components/home/product";
 
-import { ButtonSelect } from "@/components/ui/button-select";
 import { HOST_API } from "@/config-global";
-import { encodeData, mappedProduct } from "@/lib/common";
+import { convertImagePathToUrl } from "@/lib/common";
 import { useEffect, useState } from "react";
 import ProductSkeleton from "../home/product/product-skeleton";
 import { PaginationDemo } from "../ui/pagination";
 
-import GridIcon from "../icons/grid-icon";
-import ListIcon from "../icons/list-icon";
+import Link from "next/link";
+import Image from "next/image";
 
-import { FilterType } from "@/types";
-import { INIT_FILTERS } from "@/constants";
-import FilterEmpty from "./filter-empty";
-
-const SORT_OPTIONS = [
-  { value: "latest", label: "Mới nhất", orderBy: "createdAt", order: -1 },
-  { value: "oldest", label: "Cũ nhất", orderBy: "createdAt", order: 1 },
-  { value: "popular", label: "Bán chạy", orderBy: "sold", order: -1 },
-];
-
-export default function ProductsList({ category = null, brand = null }: any) {
+export default function BrandList() {
   const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [products, setProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [viewGrid, setViewGrid] = useState(true);
-  const [filter, setFilter] = useState(INIT_FILTERS);
-
-  const [sort, setSort] = useState({
-    value: "latest",
-    label: "Mới nhất",
-    orderBy: "createdAt",
-    order: -1,
-  });
 
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
-      const sortValue = encodeData({
-        orderBy: sort.orderBy,
-        order: sort.order,
-      });
       const limit = 10;
       const skip = (page - 1) * limit;
-      const filter: { category?: string[]; brand?: string[] } = {};
-      if (category) filter.category = [category];
-      if (brand) filter.brand = [brand];
-      const url = `${HOST_API}/products/?limit=${limit}&skip=${skip}&sort=${sortValue}&filterRaw=${encodeData(
-        filter
-      )}`;
+
+      const url = `${HOST_API}/brands/?limit=${limit}&skip=${skip}`;
       const resJson = await fetch(url);
       const res = await resJson.json();
-      const productsMapped = res.items.map(mappedProduct);
-      setProducts(productsMapped);
+      const brandsMapped = res.items.map((item: any) => ({
+        ...item,
+        image: convertImagePathToUrl(item.image, 250),
+      }));
+      setBrands(brandsMapped);
       setCount(res.count);
       setPage(page);
       setLoading(false);
     };
     getData();
-  }, [filter, brand, category, sort, page]);
+  }, [page]);
 
-  if (!loading && products.length === 0) {
-    return <FilterEmpty />;
-  }
   return (
     <section>
       <div className="relative z-[1]">
         <div className="mb-0 bg-white md:mb-6 md:flex md:bg-transparent">
           <div className="border-stroke-disable items-center border-b px-4 py-3 md:flex md:border-b-0 md:px-0 md:py-0 hidden">
             <h2 className="text-lg font-semibold text-gray-1000">
-              Danh sách sản phẩm
+              Danh sách thương hiệu
             </h2>
             <button className="border-stroke-default h-[32px] w-[64px] rounded-2xl border p-[1px] ml-auto md:hidden">
               <span className="relative isolate flex items-center justify-between">
@@ -103,50 +74,6 @@ export default function ProductsList({ category = null, brand = null }: any) {
               </span>
             </button>
           </div>
-          <div className="flex items-center px-4 py-3 md:ml-auto md:px-0 md:py-0">
-            <div className="flex items-center overflow-y-hidden mr-[6px]">
-              <span className="hidden md:mr-2 md:inline">Sắp xếp theo</span>
-              <div className="flex items-center gap-1 md:gap-2">
-                {SORT_OPTIONS.map((item) => (
-                  <ButtonSelect
-                    onClick={() => setSort(item)}
-                    key={item.value}
-                    className="h-8"
-                    selected={item.value === sort.value}
-                  >
-                    {item.label}
-                  </ButtonSelect>
-                ))}
-              </div>
-            </div>
-            <button className="border-stroke-default h-[32px] w-[64px] rounded-2xl border p-[1px] hidden md:ml-4 md:block">
-              <span className="relative isolate flex items-center justify-between">
-                {/* <span className="bg-gray-3 absolute inline-block h-7 w-7 rounded-full transition-all" /> */}
-                <span
-                  onClick={() => setViewGrid(true)}
-                  className={`h-7 w-7 rounded-full flex items-center justify-center ${
-                    viewGrid && "bg-gray-200"
-                  } `}
-                >
-                  <GridIcon
-                    variant={viewGrid ? "filled" : "outline"}
-                    className="w-6 h-6 p-0.5 text-gray-600"
-                  />
-                </span>
-                <span
-                  onClick={() => setViewGrid(false)}
-                  className={`h-7 w-7 rounded-full flex items-center justify-center ${
-                    !viewGrid && "bg-gray-200"
-                  } `}
-                >
-                  <ListIcon
-                    variant={viewGrid ? "outline" : "filled"}
-                    className="w-6 h-6 p-0.5 text-gray-600"
-                  />
-                </span>
-              </span>
-            </button>
-          </div>
         </div>
       </div>
       <div className="pt-3 md:px-0 md:pt-0">
@@ -155,8 +82,8 @@ export default function ProductsList({ category = null, brand = null }: any) {
             ? Array.from({ length: 10 }).map((_, index) => (
                 <ProductSkeleton key={index} />
               ))
-            : products.map((product: any) => (
-                <Product key={product._id} product={product} />
+            : brands.map((brand: any) => (
+                <Brand key={brand._id} brand={brand} />
               ))}
         </div>
         <div className="mt-3 flex w-full items-center justify-center p-[10px]">
@@ -171,3 +98,32 @@ export default function ProductsList({ category = null, brand = null }: any) {
     </section>
   );
 }
+
+const Brand = ({ brand }: { brand: any }) => (
+  <div>
+    <Link href={`/thuong-hieu/${brand.code}-${brand._id}`}>
+      <div className="md:py-[22px] md:px-3.5 h-[118px] py-3 px-0.5 rounded-xl border border-gray-300 flex flex-col items-center justify-center hover:opacity-70 bg-white">
+        <div>
+          <Image
+            alt={brand.name}
+            width={50}
+            height={50}
+            decoding="async"
+            className="basis-6 shrink-0"
+            style={{ color: "transparent" }}
+            src={brand.image}
+          />
+        </div>
+        <div>
+          <h3 className="mt-2 mb-1 text-sm font-semibold text-center text-gray-1000">
+            {brand.name}
+          </h3>
+          {/* <div className="text-sm text-gray-600 font-medium text-center">
+            {20}
+            sản phẩm
+          </div> */}
+        </div>
+      </div>
+    </Link>
+  </div>
+);

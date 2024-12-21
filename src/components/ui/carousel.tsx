@@ -421,7 +421,7 @@ export const Thumb: React.FC<ThumbPropType> = (props) => {
   return (
     <div
       className={" cursor-pointer p-1 flex-[0_0_22%] border rounded-sm".concat(
-        selected ? " border-blue-600" : ""
+        selected ? " border-primary" : ""
       )}
     >
       <Image
