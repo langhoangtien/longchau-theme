@@ -5,7 +5,7 @@ export default function Logo() {
     <Link href="/">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="h-[28px] w-[100px] !bg-transparent !bg-none object-contain md:h-[56px] md:w-[183px]"
+        className="h-[28px] w-[100px] !bg-transparent !bg-none object-contain md:h-[40px] md:w-[125px] lg:h-[56px] lg:w-[183px]"
         version="1.2"
         viewBox="0 0 801 200"
         width="801"

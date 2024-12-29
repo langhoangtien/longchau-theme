@@ -9,8 +9,8 @@ export default async function CategorySection() {
   const categories = categoriesData.items;
   return (
     <div>
-      <div className="relative py-4 mb-5">
-        <div className="container-lite relative z-10">
+      <div className="py-4 mb-5">
+        <div className="relative z-10">
           <div className="mb-2 flex">
             <Image
               alt="Danh mục nổi bật"

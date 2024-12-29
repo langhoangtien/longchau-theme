@@ -371,12 +371,8 @@ const ReviewFormDialog = ({
               </div>
             </div>
 
-            <Button
-              onClick={() => setOpen(false)}
-              type="submit"
-              className="w-full mt-4"
-            >
-              Tiếp tục
+            <Button type="submit" className="w-full mt-4">
+              Gửi
             </Button>
           </form>
         </Form>

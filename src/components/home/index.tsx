@@ -35,7 +35,6 @@ import {
 import { ButtonSelect } from "../ui/button-select";
 import CartPlusIcon from "../icons/cart-plus-icon";
 
-import CartCheckedIcon from "../icons/cart-checked-icon";
 import { Check } from "lucide-react";
 
 export function SuggestionSection({
@@ -45,7 +44,7 @@ export function SuggestionSection({
   return (
     <div>
       <div className={`relative py-4 ${background}`}>
-        <div className="container-lite isolate">
+        <div className=" isolate">
           <div className="mb-4 flex items-center ">
             <div>
               <Image
@@ -74,7 +73,7 @@ export function TopDiscountSection({
   return (
     <div>
       <div className={`relative py-4 ${background}`}>
-        <div className="isolate container-lite pt-10 pb-4 md:pt-12 md:pb-6">
+        <div className="isolate  pt-10 pb-4 md:pt-12 md:pb-6">
           <div className="absolute top-0 left-0 w-full">
             <Image
               alt="Sản phẩm bán chạy"
@@ -179,9 +178,9 @@ export function SheetProduct() {
   const handleDecrementQuantity = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
-  const handleChangeQuantity = (e: any) => {
+  const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const quantity = e.target.value;
-    if (!quantity || quantity <= 0) setQuantity(1);
+    if (!quantity || parseInt(quantity) <= 0) setQuantity(1);
     else setQuantity(parseInt(quantity));
   };
   return (
@@ -351,7 +350,7 @@ export function DialogProduct() {
 
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
-  const { addToCart, headerRef }: any = useCartContext();
+  const { addToCart }: any = useCartContext();
 
   useEffect(() => {
     if (!product) return;

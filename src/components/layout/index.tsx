@@ -1,20 +1,21 @@
 import Header from "../header";
 import Footer from "../footer";
+import MenuCategory from "../menu-category";
 
 export default async function MainLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <>
-      <div className="md:w-[1280px] lg:w-full flex flex-col min-h-screen">
-        <Header></Header>
-
-        <div className="bg-gray-100 pb-9 flex-1 relative">
+    <div>
+      <Header></Header>
+      <MenuCategory />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className=" mx-auto sm:max-w-3xl lg:max-w-full">
           {/* <MenuCategory /> */}
           {children}
         </div>
-        <Footer></Footer>
       </div>
-    </>
+      <Footer></Footer>
+    </div>
   );
 }

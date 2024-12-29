@@ -16,7 +16,8 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
     router.push(`/tim-kiem?s=${encodeURIComponent(history)}`);
     hideSearchWrapper();
   };
-  const removeSearchHistoryItem = (history: string) => {
+  const removeSearchHistoryItem = (e: React.MouseEvent, history: string) => {
+    e.preventDefault();
     const newSearchHistories = searchHistories.filter(
       (item) => item !== history
     );
@@ -49,7 +50,7 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
             <svg
               width={24}
               height={24}
-              className="text-icon-tertiary group-hover:text-text-focus transition duration-200"
+              className="transition duration-200"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -59,10 +60,10 @@ export default function HeaderSearchHistory({ hideSearchWrapper }: any) {
                 fill="currentColor"
               />
             </svg>
-            <p className="text-base text-primary text-text-focus">{history}</p>
+            <p className="text-base text-primary ">{history}</p>
           </div>
           <svg
-            onClick={() => removeSearchHistoryItem(history)}
+            onClick={(e) => removeSearchHistoryItem(e, history)}
             width={20}
             height={20}
             className="text-icon-secondary shrink-0"

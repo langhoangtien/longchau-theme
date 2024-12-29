@@ -11,16 +11,20 @@ import {
   DialogTitle,
 } from "../ui/dialog";
 import Image from "next/image";
-export default function PaymentSummery({ handleSubmit }: any) {
+
+export default function PaymentSummery({ isPayment }: any) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+
   const { totalPrice, normalPrice, subTotal, shippingFee }: any =
     useCartContext();
-  const handleRedirect = () => {
+  const handleRedirect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     router.push("/thanh-toan");
   };
+
   return (
-    <div className={`sticky top-2.5 w-full ${handleSubmit ? "mt-7" : ""} `}>
+    <div className={`sticky top-2.5 w-full ${isPayment ? "mt-7" : ""} `}>
       <div className="rounded-t-xl py-3 px-4 bg-white space-y-3">
         <Button
           onClick={() => setOpen(true)}
@@ -39,7 +43,7 @@ export default function PaymentSummery({ handleSubmit }: any) {
             />
           </svg>
         </Button>
-        <div className="space-y-2">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <span className="text-base">Tổng tiền</span>
@@ -50,43 +54,10 @@ export default function PaymentSummery({ handleSubmit }: any) {
               )}
             </div>
           </div>
+
           <div className="flex items-center justify-between">
             <div className="flex items-center">
-              <span className="text-base ">Giảm giá trực tiếp</span>
-            </div>
-            <span className="text-sm md:text-base font-semibold text-orange-500">
-              -
-              {Intl.NumberFormat("vi-VN", { currency: "VND" }).format(
-                normalPrice - subTotal
-              )}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <span className="text-body1 text-text-secondary">
-                Giảm giá voucher
-              </span>
-              <button data-state="closed" className="ml-2">
-                <svg
-                  className="w-4 h-4 text-icon-tertiary"
-                  viewBox="0 0 48 48"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M24 4C35.0457 4 44 12.9543 44 24C44 35.0457 35.0457 44 24 44C12.9543 44 4 35.0457 4 24C4 12.9543 12.9543 4 24 4ZM24.25 32C23.4216 32 22.75 32.6716 22.75 33.5C22.75 34.3284 23.4216 35 24.25 35C25.0784 35 25.75 34.3284 25.75 33.5C25.75 32.6716 25.0784 32 24.25 32ZM24.25 13C20.8864 13 18 15.8846 18 19.25C18 19.9404 18.5596 20.5 19.25 20.5C19.8541 20.5 20.358 20.0715 20.4746 19.5019L20.4935 19.3778L20.5055 19.0587C20.6142 17.1536 22.3307 15.5 24.25 15.5C26.2346 15.5 28 17.2634 28 19.25C28.0011 20.437 27.5794 21.29 26.3804 22.6455L26.1734 22.8762L25.1461 23.9739C23.5147 25.7467 22.8251 26.9703 22.8379 28.7589C22.8428 29.4493 23.4065 30.0049 24.0968 30.0001C24.6577 29.996 25.1297 29.6231 25.2843 29.1132L25.3143 28.9932L25.3323 28.8689L25.3379 28.7411L25.3409 28.5793C25.377 27.7786 25.7351 27.0936 26.6221 26.0726L26.8066 25.8638L27.8216 24.7772C29.7314 22.7192 30.502 21.3691 30.5 19.2488C30.5 15.8821 27.6147 13 24.25 13Z"
-                    fill="currentColor"
-                  />
-                </svg>
-              </button>
-            </div>
-            <span className="text-sm md:text-base font-semibold text-orange-500">
-              0đ
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <span className="text-base">Tiết kiệm được</span>
+              <span className="text-base">Giảm giá</span>
             </div>
             <span className="text-sm md:text-base font-semibold text-orange-500">
               {Intl.NumberFormat("vi-VN", { currency: "VND" }).format(
@@ -112,11 +83,6 @@ export default function PaymentSummery({ handleSubmit }: any) {
           <div className="flex items-center justify-between">
             <div className="text-heading3 font-semibold ">Thành tiền</div>
             <div className="flex items-baseline">
-              <span className="text-sm line-through strike-low">
-                {Intl.NumberFormat("vi-VN", { currency: "VND" }).format(
-                  normalPrice
-                )}
-              </span>
               <span className="ml-[6px] text-xl text-primary font-semibold">
                 {Intl.NumberFormat("vi-VN", { currency: "VND" }).format(
                   totalPrice
@@ -125,15 +91,12 @@ export default function PaymentSummery({ handleSubmit }: any) {
             </div>
           </div>
         </div>
-        {handleSubmit && (
-          <Button
-            onClick={handleSubmit}
-            className="py-[12px] px-[24px] h-[48px]  w-full"
-          >
+        {isPayment && (
+          <Button className="py-[12px] px-[24px] h-[48px]  w-full">
             Hoàn tất
           </Button>
         )}
-        {!handleSubmit && (
+        {!isPayment && (
           <Button
             onClick={handleRedirect}
             className="py-[12px] px-[24px] h-[48px]  w-full"
@@ -141,23 +104,6 @@ export default function PaymentSummery({ handleSubmit }: any) {
             Xác nhận đơn hàng
           </Button>
         )}
-        <div className=" text-sm text-center indent-4">
-          <div>Bằng việc tiến hành đặt mua hàng, bạn đồng ý với </div>
-          <a
-            className="font-medium underline underline-offset-[3px]"
-            href="/tos"
-          >
-            Điều khoản dịch vụ
-          </a>
-          <span> và </span>
-          <a
-            className="font-medium underline underline-offset-[3px]"
-            href="/chinh-sach-thu-thap-va-xu-ly-du-lieu-ca-nhan"
-          >
-            Chính sách xử lý dữ liệu cá nhân
-          </a>
-          <div> của Ludmila</div>
-        </div>
       </div>
       <div
         style={{

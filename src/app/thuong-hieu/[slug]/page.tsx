@@ -21,7 +21,7 @@ export default async function BrandPage(props: any) {
   return (
     <div data-custom-container="true">
       <div className="pb-6 md:pb-9">
-        <ol className="my-3 flex flex-wrap md:my-4 container-lite">
+        <ol className="my-3 flex flex-wrap md:my-4">
           {" "}
           <Breadcrumb>
             <BreadcrumbList>
@@ -47,7 +47,7 @@ export default async function BrandPage(props: any) {
             </BreadcrumbList>
           </Breadcrumb>
         </ol>
-        <div className="overflow-hidden container-lite">
+        <div className="overflow-hidden">
           <div data-lcpr="prr-id-brand-information">
             <div className="-mx-4 md:mx-0 px-4 md:px-0 mb-4">
               <div className="bg-gray-100 ">
@@ -76,7 +76,7 @@ export default async function BrandPage(props: any) {
           <ProductsPage brand={id} />
         </div>
 
-        <div className="container-lite pt-4 md:pt-5" />
+        <div className=" pt-4 md:pt-5" />
       </div>
     </div>
   );

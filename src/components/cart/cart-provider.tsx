@@ -1,6 +1,13 @@
 "use client";
 
-import { useMemo, useEffect, useReducer, useCallback, useRef } from "react";
+import {
+  useMemo,
+  useEffect,
+  useReducer,
+  useCallback,
+  useRef,
+  useState,
+} from "react";
 
 import { CartContext } from "./cart-context";
 
@@ -104,11 +111,11 @@ const reducer = (state: any, action: any) => {
 };
 export function CartProvider({ children }: any) {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const initialState = getInitialStateFromLocalStorage();
-
     dispatch({ type: "INITIALIZE_FROM_LOCAL_STORAGE", payload: initialState });
+    setLoading(false);
   }, []);
   const addToCart = useCallback(
     (product: any, quantity: number) => {
@@ -213,6 +220,7 @@ export function CartProvider({ children }: any) {
   const contextValue = useMemo(
     () => ({
       ...state,
+      loading,
       addToCart,
       removeFromCart,
       orderCompleted,
@@ -231,6 +239,7 @@ export function CartProvider({ children }: any) {
       setAllSelected,
       setVariant,
       setOpen,
+      loading,
     ]
   );
   return (

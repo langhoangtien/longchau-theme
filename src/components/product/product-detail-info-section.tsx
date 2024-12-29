@@ -81,12 +81,17 @@ export function ProductDetailInfoAttribute({
               <p className="text-gray-700 font-medium">Danh mục</p>
             </td>
             <td className="flex-1">
-              <Link
-                className="text-primary"
-                href={`/danh-muc/${product.category.code}-${product.category._id}`}
-              >
-                <p>{product.category.name}</p>
-              </Link>
+              <div className="line-clamp-2">
+                {product.category.map((category: any) => (
+                  <Link
+                    key={category._id}
+                    className="text-primary"
+                    href={`/danh-muc/${category.code}-${category._id}`}
+                  >
+                    <p>{category.name}</p>
+                  </Link>
+                ))}
+              </div>
             </td>
           </tr>
           <tr className="content-container">

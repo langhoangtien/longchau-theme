@@ -18,7 +18,6 @@ export default function ListCategory({ childs }: any) {
                 <h3 className="price mb-0 text-sm font-medium line-clamp-2 text-gray-700/80 ">
                   Xem thêm ...
                 </h3>
-                {/* <p className="text-sm text-gray-700 font-normal">16 sản phẩm</p> */}
               </div>
             </div>
           </div>

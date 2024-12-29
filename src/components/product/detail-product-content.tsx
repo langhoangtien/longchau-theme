@@ -18,7 +18,7 @@ export default function DetailProductContent({ description }: any) {
       >
         <div className="lc-detail-content-inner relative">
           <div className="lc-col-2 ">
-            <div className="lc-wrap-content lc-view-full-cont abc">
+            <div className="lc-wrap-content lc-view-full-cont  abc">
               <div className="inner mb:4 md:mb-8 md:pb-12">
                 <div dangerouslySetInnerHTML={{ __html: description }} />
               </div>

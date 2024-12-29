@@ -12,6 +12,7 @@ import StarIcon from "@/components/icons/star-icon";
 import { SHIPPING_THRESHOLD } from "@/components/cart/cart-provider";
 import ShippingFreeIcon from "@/components/icons/shipping-free-icon";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Card } from "@/components/ui/card";
 
 type ProductProps = {
   product: ProductType;
@@ -56,7 +57,7 @@ export default function Product({ product }: ProductProps) {
   const isMobile = useIsMobile();
 
   return (
-    <div className="h-full relative flex rounded-xl border border-solid border-white bg-white transition-all duration-300 ease-out hover:border-primary flex-col">
+    <Card className="h-full relative flex border border-solid transition-all duration-300 ease-out hover:border-primary flex-col">
       <Link
         className="px-3 block pt-3"
         href={"/san-pham/" + product.slug + "-" + product._id}
@@ -71,16 +72,16 @@ export default function Product({ product }: ProductProps) {
           />
           {isMobile ? (
             <span
-              onClick={handleAddToCart}
-              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white text-white w-9 h-9 p-1 cursor-pointer flex items-center justify-center"
+              onClick={handleClickBuyMobile}
+              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white  text-white w-9 h-9  p-1 cursor-pointer flex items-center justify-center"
             >
               {" "}
               <CartPlusIcon className="w-6 h-6 text-primary" />
             </span>
           ) : (
             <span
-              onClick={handleClickBuyMobile}
-              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white  text-white w-9 h-9  p-1 cursor-pointer flex items-center justify-center"
+              onClick={handleAddToCart}
+              className="rounded-full absolute bottom-1 right-1 border-primary border bg-white text-white w-9 h-9 p-1 cursor-pointer flex items-center justify-center"
             >
               {" "}
               <CartPlusIcon className="w-6 h-6 text-primary" />
@@ -138,6 +139,6 @@ export default function Product({ product }: ProductProps) {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

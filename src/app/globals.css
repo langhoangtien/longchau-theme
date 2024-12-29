@@ -1,7 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root {
+  font-family: "Inter", "sans-serif", "Segoe UI", "Segoe UI Web (West European)",
+    "Helvetica Neue", Helvetica, Arial;
+}
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -104,3 +107,54 @@
 }
 
 /* END_LOADING */
+
+/* UKO LOADING-SCREEN */
+.uko-loading-screen {
+  background: linear-gradient(
+      45deg,
+      hsl(var(--primary-dark)),
+      hsl(var(--primary)),
+      hsl(210deg 40% 96.08%),
+      hsl(345.36deg 84% 60.78%),
+      hsl(var(--primary-lighter))
+    )
+    0% 0% / 300%;
+  animation: 20s linear 0s infinite normal none running ukoAnimation;
+}
+@keyframes ukoAnimation {
+  0% {
+    background-position: 0px 0px;
+  }
+
+  50% {
+    background-position: 400% 0%;
+  }
+
+  100% {
+    background-position: 0px 0px;
+  }
+}
+/* END-UKO-LOADING-SCREEN  */
+
+/*LINE-LOADING */
+.line-loading {
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100px);
+  }
+  50% {
+    transform: translateX(160px);
+  }
+  100% {
+    transform: translateX(420px);
+  }
+}
+
+/* END-LINE-LOADING */
+
+.content-html p {
+  margin: 1rem 0;
+}

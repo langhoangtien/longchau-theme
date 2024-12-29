@@ -9,11 +9,7 @@ import {
   ProductDetailInfoPrice,
 } from "./product-detail-info-section";
 import { useState } from "react";
-import FreeReturnIcon from "../icons/free-return-icon";
-import Freeback from "../icons/free-back";
-import FreeShippingIcon from "../icons/free-shipping-icon";
-import FlashIcon from "../icons/flash-icon";
-import { Star } from "lucide-react";
+
 import StarIcon from "../icons/star-icon";
 import Phone from "../icons/phone";
 
@@ -34,7 +30,6 @@ export function ProductDetailInfoRight({ product }: any) {
 
   return (
     <div>
-      <Hotline />
       <div className="flex flex-col gap-2">
         <div className="font-medium">
           <span className="text-base font-medium text-gray-700">
@@ -85,71 +80,13 @@ export function ProductDetailInfoRight({ product }: any) {
           product={product}
         />
         <div className="mt-[8px] " />
-        {/* <ProductDetailInfoBuyNowMobile /> */}
         <ProductDetailInfoActions
           name={product.name}
           image={product.image}
           id={product._id}
           variant={variant}
         />
-
-        {/* <div className="flex mt-1">
-          <FlashIcon className="mr-1.5 mt-1.5 text-yellow-500 h-4 w-4" />
-          <div>
-            <span className="text-sm font-semibold text-yellow-600">
-              Sản phẩm đang được chú ý,{" "}
-            </span>
-            <span className="text-sm">
-              có 3 người thêm vào giỏ hàng &amp; 8 người đang xem
-            </span>
-          </div>
-        </div>
-        <div className="css-1ri80ux">
-          <div className="item-container">
-            <FreeReturnIcon className="w-10 h-10 text-primary mr-2" />
-
-            <div className="item-container--content text-sm">
-              <p className="text-gray-1000">Đổi trả trong 7 ngày</p>
-              <p className="text-gray-700">kể từ ngày mua hàng</p>
-            </div>
-          </div>
-          <div className="item-container">
-            <Freeback className="w-10 h-10 text-primary mr-2" />
-            <div className="item-container--content text-sm">
-              <p className="text-gray-1000">Miễn phí 100%</p>
-              <p className="text-gray-700">đổi hàng</p>
-            </div>
-          </div>
-          <div className="item-container">
-            <FreeShippingIcon className="w-10 h-10 text-primary mr-2" />
-
-            <div className="item-container--content text-sm">
-              <p className="text-gray-1000">Miễn phí vận chuyển</p>
-              <p className="text-gray-700">theo chính sách giao hàng</p>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
 }
-
-const Hotline = () => (
-  <div className="mb-2 mt-2">
-    <div className="grid">
-      <div className="grid gap-y-2 py-1">
-        <div className="flex items-center justify-center text-sm md:text-base">
-          <Phone className="w-4 h-4 md:w-5 md:h-5 text-primary mr-2" />
-          <span className="flex items-center gap-1">
-            Gọi
-            <a className="text-primary font-semibold" href="tel:0832667711">
-              0832.667.711
-            </a>
-            để được tư vấn mua hàng{" "}
-            <span className="font-medium">(Miễn phí)</span>
-          </span>
-        </div>
-      </div>
-    </div>
-  </div>
-);

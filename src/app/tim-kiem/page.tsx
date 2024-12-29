@@ -15,7 +15,7 @@ export default async function SearchPage(props: any) {
   return (
     <div data-custom-container="true">
       <div className="pb-6 md:pb-9">
-        <ol className="my-3 flex flex-wrap md:my-4 container-lite">
+        <ol className="my-3 flex flex-wrap md:my-4 ">
           {" "}
           <Breadcrumb>
             <BreadcrumbList>
@@ -33,10 +33,10 @@ export default async function SearchPage(props: any) {
             </BreadcrumbList>
           </Breadcrumb>
         </ol>
-        <div className="overflow-hidden container-lite">
+        <div className="overflow-hidden ">
           <ProductsPage filterData={filterData} search={search} />
         </div>
-        <div className="container-lite pt-4 md:pt-5" />
+        <div className=" pt-4 md:pt-5" />
       </div>
     </div>
   );

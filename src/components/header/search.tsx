@@ -5,8 +5,8 @@ import { useDebounce } from "@/hooks/use-debounce";
 import { convertImagePathToUrl, encodeData } from "@/lib/common";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { LoadingCircle } from "../ui/loading";
 import HeaderSearchHistory from "./header-search-history";
 
@@ -33,7 +33,11 @@ interface Product {
   path: string;
 }
 
-export default function Search() {
+export default function Search({
+  logoRef,
+}: {
+  logoRef: React.RefObject<HTMLDivElement>;
+}) {
   const refSearchMobile = useRef<HTMLDivElement>(null);
   const refSearchWrap = useRef<HTMLDivElement>(null);
   const refInput = useRef<HTMLInputElement>(null);
@@ -44,6 +48,15 @@ export default function Search() {
   const [error, setError] = useState<string | null>(null);
   const debounceText = useDebounce(value, 500);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const valueOfS = searchParams.get("s");
+
+  useEffect(() => {
+    if (valueOfS) {
+      setValue(valueOfS);
+    }
+  }, [valueOfS]);
+
   const handleSearch = () => {
     if (refSearchMobile.current) {
       const searchMobile = refSearchMobile.current;
@@ -58,24 +71,28 @@ export default function Search() {
     refSearchMobile.current?.classList.toggle("!hidden", true);
   };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      let moving = window.pageYOffset;
+  const handleScroll = useCallback(() => {
+    const moving = window.pageYOffset;
+    const searchElement = searchRef.current;
 
-      if (moving >= 130 && searchRef.current) {
-        // logoRef.current.style.opacity = "0";
-        searchRef.current.classList.add("header-mobile-custom");
+    if (searchElement) {
+      if (moving >= 200) {
+        searchElement.classList.add("header-mobile");
+        logoRef.current?.classList.add("logo-mobile");
+      } else if (moving < 80) {
+        searchElement.classList.remove("header-mobile");
+        logoRef.current?.classList.remove("logo-mobile");
       }
-      if (moving < 90 && searchRef.current) {
-        // logoRef.current.style.opacity = "1";
-        searchRef.current.classList.remove("header-mobile-custom");
-      }
-    };
+    }
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  });
+  }, [handleScroll]);
+
   useClickOutside(refSearchWrap, () => handleSearchBack());
   useEffect(() => {
     const fetchData = async () => {
@@ -140,12 +157,9 @@ export default function Search() {
   return (
     <div
       ref={searchRef}
-      className="search-section col-span-full mt-1.5 grid  h-[36px] content-center transition-[margin] md:col-start-2 md:col-end-3 md:row-start-1 md:row-end-2 md:mx-auto md:mt-0 md:h-auto md:w-[680px]"
+      className="order-4 md:h-32 h-12 md:order-1 basis-full md:basis-auto col-span-full mt-1.5 grid content-center transition-[width] max-w-[680px]  md:mx-auto md:mt-0  md:grow "
     >
-      <div
-        ref={refSearchWrap}
-        className="cs-search-wrapper  relative rounded-sm"
-      >
+      <div ref={refSearchWrap} className="relative rounded-sm">
         <div>
           <span className="relative inline-flex items-center bg-white md:rounded-sm md:pl-4 w-full pl-3">
             <input

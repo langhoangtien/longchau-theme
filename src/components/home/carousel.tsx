@@ -1,84 +1,76 @@
 import * as React from "react";
 
-import { CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselDot,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import { ChevronRight } from "lucide-react";
 
 export function CarouselSilde({ products }: any) {
   return (
-    <div className="relative bg-slate-50 pb-[21px] md:pb-0">
-      <div className="md:container-lite relative md:flex md:flex-row md:gap-3 md:py-4 ">
-        <Carousel className="h-auto shrink-0 md:max-w-[805px] md:basis-[805px]">
-          <CarouselContent>
-            {products.map((product: any, index: number) => (
-              <CarouselItem key={product._id}>
-                <Link
-                  href={"/san-pham/" + product.slug + "-" + product._id}
-                  className="p-1"
-                >
-                  <CardContent className="flex aspect-[16/5] items-center justify-center rounded-xl p-0">
-                    <Image
-                      width={600}
-                      height={400}
-                      sizes="100vw"
-                      src={product.image}
-                      alt={product.name}
-                      priority={!index}
-                      className="object-cover w-full h-full rounded-xl"
-                    />
+    <div className="bg-slate-50 pb-[21px] md:pb-0">
+      <div className="relative md:py-4 ">
+        <Card>
+          <Carousel className="h-auto">
+            <CarouselContent>
+              {products.map((product: any, index: number) => (
+                <CarouselItem key={product._id}>
+                  <CardContent className="grid grid-cols-1 md:grid-cols-2  gap-x-4 aspect-[16/6] rounded-xl p-8">
+                    <div className="flex flex-col p-4 space-x-2 md:space-y-4 items-center md:items-start justify-center">
+                      <div>
+                        {" "}
+                        <Badge variant="secondary" className="rounded-sm">
+                          Giảm giá {product.discount}%
+                        </Badge>
+                      </div>
+
+                      <p className="text-3xl line-clamp-1 text-primary font-bold">
+                        {product.name}
+                      </p>
+                      <p className="line-clamp-2 text-gray-500  font-medium">
+                        {product.introduction}
+                      </p>
+                      <div>
+                        <Link
+                          href={"/san-pham/" + product.slug + "-" + product._id}
+                          className="p-1"
+                        >
+                          <Button className="flex items-center space-x-2">
+                            Mua ngay{" "}
+                            <ChevronRight
+                              className=" ml-2 size-6"
+                              strokeWidth={1.5}
+                            ></ChevronRight>
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                    <div className="py-8 px-4 w-full aspect-square rounded-xl  ">
+                      {" "}
+                      <Image
+                        width={800}
+                        height={400}
+                        src={product.image}
+                        alt={product.name}
+                        priority={!index}
+                        className="object-cover w-full h-full"
+                      />
+                    </div>
                   </CardContent>
-                </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-          <CarouselDot />
-        </Carousel>
-        <div className="flex w-full flex-col gap-3 md:px-0">
-          <a
-            className="hidden max-w-[399px] md:block"
-            href="/bai-viet/thu-cu-doi-moi-binh-hen-suyen-va-but-tiem-tieu-duong-da-qua-su-dung-tai-nha-thuoc-fpt-long-chau.html"
-          >
-            <Image
-              alt=""
-              fetchPriority="high"
-              loading="lazy"
-              width={399}
-              height={117}
-              decoding="async"
-              data-nimg={1}
-              className="rounded-xl h-[117px] w-[399px] object-cover"
-              style={{ color: "transparent" }}
-              src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/399x117_49d70d4809.png"
-            />
-          </a>
-          <a
-            className="hidden max-w-[399px] md:block"
-            href="/chuyen-trang-suc-khoe"
-          >
-            <Image
-              alt=""
-              fetchPriority="high"
-              loading="lazy"
-              width={399}
-              height={117}
-              decoding="async"
-              data-nimg={1}
-              className="rounded-xl h-[117px] w-[399px] object-cover"
-              style={{ color: "transparent" }}
-              src="https://cdn.nhathuoclongchau.com.vn/unsafe/828x0/filters:quality(90)/https://cms-prod.s3-sgn09.fptcloud.com/2_bde57743c1.png"
-            />
-          </a>
-        </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselDot />
+          </Carousel>
+        </Card>
       </div>
     </div>
   );

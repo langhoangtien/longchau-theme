@@ -19,13 +19,15 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-export const revalidate = 30;
+export const revalidate = 100;
 export default async function Product(props: any) {
   const slug = props?.params?.slug ?? null;
   const id = slug.split("-").pop();
+  if (!id) return notFound();
   const resultJson = await fetch(`${HOST_API}/products/${id}`);
+  if (!resultJson.ok) return notFound();
   const result = await resultJson.json();
-  if (!result) return notFound();
+
   const images = result.images.map((img: string) =>
     convertImagePathToUrl(img, 800)
   );
@@ -66,12 +68,13 @@ export default async function Product(props: any) {
     maxPrice,
     minSalePrice,
     maxSalePrice,
+    category: result.category || [],
   };
   const { description, ...productData } = product;
+
   return (
     <div className="sm:pb-6 md:pb-10 ">
-      <ol className="my-3 flex flex-wrap md:my-4 container-lite">
-        {" "}
+      <ol className="my-3 flex flex-wrap md:my-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -86,15 +89,15 @@ export default async function Product(props: any) {
               <BreadcrumbLink
                 className="text-primary"
                 href={`
-                  /danh-muc/${product.category?.code}-${product.category?._id}`}
+                  /danh-muc/${product.category[0]?.code}-${product.category[0]?._id}`}
               >
-                {product.category?.name}
+                {product.category[0]?.name}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
       </ol>
-      <div className="md:container-lite space-y-4 md:space-y-8">
+      <div className="space-y-4 md:space-y-8">
         <ProductDetailInfo product={productData} />
 
         <DetailProductContent description={description} />

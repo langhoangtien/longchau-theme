@@ -4,20 +4,11 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+import { NavigationMenuLink } from "@/components/ui/navigation-menu";
 import { HOST_API } from "@/config-global";
 import Image from "next/image";
 import Link from "next/link";
-import { useWindowSize } from "@/hooks/use-window-size";
-import { MAX_WIDTH_MOBILE } from "@/constants";
+
 import { convertImagePathToUrl, encodeData } from "@/lib/common";
 import { ChevronRight } from "lucide-react";
 export const ListItem = React.forwardRef<

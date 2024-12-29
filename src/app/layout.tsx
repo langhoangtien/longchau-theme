@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import "./styles.css";
 import { CartProvider } from "@/components/cart";
@@ -7,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { SheetProvider } from "@/components/sheet-product";
 import dynamic from "next/dynamic";
 import { AddToCartDialog } from "@/components/home/";
+import { ProgressBar } from "@/components/progress-bar";
 const DialogProduct = dynamic(
   () => import("@/components/home/").then((mod) => mod.DialogProduct),
   { ssr: false }
@@ -15,8 +15,6 @@ const SheetProduct = dynamic(
   () => import("@/components/home/").then((mod) => mod.SheetProduct),
   { ssr: false }
 );
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Ludmila - Hàng chính hãng từ Nga",
@@ -64,7 +62,8 @@ export default function RootLayout({
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
       ></meta>
 
-      <body className={inter.className}>
+      <body>
+        <ProgressBar />
         <CartProvider>
           <SheetProvider>
             {children}

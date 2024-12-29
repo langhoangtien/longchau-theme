@@ -298,7 +298,7 @@ const CarouselDot = () => {
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(api);
 
   return (
-    <div className="absolute justify-center text-center w-100 left-0 !bottom-[23px] w-full hidden md:flex ">
+    <div className="absolute justify-center text-center w-100 left-0 !bottom-[23px] w-full  md:flex ">
       {scrollSnaps.map((_, index) => (
         <DotButton
           key={index}

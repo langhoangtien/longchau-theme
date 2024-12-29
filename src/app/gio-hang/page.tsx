@@ -1,15 +1,12 @@
 "use client";
 import { useCartContext } from "@/components/cart";
-
 import MinusIcon from "@/components/icons/minus-icon";
-import QuestionIcon from "@/components/icons/question";
 import TrashIcon from "@/components/icons/trash-icon";
+import LineLoading from "@/components/loading/loading-line";
+import SplashScreen from "@/components/loading/splash-screen";
 import PaymentSummery from "@/components/payment/payment-summery";
-
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-
-import { getLastDayOfMonth } from "@/lib/common";
 import Image from "next/image";
 import Link from "next/link";
 export default function CartPage() {
@@ -20,77 +17,79 @@ export default function CartPage() {
     totalProduct,
     setSelected,
     setAllSelected,
-    totalPrice,
-    subTotal,
+    loading,
   }: any = useCartContext();
 
   const selectAll = products.every((product: any) => product.selected);
   const handleSelectAll = () => {
     setAllSelected(!selectAll);
   };
+  if (loading)
+    return (
+      <div className="w-full aspect-video">
+        <LineLoading />;
+      </div>
+    );
   return (
     <div className="pb-9">
-      <div className="md:container-lite relative">
-        <div>
-          <Button
-            variant="link"
-            className="my-1 md:my-2 inline-flex items-center py-2 font-medium ml-4 md:ml-0 px-0"
+      <div>
+        <Button
+          variant="link"
+          className="my-1 md:my-2 inline-flex items-center py-2 font-medium ml-4 md:ml-0 px-0"
+        >
+          <svg
+            viewBox="0 0 25 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="mr-1 h-5 w-5"
           >
-            <svg
-              viewBox="0 0 25 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="mr-1 h-5 w-5"
-            >
-              <path
-                d="M16.668 4.29289C17.0586 4.68342 17.0586 5.31658 16.668 5.70711L10.3752 12L16.668 18.2929C17.0586 18.6834 17.0586 19.3166 16.668 19.7071C16.2775 20.0976 15.6444 20.0976 15.2538 19.7071L8.25383 12.7071C7.86331 12.3166 7.86331 11.6834 8.25383 11.2929L15.2538 4.29289C15.6444 3.90237 16.2775 3.90237 16.668 4.29289Z"
-                fill="currentColor"
-              />
-            </svg>
-            <Link href="/"> Tiếp tục mua sắm</Link>
-          </Button>
-          {totalProduct ? (
-            <div className="flex gap-5 flex-col md:flex-row relative items-start">
-              <div className="md:rounded-xl md:basis-[804px] basis-full md:shrink-0 overflow-hidden">
-                <div className="py-2 px-4 flex items-center text-caption2 font-medium bg-white">
-                  <div className="inline-flex items-center mr-auto">
-                    <Checkbox
-                      className="rounded-sm h-4 w-4"
-                      onCheckedChange={handleSelectAll}
-                      checked={selectAll}
-                      id="select-all"
-                    />
-                    <label htmlFor="select-all" className="ml-2">
-                      Chọn tất cả ({totalProduct})
-                    </label>
-                  </div>
-                  <div className="hidden md:block text-center basis-[110px]">
-                    Giá thành
-                  </div>
-
-                  <div className="hidden md:block text-center basis-[100px] ml-1 mr-14">
-                    Số lượng
-                  </div>
+            <path
+              d="M16.668 4.29289C17.0586 4.68342 17.0586 5.31658 16.668 5.70711L10.3752 12L16.668 18.2929C17.0586 18.6834 17.0586 19.3166 16.668 19.7071C16.2775 20.0976 15.6444 20.0976 15.2538 19.7071L8.25383 12.7071C7.86331 12.3166 7.86331 11.6834 8.25383 11.2929L15.2538 4.29289C15.6444 3.90237 16.2775 3.90237 16.668 4.29289Z"
+              fill="currentColor"
+            />
+          </svg>
+          <Link href="/"> Tiếp tục mua sắm</Link>
+        </Button>
+        {totalProduct ? (
+          <div className="flex gap-5 flex-col md:flex-row relative items-start">
+            <div className="md:rounded-xl md:basis-[804px] basis-full md:shrink-0 overflow-hidden">
+              <div className="py-2 px-4 flex items-center text-caption2 font-medium bg-white">
+                <div className="inline-flex items-center mr-auto">
+                  <Checkbox
+                    className="rounded-sm h-4 w-4"
+                    onCheckedChange={handleSelectAll}
+                    checked={selectAll}
+                    id="select-all"
+                  />
+                  <label htmlFor="select-all" className="ml-2">
+                    Chọn tất cả ({totalProduct})
+                  </label>
                 </div>
-                <div className="md:p-4 pb-4 px-0 md:mt-0.5 divide-y divide-divider-1pt bg-white [&>*]:px-4 [&>*]:py-4 [&>:first-child]:pt-0 [&>:last-child]:pb-0">
-                  {products.map((product: any) => (
-                    <ProductItem
-                      removeFromCart={removeFromCart}
-                      changeQuantity={changeQuantity}
-                      key={product._id}
-                      product={product}
-                      setSelected={setSelected}
-                    />
-                  ))}
+                <div className="hidden md:block text-center basis-[110px]">
+                  Giá thành
+                </div>
+
+                <div className="hidden md:block text-center basis-[100px] ml-1 mr-14">
+                  Số lượng
                 </div>
               </div>
-              <PaymentSummery />
-           
+              <div className="md:p-4 pb-4 px-0 md:mt-0.5 divide-y divide-divider-1pt bg-white [&>*]:px-4 [&>*]:py-4 [&>:first-child]:pt-0 [&>:last-child]:pb-0">
+                {products.map((product: any) => (
+                  <ProductItem
+                    removeFromCart={removeFromCart}
+                    changeQuantity={changeQuantity}
+                    key={product._id}
+                    product={product}
+                    setSelected={setSelected}
+                  />
+                ))}
+              </div>
             </div>
-          ) : (
-            <CarEmpty />
-          )}
-        </div>
+            <PaymentSummery />
+          </div>
+        ) : (
+          <CarEmpty />
+        )}
       </div>
     </div>
   );
@@ -264,31 +263,6 @@ const ProductItem = ({
           </Button>
         </div>
       </div>
-      {!!product.discount && (
-        <div className="p-2 bg-gray-100 rounded-lg divide-y [&>*]:py-2 [&>:first-child]:pt-0 [&>:last-child]:pb-0 md:ml-[108px] ml-8 mt-3">
-          <div style={{ opacity: 1 }}>
-            <div className="flex items-center gap-2">
-              <Image
-                alt="Giảm giá"
-                loading="lazy"
-                width={36}
-                height={36}
-                className="shrink-0 w-9 h-9 ring-1 ring-inset ring-stroke-disable rounded overflow-hidden object-contain"
-                src="/icons/svg/promotion_available.svg"
-                style={{ color: "transparent" }}
-              />
-              <div className="text-sm flex-auto basis-full font-medium whitespace-pre-line text-gray-800/80">
-                Giảm ngay{" "}
-                {Intl.NumberFormat("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                }).format(product.price - product.salePrice)}{" "}
-                khi mua Online áp dụng đến {getLastDayOfMonth()}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

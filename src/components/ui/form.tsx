@@ -14,9 +14,8 @@ import {
 
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
-import { Input, Input2 } from "./input";
+import { Input } from "./input";
 import Notifycation from "../icons/notifycation";
-import Eye from "../icons/eye";
 
 const Form = FormProvider;
 
@@ -99,9 +98,9 @@ const FormLabel = React.forwardRef<
     <Label
       ref={ref}
       className={cn(
-        "font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 absolute text-base text-gray-500 duration-300 transform -translate-y-3 scale-[0.875] top-[15px] z-10 origin-[0] start-2.5 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-[0.875] peer-focus:-translate-y-3 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto",
+        "font-normal absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1",
         className,
-        error && "text-destructive"
+        error && "!text-destructive"
       )}
       htmlFor={formItemId}
       {...props}
@@ -186,8 +185,9 @@ export interface InputProps
 }
 
 const InputRHF = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, name, icon, placeholder, ...props }, ref) => {
+  ({ className, type, name, required, icon, placeholder, ...props }, ref) => {
     const { control } = useFormContext();
+    const inputId = `input-${name}`;
     return (
       <FormField
         control={control}
@@ -200,17 +200,27 @@ const InputRHF = React.forwardRef<HTMLInputElement, InputProps>(
                   {...field}
                   type={type}
                   className={cn(
-                    "block focus:border-blue-500 rounded-lg px-2.5 pb-2.5 pt-5 w-full text-base text-gray-1000 bg-white border border-gray-200 appearance-none focus:outline-none focus:ring-0 peer",
+                    "block px-2.5 pb-2.5 pt-4 w-full text-base text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer",
                     className,
-                    error &&
-                      "border-destructive focus:border-destructive bg-red-50"
+                    error && "border-destructive focus:border-destructive "
                   )}
                   placeholder=" "
+                  id={inputId}
                   ref={ref}
                   {...props}
                 />
               </FormControl>
-              <FormLabel>{placeholder}</FormLabel>
+              <label
+                htmlFor={inputId}
+                className={cn(
+                  "font-normal absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-primary peer-focus:dark:text-primary peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1",
+                  className,
+                  error && "!text-destructive"
+                )}
+              >
+                {placeholder}{" "}
+                {required && <span className="text-destructive">*</span>}
+              </label>
               {icon}
             </div>
             <FormMessage />
@@ -272,17 +282,16 @@ const TextareaRHF = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
                   <div className="flex-1 w-full bg-white">
                     <div
                       className={cn(
-                        "flex group flex-col-reverse justify-end box-border rounded-lg border border-solid  hover:border-primary  py-[8px] h-[120px] bg-field-default-active disabled:!bg-field-default-disable border-stroke-default focus-within:border-stroke-focus disabled:!border-field-default-disable",
+                        "flex group flex-col-reverse justify-end box-border rounded-lg border border-solid   py-[8px] h-[120px] bg-field-default-active disabled:!bg-field-default-disable border-stroke-default focus-within:border-stroke-focus disabled:!border-field-default-disable",
                         className,
-                        error &&
-                          "border-destructive focus:border-destructive bg-red-50"
+                        error && "border-destructive focus:border-destructive "
                       )}
                     >
                       <textarea
                         {...field}
                         {...props}
                         ref={ref}
-                        className="peer outline-none resize-none w-full px-4 text-base font-normal text-justify placeholder:text-base placeholder:font-normal placeholder:text-left bg-transparent  disabled:!text-gray-400 placeholder:text-placeholder disabled:placeholder:!text-gray-400 "
+                        className="peer outline-none resize-none w-full px-4 text-base  focus:border-primary font-normal text-justify placeholder:text-base placeholder:font-normal placeholder:text-left bg-transparent  disabled:!text-gray-400 placeholder:text-placeholder disabled:placeholder:!text-gray-400 "
                         name="note"
                       />
                       <label className="px-4 text-sm font-medium text-gray-400 peer-disabled:!text-gray-400">

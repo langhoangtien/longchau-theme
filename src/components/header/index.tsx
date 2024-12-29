@@ -1,14 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import HeaderMobile from "./header-mobile";
-
 import Cart from "./cart";
-import Link from "next/link";
-import Image from "next/image";
 import Search from "./search";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
-
 import { Form, InputRHF } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -19,7 +15,6 @@ import User from "../icons/user";
 import Eye from "../icons/eye";
 import EyeSlash from "../icons/eye-slash";
 
-import { MAX_WIDTH_MOBILE } from "@/constants";
 import MenuIcon from "../icons/menu-icon";
 import MenuCategory from "../menu-category";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -30,11 +25,11 @@ export default function Header() {
   const [openDialog, setOpenDialog] = useState(false);
 
   const isMobile = useIsMobile();
-
+  const logoRef = useRef<HTMLDivElement>(null);
   return (
     <header
       id="header"
-      className="sticky top-0 z-[49] bg-gradient-to-r from-primary to-primary/80 transition-[height] "
+      className="sticky top-0 z-[49] bg-gradient-to-r from-primary to-primary/90 transition-[height] "
     >
       {isMobile && (
         <HeaderMobile
@@ -44,45 +39,41 @@ export default function Header() {
         />
       )}
 
-      <div className="relative">
-        <div className="relative md:static">
-          {/* <Info /> */}
-
-          <div className="h-full md:relative md:h-auto">
-            <div className="container-lite grid grid-cols-[40px_1fr_40px] grid-rows-[40px] content-center pt-1.5 pb-2 md:grid-cols-[200px_1fr_270px] md:grid-rows-[56px] md:pt-4 md:pb-[44px]">
-              <div className="grid place-content-start content-center md:hidden">
-                <button aria-label="open menu" onClick={() => setOpen(true)}>
-                  <MenuIcon className="w-5 h-4 text-white" />
-                </button>
-              </div>
-
-              <div className="grid place-content-center content-center transition-[opacity] duration-300 md:place-content-start text-primary">
-                <Logo />
-              </div>
-
-              <div className="grid place-content-end content-center md:col-start-3 md:col-end-4 md:place-content-stretch text-black">
-                <div className="flex h-full items-center justify-end space-x-2 ">
-                  <div className="hidden md:flex items-center justify-center h-11 w-11 rounded-full bg-gray-700/80">
-                    <div
-                      onClick={() => setOpenDialog(true)}
-                      className="flex items-center cursor-pointer"
-                    >
-                      <User className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-
-                  <Cart></Cart>
-                </div>
-              </div>
-
-              <Search />
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className=" mx-auto lg:max-w-full">
+          <div className="flex flex-row gap-x-2 md:gap-x-4 py-0.5 justify-between flex-wrap items-center">
+            <div className="grid content-center md:hidden">
+              <button aria-label="open menu" onClick={() => setOpen(true)}>
+                <MenuIcon className="w-5 h-4 text-white" />
+              </button>
             </div>
+
+            <div
+              ref={logoRef}
+              className=" transition-[display] duration-300  text-primary"
+            >
+              <Logo />
+            </div>
+            <div className="order-3 text-black">
+              <div className="flex h-full items-center justify-end space-x-2 ">
+                <div className="hidden md:flex items-center justify-center h-11 w-11 rounded-full bg-gray-700/80">
+                  <div
+                    onClick={() => setOpenDialog(true)}
+                    className="flex items-center cursor-pointer"
+                  >
+                    <User className="w-6 h-6 text-white" />
+                  </div>
+                </div>
+
+                <Cart></Cart>
+              </div>
+            </div>
+            <Search logoRef={logoRef} />
           </div>
         </div>
       </div>
-      <LoginDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
 
-      <MenuCategory />
+      <LoginDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
     </header>
   );
 }

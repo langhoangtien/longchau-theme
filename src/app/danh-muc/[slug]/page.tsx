@@ -16,11 +16,14 @@ export const revalidate = 60;
 export default async function CategoryPage(props: any) {
   const slug = props?.params?.slug ?? null;
   const id = slug.split("-").pop();
-  const resultJson = await fetch(`${HOST_API}/categories/${id}`);
-  const result = await resultJson.json();
-  console.log(result);
+  const res = await fetch(`${HOST_API}/categories/${id}`);
+  if (!res.ok) {
+    return "There was an error.";
+  }
 
-  const childs = result?.childrens.map((item: any) => ({
+  const result = await res.json();
+
+  const childs = result?.childrens?.map((item: any) => ({
     ...item,
     image: item.image ? convertImagePathToUrl(item.image, 80) : "",
   }));
@@ -28,7 +31,7 @@ export default async function CategoryPage(props: any) {
   return (
     <div data-custom-container="true">
       <div className="pb-6 md:pb-9">
-        <ol className="my-3 flex flex-wrap md:my-4 container-lite">
+        <ol className="my-3 flex flex-wrap md:my-4">
           {" "}
           <Breadcrumb>
             <BreadcrumbList>
@@ -46,7 +49,7 @@ export default async function CategoryPage(props: any) {
             </BreadcrumbList>
           </Breadcrumb>
         </ol>
-        <div className="overflow-hidden container-lite">
+        <div>
           <div data-lcpr="prr-id-brand-information">
             <div className="-mx-4 bg-white md:bg-transparent md:mx-0">
               <ListCategory childs={childs} />
@@ -54,8 +57,6 @@ export default async function CategoryPage(props: any) {
           </div>
           <ProductsPage category={result?._id} />
         </div>
-
-        <div className="container-lite pt-4 md:pt-5" />
       </div>
     </div>
   );
