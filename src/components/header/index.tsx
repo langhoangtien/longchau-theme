@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import HeaderMobile from "./header-mobile";
 import Cart from "./cart";
 import Search from "./search";
@@ -68,7 +68,10 @@ export default function Header() {
                 <Cart></Cart>
               </div>
             </div>
-            <Search logoRef={logoRef} />
+            <Suspense>
+              {" "}
+              <Search logoRef={logoRef} />
+            </Suspense>
           </div>
         </div>
       </div>

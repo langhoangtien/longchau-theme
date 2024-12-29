@@ -84,7 +84,7 @@ export default function Search({
         logoRef.current?.classList.remove("logo-mobile");
       }
     }
-  }, []);
+  }, [logoRef]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
