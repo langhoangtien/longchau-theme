@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: "Inter", "sans-serif", "Segoe UI", "Segoe UI Web (West European)",
+    "Helvetica Neue", Helvetica, Arial;
+}
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 249.87 76.77% 61.18%;
+    --primary-light: 249.87 76.77% 76.18%;
+    --primary-lighter: 249.87 66.77% 86.18%;
+    --primary-dark: 249.87 76.77% 46.18%;
+    --primary-darker: 249.87 76.77% 36.18%;
+    /* --primary: 217 91% 60%; */
+    /* --primary: 220.9 39.3% 11%; */
+    /* --primary: 0 72.22% 50.59%; */
+    /* --primary: 142 76.22% 36.27%; */
+    /* --primary: 341.18 100% 50%; */
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 224 71.4% 4.1%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 210 20% 98%;
+    --primary-foreground: 220.9 39.3% 11%;
+    --secondary: 215 27.9% 16.9%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 216 12.2% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* LOADING */
+.loader {
+  width: 40px;
+  aspect-ratio: 4;
+  --_g: no-repeat
+    radial-gradient(circle closest-side, hsl(var(--primary)) 90%, #0000);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: calc(100% / 3) 100%;
+  animation: l7 1s infinite linear;
+}
+
+@keyframes l7 {
+  33% {
+    background-size: calc(100% / 3) 0%, calc(100% / 3) 100%, calc(100% / 3) 100%;
+  }
+
+  50% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 0%, calc(100% / 3) 100%;
+  }
+
+  66% {
+    background-size: calc(100% / 3) 100%, calc(100% / 3) 100%, calc(100% / 3) 0%;
+  }
+}
+
+/* END_LOADING */
+
+/* UKO LOADING-SCREEN */
+.uko-loading-screen {
+  background: linear-gradient(
+      45deg,
+      hsl(var(--primary-dark)),
+      hsl(var(--primary)),
+      hsl(210deg 40% 96.08%),
+      hsl(345.36deg 84% 60.78%),
+      hsl(var(--primary-lighter))
+    )
+    0% 0% / 300%;
+  animation: 20s linear 0s infinite normal none running ukoAnimation;
+}
+@keyframes ukoAnimation {
+  0% {
+    background-position: 0px 0px;
+  }
+
+  50% {
+    background-position: 400% 0%;
+  }
+
+  100% {
+    background-position: 0px 0px;
+  }
+}
+/* END-UKO-LOADING-SCREEN  */
+
+/*LINE-LOADING */
+.line-loading {
+  animation: loading 2s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100px);
+  }
+  50% {
+    transform: translateX(160px);
+  }
+  100% {
+    transform: translateX(420px);
+  }
+}
+
+/* END-LINE-LOADING */
+
+.content-html p {
+  margin: 1rem 0;
+}
