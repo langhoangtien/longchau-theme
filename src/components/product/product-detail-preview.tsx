@@ -163,15 +163,8 @@ export default function ProductDetailPreview({
                 ))}
               </div>
             </div>
-            <div className="mt-4 flex gap-2 flex-col md:flex-row items-end md:mt-4 md:text-center">
-              <div className="flex flex-col w-full md:flex-grow-1">
-                <Textarea placeholder="Nhập nội dung bình luận" />
-              </div>
-
-              <Button>Gửi bình luận </Button>
-            </div>
           </div>
-          <div className="block border-gray-300 border-b mb-4 mt-3 h-full"></div>
+          <div className="block mb-4 mt-3 h-full"></div>
           <div>
             <ul>
               {reviews.map((review: any) => (
