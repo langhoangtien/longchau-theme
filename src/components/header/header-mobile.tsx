@@ -18,10 +18,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { HOST_API } from "@/config-global";
 import { useRouter } from "next/navigation";
-import Logo from "../icons/logo";
+
 import Close from "../icons/close";
 import Phone from "../icons/phone";
 import { CACHE_KEY } from "../menu-category";
+import Logo from "./logo";
 
 export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
         </SheetHeader>
         <div className="py-3.5 px-4 flex justify-between items-center sticky top-0 z-10 bg-white border-b border-divider-1pt drop-shadow-md">
           <span onClick={backToHome} className="shrink-0">
-            <Logo className="w-36 h-8" />
+            <Logo black className="w-36 h-8" />
           </span>
           <SheetClose>
             <span
