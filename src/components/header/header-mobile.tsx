@@ -131,7 +131,7 @@ export default function HeaderMobile({ open, setOpen, setOpenDialog }: any) {
           </div>
 
           <a
-            href="tel:0832667711"
+            href="tel:0968993683"
             className="inline-flex items-center justify-center font-medium bg-blue-50 text-primary  py-[8px] px-[8px] rounded-[25px] text-sm mt-4 w-full h-auto"
           >
             <Phone className="w-5 h-5 shrink-0" />

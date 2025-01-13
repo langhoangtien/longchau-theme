@@ -310,7 +310,7 @@ export function ProductDetailInfoActions({ name, image, variant }: any) {
           <div className="shadow-2xl w-full rounded-t-3xl p-4">
             <div className="flex gap-x-2">
               <a
-                href="tel:0832667711"
+                href="tel:0968993683"
                 className="inline-flex items-center justify-center border border-primary  [&>*]:shrink-0 bg-white  p-[12px] h-[44px] w-[44px] rounded-[50px]"
               >
                 <Phone className="h-7 w-7 text-primary animate-pulse" />

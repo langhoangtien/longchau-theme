@@ -6,9 +6,9 @@ import Logo from "../ui/logo";
 import { HOST_API } from "@/config-global";
 
 export const FOOTER_SWITCHBOARD_MENU = [
-  { name: "Tư vấn mua hàng", phone: "0832667711", branch: "(Hotline 1)" },
-  { name: "Hướng dẫn sử dụng", phone: "0365686630", branch: "(Hotline 2)" },
-  { name: "Góp ý, khiếu nại", phone: "0328237796", branch: "(Hotline 3)" },
+  { name: "Tư vấn mua hàng", phone: "0968993683", branch: "(Hotline 1)" },
+  { name: "Hướng dẫn sử dụng", phone: "0865108279", branch: "(Hotline 2)" },
+  { name: "Góp ý, khiếu nại", phone: "0968699399", branch: "(Hotline 3)" },
 ];
 export const revalidate = 300;
 export default async function Footer() {
